@@ -4,16 +4,21 @@ export const revalidate = false;
 import Calculator from '@/components/Calculator';
 
 export default function Page() {
-  return (
-    <main>
-      <h1 style={{ fontSize: 24, margin: '8px 0' }}>Delay Repay Estimator</h1>
-      <p style={{ color: '#555', marginBottom: 16 }}>
-        Enter ticket price, type, operator, and delay. We’ll estimate compensation and take you to the correct claim form.
-      </p>
-      <Calculator />
-      <p style={{ color: '#777', fontSize: 12, marginTop: 24 }}>
-        Estimates only. Final payout is determined by your operator. Season tickets are converted to a per-journey value.
-      </p>
-    </main>
-  );
+	return (
+		<main>
+			<article className={"prose"}>
+				<p>
+					Use our Delay Repay Calculator to understand how much you could claim back from the relevant rail company for
+					a train delay.
+				</p>
+				<p>Enter ticket price, type, operator, and delay. We’ll estimate compensation and take you to the correct claim
+					form</p>
+				<Calculator/>
+				<p className={'prose-sm'}>
+					Estimates only. Final payout is determined by your operator. Season tickets are converted to a per-journey
+					value.
+				</p>
+			</article>
+		</main>
+	);
 }

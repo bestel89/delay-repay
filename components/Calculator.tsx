@@ -75,17 +75,17 @@ export default function Calculator() {
 	}
 
 	return (
-		<div style={{ border: '1px solid #ddd', borderRadius: 8, padding: 16 }}>
+		<div className={"border p-4 rounded shadow-sm"}>
 			{operators.length === 0 ? (
 				<div>Loading operators…</div>
 			) : (
-				<div style={{ display: 'grid', gap: 12 }}>
-					<label>
-						<div style={{ fontSize: 14 }}>Operator</div>
+				<div>
+					<fieldset className={"fieldset mb-4"}>
+						<legend>Operator</legend>
 						<select
 							value={opCode}
 							onChange={e => setOpCode(e.target.value)}
-							style={{ width: '100%', padding: 8 }}
+							className={"select"}
 						>
 							{operators.map(o => (
 								<option key={o.code} value={o.code}>
@@ -93,45 +93,37 @@ export default function Calculator() {
 								</option>
 							))}
 						</select>
-					</label>
+					</fieldset>
 
 					{isManual ? (
-						<div style={{ marginTop: 16, fontSize: 14 }}>
+						<div>
 							This operator doesn’t use Delay Repay. You’ll need to claim
 							directly via their official page.
 							<button
 								onClick={onClaim}
-								style={{
-									marginTop: 8,
-									padding: '8px 12px',
-									border: '1px solid #ccc',
-									borderRadius: 6,
-									background: '#fff',
-									cursor: 'pointer'
-								}}
 							>
 								Go to claim page
 							</button>
 						</div>
 					) : (
 						<>
-							<label>
-								<div style={{ fontSize: 14 }}>Ticket price (£)</div>
+							<fieldset className={"fieldset mb-4"}>
+								<legend>Ticket price (£)</legend>
 								<input
 									value={price}
 									onChange={e => setPrice(e.target.value)}
 									placeholder="e.g. 42.50"
 									inputMode="decimal"
-									style={{ width: '100%', padding: 8 }}
+									className={"input"}
 								/>
-							</label>
+							</fieldset>
 
-							<label>
-								<div style={{ fontSize: 14 }}>Ticket type</div>
+							<fieldset className={"fieldset mb-4"}>
+								<legend >Ticket type</legend>
 								<select
 									value={ticket}
 									onChange={e => setTicket(e.target.value as TicketType)}
-									style={{ width: '100%', padding: 8 }}
+									className={"select"}
 								>
 									<option value="single">Single</option>
 									<option value="return">Return</option>
@@ -140,40 +132,32 @@ export default function Calculator() {
 									<option value="season_annual">Season — Annual</option>
 									<option value="season_flexi">Season — Flexi</option>
 								</select>
-							</label>
+							</fieldset>
 
-							<label>
-								<div style={{ fontSize: 14 }}>Delay length</div>
+							<fieldset className={"fieldset mb-4"}>
+								<legend>Delay length</legend>
 								<select
 									value={band}
 									onChange={e => setBand(e.target.value as DelayBand)}
-									style={{ width: '100%', padding: 8 }}
+									className={"select"}
 								>
 									<option value="15-29">15–29 minutes</option>
 									<option value="30-59">30–59 minutes</option>
 									<option value="60-119">60–119 minutes</option>
 									<option value="120+">120+ minutes</option>
 								</select>
+							</fieldset>
+
+							<label className="input mb-4">
+								<span className="label">£</span>
+								<input type="text" readOnly placeholder="Estimated compensation" value={estimate === null ? '' : `${estimate.toFixed(2)}`}/>
 							</label>
 
-							<div style={{ paddingTop: 8 }}>
-								<div style={{ color: '#555', fontSize: 13 }}>
-									Estimated compensation
-								</div>
-								<div style={{ fontSize: 24, fontWeight: 600 }}>
-									{estimate === null ? '—' : `£${estimate.toFixed(2)}`}
-								</div>
+							<div>
 								<button
 									onClick={onClaim}
 									disabled={!estimate}
-									style={{
-										marginTop: 8,
-										padding: '8px 12px',
-										border: '1px solid #ccc',
-										borderRadius: 6,
-										background: '#fff',
-										cursor: estimate ? 'pointer' : 'not-allowed'
-									}}
+									className="btn btn-primary"
 								>
 									Claim with {selectedOp?.name || "this operator"}
 								</button>

@@ -1,5 +1,6 @@
 @import "tailwindcss";
+@plugin "daisyui" {
+    themes: corporate --default;
+}
+@plugin "@tailwindcss/typography";
 
-html, body { background: #fff; color: #111; }
-a { color: #0b65c6; text-decoration: none; }
-a:hover { text-decoration: underline; }
