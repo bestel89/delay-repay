@@ -2,6 +2,11 @@ import {NextResponse} from "next/server";
 import {createClient} from "@supabase/supabase-js";
 import {domainNameWithHTTPS} from "../Constants";
 
+type Operator = {
+	code: string;
+	updated_at?: string;
+};
+
 export async function GET() {
 	const supabase = createClient(
 		process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -16,9 +21,9 @@ export async function GET() {
 
 	const urls = [
 		{loc: `${domainNameWithHTTPS}/`, lastmod: new Date().toISOString()},
-		...(ops ?? []).map(o => ({
+		...(ops ?? []).map((o: Operator) => ({
 			loc: `${domainNameWithHTTPS}/operators/${o.code}`,
-			lastmod: (o as any).updated_at ?? new Date().toISOString(),
+			lastmod: o.updated_at ?? new Date().toISOString(),
 		})),
 	];
 
