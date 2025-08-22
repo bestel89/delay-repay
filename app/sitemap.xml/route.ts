@@ -1,6 +1,6 @@
 import {NextResponse} from "next/server";
-import {createClient} from "@supabase/supabase-js";
 import {domainNameWithHTTPS} from "../Constants";
+import {supabaseServer} from "@/lib/supabase.server";
 
 type Operator = {
 	code: string;
@@ -8,20 +8,16 @@ type Operator = {
 };
 
 export async function GET() {
-	const supabase = createClient(
-		process.env.NEXT_PUBLIC_SUPABASE_URL!,
-		process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-	);
-
-	const {data: ops} = await supabase
-		.from("operators")
-		.select("code, updated_at")
-		.eq("active", true)
-		.order("code");
+	const supabase = supabaseServer();
+	const { data, error } = await supabase
+		.from('operators')
+		.select('code,name,claim_url,delay_repay,active')
+		.eq('active', true)
+		.order('name');
 
 	const urls = [
 		{loc: `${domainNameWithHTTPS}/`, lastmod: new Date().toISOString()},
-		...(ops ?? []).map((o: Operator) => ({
+		...(data ?? []).map((o: Operator) => ({
 			loc: `${domainNameWithHTTPS}/operators/${o.code}`,
 			lastmod: o.updated_at ?? new Date().toISOString(),
 		})),
