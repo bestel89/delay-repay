@@ -14,10 +14,6 @@ export default function Page() {
 				<p>Enter ticket price, type, operator, and delay. We’ll estimate compensation and take you to the correct claim
 					form</p>
 				<Calculator/>
-				<p className={'prose-sm'}>
-					Estimates only. Final payout is determined by your operator. Season tickets are converted to a per-journey
-					value.
-				</p>
 			</article>
 		</main>
 	);
