@@ -1,7 +1,15 @@
+import type {Metadata} from "next";
+
 export const dynamic = 'force-static';
 export const revalidate = false;
 
 import Calculator from '@/components/Calculator';
+
+export const metadata: Metadata = {
+	title: 'Delay Repay Estimator',
+	description: 'Estimate UK train delay compensation and jump to the claim page.',
+	alternates: {canonical: '/'},
+};
 
 export default function Page() {
 	return (

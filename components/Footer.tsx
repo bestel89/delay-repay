@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import {domainNameWithoutHTTPS} from "@/app/Constants";
 
 export default function Footer() {
 	return (
@@ -12,7 +13,7 @@ export default function Footer() {
 			</nav>
 			<aside>
 				<p>
-					© {new Date().getFullYear()} delayrepaycalc.co.uk — All rights reserved.
+					© {new Date().getFullYear()} {domainNameWithoutHTTPS} — All rights reserved.
 				</p>
 			</aside>
 		</footer>

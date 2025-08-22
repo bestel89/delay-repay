@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
+import {domainNameWithoutHTTPS} from "@/app/Constants";
 
 export const metadata: Metadata = {
 	title: 'Cookie Policy | Delay Repay Estimator',
-	description: 'How delayrepaycalc.co.uk uses cookies and similar technologies.',
+	description: `How ${domainNameWithoutHTTPS} uses cookies and similar technologies.`,
 	alternates: { canonical: '/cookies' },
 };
 

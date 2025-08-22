@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
+import {domainNameWithoutHTTPS} from "@/app/Constants";
 
 export const metadata: Metadata = {
 	title: 'Legal Disclaimer | Delay Repay Estimator',
-	description: 'Important limitations and disclaimers for delayrepaycalc.co.uk.',
+	description: `Important limitations and disclaimers for ${domainNameWithoutHTTPS}`,
 	alternates: { canonical: '/legal' },
 };
 
@@ -32,7 +33,7 @@ export default function LegalPage() {
 
 			<h2>Limitation of Liability</h2>
 			<p>
-				To the maximum extent permitted by law, delayrepaycalc.co.uk shall not be liable for any
+				To the maximum extent permitted by law, {domainNameWithoutHTTPS} shall not be liable for any
 				loss or damage arising from reliance on information or estimates provided by the Service.
 			</p>
 

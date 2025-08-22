@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
+import {domainNameWithoutHTTPS} from "@/app/Constants";
 
 export const metadata: Metadata = {
 	title: 'Privacy Policy | Delay Repay Estimator',
-	description: 'How delayrepaycalc.co.uk collects and uses information.',
+	description: `How ${domainNameWithoutHTTPS} collects and uses information.`,
 	alternates: { canonical: '/privacy' },
 };
 
@@ -13,7 +14,7 @@ export default function PrivacyPage() {
 			<p><em>Last updated: 22 Aug 2025</em></p>
 
 			<p>
-				This Privacy Policy explains how delayrepaycalc.co.uk (“we”, “our”, “us”) collects,
+				This Privacy Policy explains how {domainNameWithoutHTTPS} (“we”, “our”, “us”) collects,
 				uses, and protects information when you use our website (the “Service”).
 			</p>
 
@@ -70,7 +71,7 @@ export default function PrivacyPage() {
 			<h2>7. Your Rights</h2>
 			<p>
 				If you have questions about how we handle data, contact us at
-				{' '}<a href="mailto:contact@delayrepaycalc.co.uk">contact@delayrepaycalc.co.uk</a>.
+				{' '}<a href="mailto:contact.delayrepaycalc@gmail.com">contact.delayrepaycalc@gmail.com</a>.
 			</p>
 
 			<h2>8. Changes</h2>

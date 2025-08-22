@@ -3,11 +3,12 @@ import type {Metadata} from 'next';
 import './globals.css';
 import Footer from "@/components/Footer";
 import Link from "next/link";
+import {domainNameWithHTTPS} from "@/app/Constants";
 
 export const metadata: Metadata = {
 	title: 'Delay Repay Estimator',
 	description: 'Estimate UK train delay compensation and jump to the claim page.',
-	metadataBase: new URL('https://delayrepaycalc.co.uk'),
+	metadataBase: new URL(domainNameWithHTTPS),
 	alternates: {canonical: '/'},
 };
 
