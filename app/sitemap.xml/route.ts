@@ -1,5 +1,6 @@
 import {NextResponse} from "next/server";
 import {createClient} from "@supabase/supabase-js";
+import {domainNameWithHTTPS} from "@/app/Constants";
 
 export async function GET() {
 	const supabase = createClient(
@@ -13,12 +14,12 @@ export async function GET() {
 		.eq("active", true);
 
 	const urls = (ops || []).map(
-		o => `<url><loc>https://relayrepaycalc.co.uk/operators/${o.code}</loc></url>`
+		o => `<url><loc>${domainNameWithHTTPS}/operators/${o.code}</loc></url>`
 	);
 
 	const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://relayrepaycalc.co.uk/</loc></url>
+  <url><loc>${domainNameWithHTTPS}/</loc></url>
   ${urls.join("\n")}
 </urlset>`;
 
