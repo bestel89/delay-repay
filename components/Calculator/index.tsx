@@ -1,15 +1,8 @@
 // components/Calculator/index.tsx  (SERVER COMPONENT)
 import Client from "./Client";
-import { supabaseServer } from "@/lib/supabase.server";
-import type { DelayBand, TicketType } from "@/lib/rules";
-
-type Operator = {
-	code: string;
-	name: string;
-	claim_url: string;
-	active: boolean;
-	delay_repay: boolean;
-};
+import {supabaseServer} from "@/lib/supabase.server";
+import type {DelayBand, TicketType} from "@/lib/rules";
+import {Operator} from "@/definitions/operator";
 
 type RuleRow = {
 	ticket: TicketType;
@@ -21,7 +14,7 @@ export default async function Calculator() {
 	const supabase = supabaseServer();
 
 	// 1) Operators (active, ordered)
-	const { data: operators, error: opErr } = await supabase
+	const {data: operators, error: opErr} = await supabase
 		.from("operators")
 		.select("code,name,claim_url,delay_repay,active")
 		.eq("active", true)
@@ -43,17 +36,17 @@ export default async function Calculator() {
 	const initialOpCode = ops[0]?.code ?? "";
 
 	// 2) Default rules (all)
-	const { data: defaultRows } = await supabase
+	const {data: defaultRows} = await supabase
 		.from("rules_default")
 		.select("ticket,band,percent");
 
 	// 3) Overrides for the initial operator (hydrate first paint fully)
-	const { data: overrideRows } = initialOpCode
+	const {data: overrideRows} = initialOpCode
 		? await supabase
 			.from("rules_override")
 			.select("ticket,band,percent")
 			.eq("operator_code", initialOpCode)
-		: { data: [] as RuleRow[] };
+		: {data: [] as RuleRow[]};
 
 	return (
 		<Client

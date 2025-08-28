@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import {domainNameWithoutHTTPS} from "@/app/Constants";
+import {contactEmail, domainNameWithoutHTTPS} from "@/app/Constants";
 
 export const metadata: Metadata = {
 	title: 'Privacy Policy | Delay Repay Estimator',
@@ -71,7 +71,7 @@ export default function PrivacyPage() {
 			<h2>7. Your Rights</h2>
 			<p>
 				If you have questions about how we handle data, contact us at
-				{' '}<a href="mailto:contact.delayrepaycalc@gmail.com">contact.delayrepaycalc@gmail.com</a>.
+				{' '}<a href={`mailto:${contactEmail}`}>{contactEmail}</a>.
 			</p>
 
 			<h2>8. Changes</h2>
