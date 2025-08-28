@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import {domainNameWithoutHTTPS} from "@/app/Constants";
 
+robots: { index: false }
+
 export const metadata: Metadata = {
 	title: 'Legal Disclaimer | Delay Repay Estimator',
 	description: `Important limitations and disclaimers for ${domainNameWithoutHTTPS}`,
