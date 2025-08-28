@@ -17,7 +17,7 @@ export default function RootLayout({children}: { children: React.ReactNode }) {
 	return (
 		<html lang="en">
 		<head>
-			// 1) Google's CMP (Funding Choices) — load first
+			{/*1) Google's CMP (Funding Choices) — load first*/}
 			<Script
 				id="fc"
 				strategy="beforeInteractive"
@@ -27,7 +27,7 @@ export default function RootLayout({children}: { children: React.ReactNode }) {
 				{`(function(){function s(){if(!window.frames['googlefcPresent']){if(document.body){const i=document.createElement('iframe');i.style='width:0;height:0;border:0;display:none';i.name='googlefcPresent';document.body.appendChild(i);}else{setTimeout(s,0);}}}s();})();`}
 			</Script>
 
-			// 2) AdSense — load after CMP
+			 {/*2) AdSense — load after CMP*/}
 			<Script
 				id="adsbygoogle"
 				strategy="afterInteractive"
