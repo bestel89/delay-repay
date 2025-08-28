@@ -1,8 +1,9 @@
-'use client';
+// components/Calculator/Client.tsx
+"use client";
 
-import {useEffect, useMemo, useState} from 'react';
-import {createClient} from '@supabase/supabase-js';
-import {type DelayBand, type TicketType, toPerJourney} from '@/lib/rules'; // keep only toPerJourney + types
+import { useEffect, useMemo, useRef, useState } from "react";
+import { createClient } from "@supabase/supabase-js";
+import { type DelayBand, type TicketType, toPerJourney } from "@/lib/rules";
 
 type Operator = {
 	code: string;
@@ -23,102 +24,84 @@ const supabase = createClient(
 	process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 );
 
-// helper to build a stable key
 const k = (ticket: TicketType, band: DelayBand) => `${ticket}|${band}` as const;
 
-export default function Calculator() {
-	const [operators, setOperators] = useState<Operator[]>([]);
-	const [opCode, setOpCode] = useState<string>('');
+export default function Client(props: {
+	initialOperators: Operator[];
+	initialOpCode: string;
+	initialDefaultRules: RuleRow[];
+	initialOverrideRules: RuleRow[];
+}) {
+	// Seed from server props so the first paint is complete
+	const [operators] = useState<Operator[]>(props.initialOperators);
+	const [opCode, setOpCode] = useState<string>(
+		props.initialOpCode || props.initialOperators[0]?.code || ""
+	);
 
-	// maps of rules: `${ticket}|${band}` -> percent
-	const [defaultRules, setDefaultRules] = useState<Map<string, number>>(new Map());
-	const [overrideRules, setOverrideRules] = useState<Map<string, number>>(new Map());
+	const [defaultRules] = useState<Map<string, number>>(
+		() =>
+			new Map(
+				(props.initialDefaultRules || []).map((r) => [k(r.ticket, r.band), Number(r.percent)])
+			)
+	);
 
-	const [ticket, setTicket] = useState<TicketType>('single');
-	const [band, setBand] = useState<DelayBand>('15-29');
-	const [price, setPrice] = useState('');
+	const [overrideRules, setOverrideRules] = useState<Map<string, number>>(
+		() =>
+			new Map(
+				(props.initialOverrideRules || []).map((r) => [k(r.ticket, r.band), Number(r.percent)])
+			)
+	);
 
-	// 1) Load operators
-	useEffect(() => {
-		let cancelled = false;
-		(async () => {
-			const { data, error } = await supabase
-				.from('operators')
-				.select('code,name,claim_url,delay_repay,active')
-				.eq('active', true)
-				.order('name');
-			if (error) {
-				console.error('Failed to load operators', error);
-				return;
-			}
-			if (cancelled) return;
-			setOperators(data || []);
-			if (data?.length) setOpCode(data[0].code);
-		})();
-		return () => { cancelled = true; };
-	}, []);
+	// So we don't refetch overrides for the SSR'd operator
+	const hydratedForOp = useRef<string | null>(props.initialOpCode || null);
 
-	// 2) Load default rules once
-	useEffect(() => {
-		let cancelled = false;
-		(async () => {
-			const { data, error } = await supabase
-				.from('rules_default')
-				.select('ticket,band,percent');
-			if (error) {
-				console.error('Failed to load rules_default', error);
-				return;
-			}
-			if (cancelled) return;
-			const map = new Map<string, number>();
-			(data as RuleRow[]).forEach(r => map.set(k(r.ticket, r.band), Number(r.percent)));
-			setDefaultRules(map);
-		})();
-		return () => { cancelled = true; };
-	}, []);
-
-	// 3) Load overrides when operator changes
-	useEffect(() => {
-		if (!opCode) return;
-		let cancelled = false;
-		(async () => {
-			// fetch only rows for this operator
-			const { data, error } = await supabase
-				.from('rules_override')
-				.select('ticket,band,percent')
-				.eq('operator_code', opCode);
-			if (error) {
-				console.error('Failed to load rules_override', error);
-				return;
-			}
-			if (cancelled) return;
-			const map = new Map<string, number>();
-			(data as RuleRow[]).forEach(r => map.set(k(r.ticket, r.band), Number(r.percent)));
-			setOverrideRules(map);
-		})();
-		return () => { cancelled = true; };
-	}, [opCode]);
+	const [ticket, setTicket] = useState<TicketType>("single");
+	const [band, setBand] = useState<DelayBand>("15-29");
+	const [price, setPrice] = useState("");
 
 	const selectedOp = useMemo(
-		() => operators.find(o => o.code === opCode),
+		() => operators.find((o) => o.code === opCode),
 		[operators, opCode]
 	);
 
 	const isManual = selectedOp ? !selectedOp.delay_repay : false;
 
-	// 4) Lookup %: override -> default
+	// Fetch overrides when operator changes (skip the one we already hydrated)
+	useEffect(() => {
+		if (!opCode) return;
+		if (hydratedForOp.current === opCode && overrideRules.size > 0) return;
+
+		let cancelled = false;
+		(async () => {
+			const { data, error } = await supabase
+				.from("rules_override")
+				.select("ticket,band,percent")
+				.eq("operator_code", opCode);
+
+			if (cancelled || error) return;
+			const map = new Map<string, number>();
+			(data as RuleRow[]).forEach((r) => map.set(k(r.ticket, r.band), Number(r.percent)));
+			setOverrideRules(map);
+			hydratedForOp.current = opCode;
+		})();
+
+		return () => {
+			cancelled = true;
+		};
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [opCode]);
+
 	const percent = useMemo(() => {
 		if (!selectedOp || isManual) return null;
 		const key = k(ticket, band);
 		if (overrideRules.has(key)) return overrideRules.get(key)!;
 		if (defaultRules.has(key)) return defaultRules.get(key)!;
-		return null; // no rule found -> no estimate
+		return null;
 	}, [selectedOp, isManual, ticket, band, overrideRules, defaultRules]);
 
-	// 5) Compute estimate
 	const estimate = useMemo(() => {
 		if (percent === null) return null;
-		const p = parseFloat(price || '0');
+		const p = parseFloat(price || "0");
 		if (!p || p <= 0) return null;
 		const perJourney = toPerJourney(ticket, p);
 		return Math.round(perJourney * (percent / 100) * 100) / 100;
@@ -126,32 +109,33 @@ export default function Calculator() {
 
 	async function onClaim() {
 		if (!selectedOp) return;
-		const dest = selectedOp.claim_url || '#';
+		const dest = selectedOp.claim_url || "#";
 		try {
-			fetch('/api/click', {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
+			fetch("/api/click", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify({ operator_code: opCode, dest_url: dest }),
-				keepalive: true
+				keepalive: true,
 			});
 		} catch {}
-		window.open(dest, '_blank', 'noopener,noreferrer');
+		window.open(dest, "_blank", "noopener,noreferrer");
 	}
 
 	return (
 		<div className="border p-4 rounded shadow-sm">
+			{/* No loading state: operators are present from SSR */}
 			{operators.length === 0 ? (
-				<div>Loading operators…</div>
+				<div>Couldn’t load operators. Please refresh.</div>
 			) : (
 				<div>
 					<fieldset className="fieldset mb-4">
 						<legend>Operator</legend>
 						<select
 							value={opCode}
-							onChange={e => setOpCode(e.target.value)}
+							onChange={(e) => setOpCode(e.target.value)}
 							className="select"
 						>
-							{operators.map(o => (
+							{operators.map((o) => (
 								<option key={o.code} value={o.code}>
 									{o.name}
 								</option>
@@ -174,7 +158,7 @@ export default function Calculator() {
 								<legend>Ticket price (£)</legend>
 								<input
 									value={price}
-									onChange={e => setPrice(e.target.value)}
+									onChange={(e) => setPrice(e.target.value)}
 									placeholder="e.g. 42.50"
 									inputMode="decimal"
 									className="input"
@@ -185,7 +169,7 @@ export default function Calculator() {
 								<legend>Ticket type</legend>
 								<select
 									value={ticket}
-									onChange={e => setTicket(e.target.value as TicketType)}
+									onChange={(e) => setTicket(e.target.value as TicketType)}
 									className="select"
 								>
 									<option value="single">Single</option>
@@ -201,7 +185,7 @@ export default function Calculator() {
 								<legend>Delay length</legend>
 								<select
 									value={band}
-									onChange={e => setBand(e.target.value as DelayBand)}
+									onChange={(e) => setBand(e.target.value as DelayBand)}
 									className="select"
 								>
 									<option value="15-29">15–29 minutes</option>
@@ -212,9 +196,8 @@ export default function Calculator() {
 							</fieldset>
 
 							<p>What you might be able to claim:</p>
-							<p className={'prose-sm'}>
-								<em><b>Important!</b></em> Estimates only. Final payout is determined by your operator. Season tickets are converted to a per-journey
-								value.
+							<p className="prose-sm">
+								<em><b>Important!</b></em> Estimates only. Final payout is determined by your operator. Season tickets are converted to a per-journey value.
 							</p>
 							<label className="input mb-4">
 								<span className="label">£</span>
@@ -222,7 +205,7 @@ export default function Calculator() {
 									type="text"
 									readOnly
 									placeholder="What you might be able to claim"
-									value={estimate === null ? '' : `${estimate.toFixed(2)}`}
+									value={estimate === null ? "" : `${estimate.toFixed(2)}`}
 								/>
 							</label>
 
@@ -232,7 +215,7 @@ export default function Calculator() {
 									disabled={!estimate && !selectedOp?.claim_url}
 									className="btn btn-primary"
 								>
-									Claim with {selectedOp?.name || 'this operator'}
+									Claim with {selectedOp?.name || "this operator"}
 								</button>
 							</div>
 						</>

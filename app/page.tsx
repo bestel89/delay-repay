@@ -1,9 +1,8 @@
 import type {Metadata} from "next";
+import Calculator from "@/components/Calculator";
 
 export const dynamic = 'force-static';
 export const revalidate = false;
-
-import Calculator from '@/components/Calculator';
 
 export const metadata: Metadata = {
 	title: 'Delay Repay Estimator',
