@@ -1,8 +1,6 @@
 import type { Metadata } from 'next';
 import {domainNameWithoutHTTPS} from "@/app/Constants";
 
-robots: { index: false }
-
 export const metadata: Metadata = {
 	title: 'Cookie Policy | Delay Repay Estimator',
 	description: `How ${domainNameWithoutHTTPS} uses cookies and similar technologies.`,

@@ -10,8 +10,8 @@ type RuleRow = {
 	percent: number;
 };
 
-export default async function Calculator() {
-	const supabase = supabaseServer();
+export default async function Calculator({ preselectedOperatorCode }: { preselectedOperatorCode?: string }) {
+        const supabase = supabaseServer();
 
 	// 1) Operators (active, ordered)
 	const {data: operators, error: opErr} = await supabase
@@ -32,8 +32,13 @@ export default async function Calculator() {
 		);
 	}
 
-	const ops = operators ?? [];
-	const initialOpCode = ops[0]?.code ?? "";
+        const ops = operators ?? [];
+        const normalise = (s: string) => s.toLowerCase().replace(/[^a-z0-9]/g, "");
+        const requested = preselectedOperatorCode ? normalise(preselectedOperatorCode.trim()) : "";
+        const matched = requested
+                ? ops.find((op) => normalise(op.code) === requested || normalise(op.name) === requested)?.code ?? ""
+                : "";
+        const initialOpCode = matched || ops[0]?.code || "";
 
 	// 2) Default rules (all)
 	const {data: defaultRows} = await supabase
