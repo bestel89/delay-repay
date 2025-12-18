@@ -1,165 +1,174 @@
-import type {Metadata} from "next";
+import type { Metadata } from "next";
 import Calculator from "@/components/Calculator";
 import Faq from "@/components/Faq";
 import Link from "next/link";
 
-export const dynamic = 'force-static';
+export const dynamic = "force-static";
 export const revalidate = false;
 
 export const metadata: Metadata = {
-	title: 'Delay Repay Estimator',
-	description: 'Estimate UK train delay compensation and jump to the claim page.',
-	alternates: {canonical: '/'},
+        title: "Delay Repay Calculator | Estimate UK train compensation",
+        description: "Estimate UK Delay Repay in pounds for your train delay. Independent guidance for season tickets, cancellations, and major operators.",
+        alternates: { canonical: "/" },
 };
 
-export default function Page() {
-	return (
-		<main>
-			<article className={"prose"}>
-				<p>
-					Use our Delay Repay Calculator to understand how much you could claim back from the relevant rail company for
-					a train delay.
-				</p>
-				<p>Enter ticket price, type, operator, and delay. We’ll estimate compensation and take you to the correct claim
-					form</p>
+type PageProps = {
+        searchParams?: { operator?: string };
+};
 
-				{/* Handy cross-link */}
-				<p className="mt-2">
-					Not sure about your operator’s rules?{" "}
-					<Link href="/operators" className="no-underline">
-						See which operators use standard vs different rules
-					</Link>
-					.
-				</p>
+export default function Page({ searchParams }: PageProps) {
+        const operatorFromUrl = searchParams?.operator;
 
-				<Calculator/>
-				<section aria-labelledby="about-delay-repay" className="mt-10">
-					<h2 id="about-delay-repay">How Delay Repay works (UK, 2025)</h2>
-					<p>
-						Delay Repay is a compensation scheme run by most UK train operating companies. If your train is delayed
-						beyond a published threshold (often from <strong>15 minutes</strong>), you can claim a percentage of your
-						ticket price back. Thresholds and payout bands vary by operator and by ticket type, which is why this
-						calculator asks for operator, ticket details, and the delay length.
-					</p>
-					<p>
-						This tool gives you an <em>indicative</em> payout based on the information you provide. We keep operator rules
-						up to date and link you straight to the official claim pages so you can submit your evidence quickly.
-						Remember: only the train company can approve the final amount after reviewing your claim.
-					</p>
+        return (
+                <main className="space-y-16">
+                        <section className="grid gap-8 rounded-2xl bg-white p-8 shadow-sm md:grid-cols-2">
+                                <div className="space-y-4">
+                                        <p className="text-sm font-semibold uppercase tracking-wide text-blue-700">Independent UK guide</p>
+                                        <h1 className="text-4xl font-bold leading-tight text-slate-900">Delay Repay Calculator</h1>
+                                        <p className="text-lg leading-relaxed text-slate-700">
+                                                Check how much Delay Repay you might receive for a delayed or cancelled UK rail journey. The calculator uses published operator policies and converts season tickets to a per-journey value so you can claim with confidence.
+                                        </p>
+                                        <div className="flex flex-wrap gap-3">
+                                                <a className="btn btn-primary" href="#calculator">Estimate your Delay Repay</a>
+                                                <Link className="btn btn-outline" href="/delay-repay-explained">Learn how Delay Repay works</Link>
+                                        </div>
+                                        <div className="flex flex-wrap gap-4 pt-4 text-sm text-slate-700">
+                                                <span className="rounded-full bg-blue-50 px-3 py-1 text-blue-800">Used by UK rail passengers</span>
+                                                <span className="rounded-full bg-green-50 px-3 py-1 text-green-800">Based on published operator policies</span>
+                                                <span className="rounded-full bg-slate-100 px-3 py-1 text-slate-800">Independent and unaffiliated</span>
+                                        </div>
+                                </div>
+                                <div className="rounded-xl bg-slate-50 p-6 text-sm leading-relaxed text-slate-800">
+                                        <h2 className="text-xl font-semibold text-slate-900">What this page is for</h2>
+                                        <p className="mt-2">
+                                                Delay Repay is a consumer compensation scheme. This site keeps the calculator front and centre, but also provides plain-English guidance on the process, evidence, and time limits so you can submit a complete claim to your train operator.
+                                        </p>
+                                        <ul className="mt-4 list-disc space-y-2 pl-5">
+                                                <li>Fast estimate in pounds, before you visit the operator claim form</li>
+                                                <li>Operator differences highlighted so you know when rules change</li>
+                                                <li>Links to deeper guides on season tickets, missed connections, and cancellations</li>
+                                        </ul>
+                                        <p className="mt-4 text-xs text-slate-600">Guidance only. Final decisions rest with the operator after they review your evidence.</p>
+                                </div>
+                        </section>
 
-					<aside
-						aria-labelledby="methodology-heading"
-						className="not-prose mt-6 border-l-4 border-blue-600 bg-blue-50 p-4 rounded"
-						role="note"
-					>
-						<h3 id="methodology-heading" className="font-semibold mb-2">Methodology &amp; data</h3>
-						<ul className="list-disc pl-5 space-y-1">
-							<li>
-								<strong>Bands &amp; overrides:</strong> We start with common Delay Repay bands (e.g., 15–29, 30–59, 60–119,
-								120+) and apply <em>operator-specific overrides</em> where their policy differs.
-							</li>
-							<li>
-								<strong>Ticket handling:</strong> Singles/returns use the face value you enter. For season tickets, we convert
-								to a <em>per-journey</em> equivalent using standard industry conventions so compensation is comparable to a
-								single journey.
-							</li>
-							<li>
-								<strong>Edge cases:</strong> If an operator doesn’t participate in Delay Repay or uses a bespoke scheme, the
-								calculator will direct you to the correct claim page rather than showing an estimate.
-							</li>
-							<li>
-								<strong>Last updated:</strong> <time dateTime="2025-08-28">28 August 2025</time>
-							</li>
-						</ul>
-						<p className="mt-2 text-sm">
-							<strong>Sources:</strong> operator-published Delay Repay policies and claim pages. Where an operator’s policy
-							is ambiguous, we default to the conservative interpretation and flag it in the UI.
-						</p>
-					</aside>
+                        <section id="calculator" className="space-y-6">
+                                <div className="space-y-3">
+                                        <h2 className="text-2xl font-semibold text-slate-900">Estimate your Delay Repay</h2>
+                                        <p className="text-slate-700">
+                                                Enter the ticket price, ticket type, operator, and delay length. The estimator applies the operator’s published percentages. For season products we convert to a per-journey figure before applying the band.
+                                        </p>
+                                </div>
+                                <Calculator preselectedOperatorCode={operatorFromUrl} />
+                                <p className="text-sm text-slate-600">Results are indicative only. Your train operator confirms eligibility and the final payment.</p>
+                        </section>
 
-					<h3 className="mt-8">How the estimator works</h3>
-					<p>
-						Enter your ticket price, choose the ticket type, pick your operator, and select the delay band that matches your
-						journey. The estimator calculates an indicative refund percentage for that band. If your operator has a unique
-						rule (for example, different percentages for returns or special treatment of flexi season tickets), we apply that
-						rule automatically.
-					</p>
-					<p>
-						For season products (weekly, monthly, annual, flexi), we derive a per-journey value first and then apply the
-						compensation percentage to that figure. This avoids over- or under-estimating compared to single-journey tickets.
-					</p>
+                        <section className="grid gap-8 rounded-2xl bg-white p-8 shadow-sm md:grid-cols-3">
+                                <div className="space-y-2">
+                                        <h2 className="text-xl font-semibold text-slate-900">How Delay Repay works</h2>
+                                        <p className="text-slate-700">Quick overview before you claim. Full details are in the dedicated guide.</p>
+                                        <Link className="text-blue-700 underline" href="/delay-repay-explained">Read the full Delay Repay guide</Link>
+                                </div>
+                                <div className="md:col-span-2">
+                                        <ol className="grid gap-4 md:grid-cols-2">
+                                                <li className="rounded-lg border border-slate-200 bg-slate-50 p-4">
+                                                        <p className="text-sm font-semibold text-blue-800">Step 1</p>
+                                                        <p className="font-medium text-slate-900">Check your eligibility</p>
+                                                        <p className="mt-2 text-sm text-slate-700">Most operators pay from 15 minutes of delay. Confirm your operator participates and whether they have any exclusions for your ticket type.</p>
+                                                </li>
+                                                <li className="rounded-lg border border-slate-200 bg-slate-50 p-4">
+                                                        <p className="text-sm font-semibold text-blue-800">Step 2</p>
+                                                        <p className="font-medium text-slate-900">Gather evidence</p>
+                                                        <p className="mt-2 text-sm text-slate-700">Keep your ticket or booking confirmation and note the actual arrival time. Photos of station boards or app notifications are useful.</p>
+                                                </li>
+                                                <li className="rounded-lg border border-slate-200 bg-slate-50 p-4">
+                                                        <p className="text-sm font-semibold text-blue-800">Step 3</p>
+                                                        <p className="font-medium text-slate-900">Use the calculator</p>
+                                                        <p className="mt-2 text-sm text-slate-700">Select operator, ticket, and delay band to see the indicative payout in pounds. We highlight when an operator uses different bands.</p>
+                                                </li>
+                                                <li className="rounded-lg border border-slate-200 bg-slate-50 p-4">
+                                                        <p className="text-sm font-semibold text-blue-800">Step 4</p>
+                                                        <p className="font-medium text-slate-900">Submit the claim</p>
+                                                        <p className="mt-2 text-sm text-slate-700">Follow the link to the official operator form. Upload evidence, check the time limit, and keep a copy of your submission for reference.</p>
+                                                </li>
+                                        </ol>
+                                </div>
+                        </section>
 
-					<h3>Assumptions &amp; limitations</h3>
-					<ul>
-						<li>
-							<strong>Evidence matters:</strong> Operators typically require proof of travel and delay (ticket/receipt,
-							photos, or booking confirmation). Without evidence, claims are usually rejected.
-						</li>
-						<li>
-							<strong>Different thresholds:</strong> Some operators pay from 15 minutes; a few use different bands or
-							handle cancellations/missed connections differently. We reflect known overrides where available.
-						</li>
-						<li>
-							<strong>Special fares:</strong> Promotional fares, railcards, split tickets, or goodwill gestures may be
-							treated differently and can produce outcomes that differ from the estimate.
-						</li>
-						<li>
-							<strong>Final decision:</strong> Your operator makes the final call. Consider this tool a guide, not a
-							guarantee.
-						</li>
-					</ul>
+                        <section className="grid gap-8 rounded-2xl bg-white p-8 shadow-sm md:grid-cols-2">
+                                <div className="space-y-3">
+                                        <h2 className="text-2xl font-semibold text-slate-900">Who can claim and common scenarios</h2>
+                                        <p className="text-slate-700">Delay Repay covers most ticket types when the train is delayed or cancelled. These guides explain the nuances.</p>
+                                </div>
+                                <div className="grid gap-3">
+                                        <Link className="flex items-start justify-between rounded border border-slate-200 p-4 hover:bg-slate-50" href="/delay-repay-season-tickets">
+                                                <div>
+                                                        <p className="font-semibold text-slate-900">Season tickets</p>
+                                                        <p className="text-sm text-slate-700">Weekly, monthly, annual, and flexi products converted to per-journey estimates.</p>
+                                                </div>
+                                                <span className="text-blue-700">Read guide</span>
+                                        </Link>
+                                        <Link className="flex items-start justify-between rounded border border-slate-200 p-4 hover:bg-slate-50" href="/delay-repay-cancelled-trains">
+                                                <div>
+                                                        <p className="font-semibold text-slate-900">Cancelled trains</p>
+                                                        <p className="text-sm text-slate-700">What happens when the service never runs or you are advised not to travel.</p>
+                                                </div>
+                                                <span className="text-blue-700">Read guide</span>
+                                        </Link>
+                                        <Link className="flex items-start justify-between rounded border border-slate-200 p-4 hover:bg-slate-50" href="/delay-repay-missed-connections">
+                                                <div>
+                                                        <p className="font-semibold text-slate-900">Missed connections</p>
+                                                        <p className="text-sm text-slate-700">How delay is measured to the final destination and what evidence to include.</p>
+                                                </div>
+                                                <span className="text-blue-700">Read guide</span>
+                                        </Link>
+                                        <Link className="flex items-start justify-between rounded border border-slate-200 p-4 hover:bg-slate-50" href="/delay-repay-claim-time-limits">
+                                                <div>
+                                                        <p className="font-semibold text-slate-900">Claim time limits</p>
+                                                        <p className="text-sm text-slate-700">Typical submission windows and what to do if you are close to the deadline.</p>
+                                                </div>
+                                                <span className="text-blue-700">Read guide</span>
+                                        </Link>
+                                </div>
+                        </section>
 
-					<h3>Worked example</h3>
-					<p>
-						You bought a <strong>single</strong> ticket for <strong>£42.50</strong>. Your train arrived
-						<strong> 38 minutes</strong> late. Your operator’s policy for the <strong>30–59 minutes</strong> band is
-						<strong> 50%</strong> of the ticket value.
-					</p>
-					<p>
-						Estimated compensation: £42.50 × 50% = <strong>£21.25</strong>.
-					</p>
-					<p>
-						If you had a <strong>monthly season</strong> instead, we first convert the monthly cost to a per-journey value,
-						then apply the same percentage. The estimator does this conversion automatically; you don’t need to change the
-						percentage yourself.
-					</p>
+                        <section className="space-y-4">
+                                <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+                                        <div>
+                                                <h2 className="text-2xl font-semibold text-slate-900">Operator coverage</h2>
+                                                <p className="text-slate-700">Rules are set by each train company. Start with these major operators or browse the full list.</p>
+                                        </div>
+                                        <Link className="text-blue-700 underline" href="/operators">See all operators</Link>
+                                </div>
+                                <div className="grid gap-4 md:grid-cols-3">
+                                        <Link className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm hover:border-blue-300" href="/delay-repay-avanti">
+                                                <p className="font-semibold text-slate-900">Avanti West Coast</p>
+                                                <p className="text-sm text-slate-700">Long-distance West Coast services.</p>
+                                        </Link>
+                                        <Link className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm hover:border-blue-300" href="/delay-repay-gwr">
+                                                <p className="font-semibold text-slate-900">Great Western Railway</p>
+                                                <p className="text-sm text-slate-700">Intercity and regional routes in the West and Wales.</p>
+                                        </Link>
+                                        <Link className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm hover:border-blue-300" href="/delay-repay-lner">
+                                                <p className="font-semibold text-slate-900">LNER</p>
+                                                <p className="text-sm text-slate-700">East Coast Main Line services.</p>
+                                        </Link>
+                                        <Link className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm hover:border-blue-300" href="/delay-repay-northern">
+                                                <p className="font-semibold text-slate-900">Northern</p>
+                                                <p className="text-sm text-slate-700">Local and regional services across the North.</p>
+                                        </Link>
+                                        <Link className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm hover:border-blue-300" href="/delay-repay-southern">
+                                                <p className="font-semibold text-slate-900">Southern</p>
+                                                <p className="text-sm text-slate-700">Commuter and airport services in the South East.</p>
+                                        </Link>
+                                        <Link className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm hover:border-blue-300" href="/delay-repay-explained">
+                                                <p className="font-semibold text-slate-900">All operator guidance</p>
+                                                <p className="text-sm text-slate-700">Understand how policies differ before you submit.</p>
+                                        </Link>
+                                </div>
+                        </section>
 
-					<h3>Practical tips to maximise approval odds</h3>
-					<ul>
-						<li>
-							<strong>Record the actual arrival time:</strong> snap a photo of the platform board or keep a GPS timeline.
-						</li>
-						<li>
-							<strong>Submit fast:</strong> many operators set a claim window (e.g., 28 days). Don’t wait.
-						</li>
-						<li>
-							<strong>One journey, one claim:</strong> Avoid bundling unrelated trips into a single submission.
-						</li>
-						<li>
-							<strong>Be consistent:</strong> Names, dates, and ticket references should match across all documents.
-						</li>
-						<li>
-							<strong>Keep it simple:</strong> Use the operator’s official form (linked from the button above) and attach
-							only relevant files.
-						</li>
-					</ul>
-
-					<h3>What happens next?</h3>
-					<p>
-						When you click <em>Claim with [Operator]</em>, you’ll be taken to the official claim page. Most forms take
-						5–10 minutes if you have your evidence ready. Operators typically respond by email and pay via bank transfer,
-						card refund, or vouchers depending on policy.
-					</p>
-
-					<p className="text-sm text-neutral-600">
-						This site is independent and unaffiliated with UK train operating companies. The estimator is provided for
-						guidance only.
-					</p>
-				</section>
-
-				<Faq />
-
-			</article>
-		</main>
-	);
+                        <Faq />
+                </main>
+        );
 }
