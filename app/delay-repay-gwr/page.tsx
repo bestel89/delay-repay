@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function GwrPage() {
         return (
-                <article className="prose max-w-none">
+                <article className="prose max-w-3xl prose-headings:font-semibold prose-a:link prose-a:link-hover">
                         <h1>Great Western Railway Delay Repay</h1>
                         <p>
                                 Use this guide to understand how Great Western Railway (GWR) handles Delay Repay and to estimate compensation using the <Link href="/">Delay Repay calculator</Link>. It covers eligibility, ticket types, evidence, cancellations, and what to expect after submitting a claim.

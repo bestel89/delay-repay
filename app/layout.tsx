@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
         return (
-                <html lang="en-GB">
+                <html lang="en-GB" data-theme="railAuthority">
                         <head>
                                 <Script
                                         id="fc"
@@ -34,25 +34,25 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                                         crossOrigin="anonymous"
                                 />
                         </head>
-                        <body className="bg-slate-50 text-slate-900 min-h-screen flex flex-col">
-                                <header className="bg-blue-900 text-white shadow-sm">
+                        <body className="min-h-screen bg-base-200 text-base-content font-sans antialiased flex flex-col">
+                                <header className="bg-primary text-primary-content shadow">
                                         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
                                                 <div className="text-xl font-semibold tracking-tight">
-                                                        <Link href="/" className="no-underline text-white">
+                                                        <Link href="/" className="no-underline text-primary-content">
                                                                 Delay Repay Calculator
                                                         </Link>
                                                 </div>
                                                 <nav className="flex flex-wrap items-center gap-4 text-sm">
-                                                        <Link className="hover:underline" href="/">Home</Link>
-                                                        <Link className="hover:underline" href="/delay-repay-explained">Delay Repay guide</Link>
-                                                        <Link className="hover:underline" href="/operators">Operators</Link>
-                                                        <Link className="hover:underline" href="/delay-repay-season-tickets">Season tickets</Link>
-                                                        <Link className="hover:underline" href="/about">About</Link>
+                                                        <Link className="link link-hover text-primary-content" href="/">Home</Link>
+                                                        <Link className="link link-hover text-primary-content" href="/delay-repay-explained">Delay Repay guide</Link>
+                                                        <Link className="link link-hover text-primary-content" href="/operators">Operators</Link>
+                                                        <Link className="link link-hover text-primary-content" href="/delay-repay-season-tickets">Season tickets</Link>
+                                                        <Link className="link link-hover text-primary-content" href="/about">About</Link>
                                                 </nav>
                                         </div>
                                 </header>
                                 <main className="flex-1">
-                                        <div className="mx-auto max-w-6xl px-4 py-10">
+                                        <div className="mx-auto max-w-6xl px-4 py-10 space-y-12">
                                                 {children}
                                         </div>
                                 </main>

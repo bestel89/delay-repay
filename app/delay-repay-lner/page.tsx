@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function LnerPage() {
         return (
-                <article className="prose max-w-none">
+                <article className="prose max-w-3xl prose-headings:font-semibold prose-a:link prose-a:link-hover">
                         <h1>LNER Delay Repay</h1>
                         <p>
                                 Learn how London North Eastern Railway (LNER) handles Delay Repay and use the <Link href="/">Delay Repay calculator</Link> to estimate compensation before you claim. This guide covers eligibility, ticket types, evidence, cancellations, and the steps to submit a strong application.

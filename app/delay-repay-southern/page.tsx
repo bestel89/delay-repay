@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function SouthernPage() {
         return (
-                <article className="prose max-w-none">
+                <article className="prose max-w-3xl prose-headings:font-semibold prose-a:link prose-a:link-hover">
                         <h1>Southern Delay Repay</h1>
                         <p>
                                 Southern runs commuter and airport services across the South East. This guide shows how Southern applies Delay Repay and how to estimate compensation using the <Link href="/">Delay Repay calculator</Link> before submitting a claim.

@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function NorthernPage() {
         return (
-                <article className="prose max-w-none">
+                <article className="prose max-w-3xl prose-headings:font-semibold prose-a:link prose-a:link-hover">
                         <h1>Northern Delay Repay</h1>
                         <p>
                                 Northern operates a large commuter and regional network across the North of England. This guide explains how Northern handles Delay Repay and how to estimate compensation using the <Link href="/">Delay Repay calculator</Link> before submitting a claim.

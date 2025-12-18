@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function CookiesPage() {
 	return (
-		<article className="prose max-w-none">
+		<article className="prose max-w-3xl prose-headings:font-semibold prose-a:link prose-a:link-hover">
 			<h1>Cookie Policy</h1>
 			<p><em>Last updated: 22 Aug 2025</em></p>
 

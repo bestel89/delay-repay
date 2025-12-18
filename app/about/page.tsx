@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
         return (
-                <article className="prose max-w-none">
+                <article className="prose max-w-3xl prose-headings:font-semibold prose-a:link prose-a:link-hover">
                         <h1>About this site</h1>
                         <p>
                                 {domainNameWithoutHTTPS} is an independent UK consumer information site focused on Delay Repay. It combines a fast, public calculator with plain-English guidance so rail passengers can check potential compensation before submitting a claim to their train operator.
@@ -51,6 +51,9 @@ export default function AboutPage() {
                         <h2>Independence and funding</h2>
                         <p>
                                 The site is independent and unaffiliated with UK train operating companies. Any advertising is kept separate from the calculator and guides so that core content remains clear and usable. There are no paid placements for operators or ticket retailers.
+                        </p>
+                        <p>
+                                Independent information site. Not affiliated with any train operator or government body.
                         </p>
 
                         <h2>Contact</h2>

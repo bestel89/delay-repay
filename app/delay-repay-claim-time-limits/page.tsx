@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function ClaimTimeLimitsPage() {
         return (
-                <article className="prose max-w-none">
+                <article className="prose max-w-3xl prose-headings:font-semibold prose-a:link prose-a:link-hover">
                         <h1>Delay Repay claim time limits</h1>
                         <p>
                                 Delay Repay claims usually need to be submitted within a set number of days from the date of travel. This guide summarises common windows, how to prepare evidence quickly, and what to do if you are close to the deadline. Use it alongside the <Link href="/">Delay Repay calculator</Link> so you can submit a complete claim on time.

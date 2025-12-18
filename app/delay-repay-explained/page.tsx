@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function DelayRepayExplainedPage() {
         return (
-                <article className="prose max-w-none">
+                <article className="prose max-w-3xl prose-headings:font-semibold prose-a:link prose-a:link-hover">
                         <h1>Delay Repay explained</h1>
                         <p>
                                 Delay Repay is the UK scheme that lets rail passengers claim compensation when a train is delayed or cancelled. This guide walks through eligibility, evidence, ticket types, operator differences, and how to submit a claim without jargon. It complements the <Link href="/">Delay Repay calculator</Link>, which estimates what you might receive in pounds before you open the official claim form.

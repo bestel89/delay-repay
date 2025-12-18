@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
         return (
-                <article className="prose max-w-none">
+                <article className="prose max-w-3xl prose-headings:font-semibold prose-a:link prose-a:link-hover">
                         <h1>Contact</h1>
                         <p>
                                 If you have spotted an error, need to flag an operator policy change, or want to share feedback on the calculator, please get in touch by email. This inbox is monitored in the UK and responses focus on site accuracy and usability.

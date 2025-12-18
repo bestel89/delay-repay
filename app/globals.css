@@ -1,6 +1,43 @@
 @import "tailwindcss";
 @plugin "daisyui" {
-    themes: corporate --default;
+    themes: corporate;
 }
 @plugin "@tailwindcss/typography";
 
+@layer base {
+    :root[data-theme="railAuthority"] {
+        /* Palette: primary #0c2e4f, secondary #1f4f7a, accent #c1121f, neutral #243447, base-100 #ffffff, base-200 #edf1f6, base-300 #d9e0ea, info #1b6fb7, success #2f7c4d, warning #b4680f, error #b02038 */
+        color-scheme: light;
+        --color-primary: oklch(29.608% 0.071 251.092);
+        --color-primary-content: oklch(97.500% 0.006 255.475);
+        --color-secondary: oklch(41.680% 0.089 248.663);
+        --color-secondary-content: oklch(95.262% 0.011 252.089);
+        --color-accent: oklch(51.611% 0.202 25.943);
+        --color-accent-content: oklch(98.150% 0.009 41.886);
+        --color-neutral: oklch(31.990% 0.040 253.232);
+        --color-neutral-content: oklch(93.209% 0.014 258.346);
+        --color-base-100: oklch(100.000% 0.000 89.876);
+        --color-base-200: oklch(95.654% 0.008 253.854);
+        --color-base-300: oklch(90.430% 0.016 257.200);
+        --color-base-content: oklch(22.388% 0.038 255.577);
+        --color-info: oklch(53.131% 0.136 249.819);
+        --color-info-content: oklch(97.392% 0.012 255.504);
+        --color-success: oklch(52.570% 0.106 153.637);
+        --color-success-content: oklch(97.322% 0.009 150.692);
+        --color-warning: oklch(59.041% 0.132 61.497);
+        --color-warning-content: oklch(98.429% 0.014 78.265);
+        --color-error: oklch(49.475% 0.177 18.540);
+        --color-error-content: oklch(97.847% 0.011 3.488);
+    }
+}
+
+@layer components {
+    .prose a {
+        @apply link link-hover;
+    }
+    .prose h1,
+    .prose h2,
+    .prose h3 {
+        @apply font-semibold text-base-content;
+    }
+}

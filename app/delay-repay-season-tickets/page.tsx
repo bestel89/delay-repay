@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function SeasonTicketsPage() {
         return (
-                <article className="prose max-w-none">
+                <article className="prose max-w-3xl prose-headings:font-semibold prose-a:link prose-a:link-hover">
                         <h1>Delay Repay for season tickets</h1>
                         <p>
                                 Season tickets are eligible for Delay Repay across most UK operators, but the compensation is calculated differently from single or return fares. This guide explains how per-journey values are derived, what evidence to provide, and how to use the <Link href="/">Delay Repay calculator</Link> to get an indicative payout before submitting a claim.

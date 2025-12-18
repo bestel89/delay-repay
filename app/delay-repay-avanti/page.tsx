@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function AvantiPage() {
         return (
-                <article className="prose max-w-none">
+                <article className="prose max-w-3xl prose-headings:font-semibold prose-a:link prose-a:link-hover">
                         <h1>Avanti West Coast Delay Repay</h1>
                         <p>
                                 This page explains how Avanti West Coast applies Delay Repay and how to estimate compensation using the <Link href="/">Delay Repay calculator</Link>. It covers thresholds, ticket types, evidence, and practical steps to submit a complete claim.

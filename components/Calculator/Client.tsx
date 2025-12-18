@@ -121,107 +121,112 @@ export default function Client(props: {
 		window.open(dest, "_blank", "noopener,noreferrer");
 	}
 
-	return (
-		<div className="border p-4 rounded shadow-sm">
-			{/* No loading state: operators are present from SSR */}
-			{operators.length === 0 ? (
-				<div>Couldn’t load operators. Please refresh.</div>
-			) : (
-				<div>
-					<fieldset className="fieldset mb-4">
-						<legend>Operator</legend>
-						<select
-							value={opCode}
-							onChange={(e) => setOpCode(e.target.value)}
-							className="select"
-						>
-							{operators.map((o) => (
-								<option key={o.code} value={o.code}>
+        return (
+                <div className="card bg-base-100 shadow-sm border border-base-300">
+                        <div className="card-body space-y-4">
+                        {/* No loading state: operators are present from SSR */}
+                        {operators.length === 0 ? (
+                                <div className="alert alert-warning">Couldn’t load operators. Please refresh.</div>
+                        ) : (
+                                <div>
+                                        <fieldset className="fieldset mb-4">
+                                                <legend className="text-sm font-semibold text-base-content">Operator</legend>
+                                                <select
+                                                        value={opCode}
+                                                        onChange={(e) => setOpCode(e.target.value)}
+                                                        className="select select-bordered w-full"
+                                                >
+                                                        {operators.map((o) => (
+                                                                <option key={o.code} value={o.code}>
 									{o.name}
 								</option>
 							))}
 						</select>
 					</fieldset>
 
-					{isManual ? (
-						<div>
-							This operator doesn’t use Delay Repay. You’ll need to claim directly via their official page.
-							<div className="mt-2">
-								<button onClick={onClaim} className="btn btn-primary">
-									Go to claim page
-								</button>
-							</div>
-						</div>
-					) : (
-						<>
-							<fieldset className="fieldset mb-4">
-								<legend>Ticket price (£)</legend>
-								<input
-									value={price}
-									onChange={(e) => setPrice(e.target.value)}
-									placeholder="e.g. 42.50"
-									inputMode="decimal"
-									className="input"
-								/>
-							</fieldset>
+                                        {isManual ? (
+                                                <div className="alert alert-info mt-4">
+                                                        This operator doesn’t use Delay Repay. You’ll need to claim directly via their official page.
+                                                        <div className="mt-3">
+                                                                <button onClick={onClaim} className="btn btn-accent">
+                                                                        Go to claim page
+                                                                </button>
+                                                        </div>
+                                                </div>
+                                        ) : (
+                                                <>
+                                                        <fieldset className="fieldset mb-4 space-y-2">
+                                                                <legend className="text-sm font-semibold text-base-content">Ticket price (£)</legend>
+                                                                <input
+                                                                        value={price}
+                                                                        onChange={(e) => setPrice(e.target.value)}
+                                                                        placeholder="e.g. 42.50"
+                                                                        inputMode="decimal"
+                                                                        className="input input-bordered w-full"
+                                                                />
+                                                        </fieldset>
 
-							<fieldset className="fieldset mb-4">
-								<legend>Ticket type</legend>
-								<select
-									value={ticket}
-									onChange={(e) => setTicket(e.target.value as TicketType)}
-									className="select"
-								>
-									<option value="single">Single</option>
-									<option value="return">Return</option>
-									<option value="season_weekly">Season — Weekly</option>
-									<option value="season_monthly">Season — Monthly</option>
-									<option value="season_annual">Season — Annual</option>
-									<option value="season_flexi">Season — Flexi</option>
-								</select>
-							</fieldset>
+                                                        <fieldset className="fieldset mb-4 space-y-2">
+                                                                <legend className="text-sm font-semibold text-base-content">Ticket type</legend>
+                                                                <select
+                                                                        value={ticket}
+                                                                        onChange={(e) => setTicket(e.target.value as TicketType)}
+                                                                        className="select select-bordered w-full"
+                                                                >
+                                                                        <option value="single">Single</option>
+                                                                        <option value="return">Return</option>
+                                                                        <option value="season_weekly">Season — Weekly</option>
+                                                                        <option value="season_monthly">Season — Monthly</option>
+                                                                        <option value="season_annual">Season — Annual</option>
+                                                                        <option value="season_flexi">Season — Flexi</option>
+                                                                </select>
+                                                        </fieldset>
 
-							<fieldset className="fieldset mb-4">
-								<legend>Delay length</legend>
-								<select
-									value={band}
-									onChange={(e) => setBand(e.target.value as DelayBand)}
-									className="select"
-								>
-									<option value="15-29">15–29 minutes</option>
-									<option value="30-59">30–59 minutes</option>
-									<option value="60-119">60–119 minutes</option>
-									<option value="120+">120+ minutes</option>
-								</select>
-							</fieldset>
+                                                        <fieldset className="fieldset mb-4 space-y-2">
+                                                                <legend className="text-sm font-semibold text-base-content">Delay length</legend>
+                                                                <select
+                                                                        value={band}
+                                                                        onChange={(e) => setBand(e.target.value as DelayBand)}
+                                                                        className="select select-bordered w-full"
+                                                                >
+                                                                        <option value="15-29">15–29 minutes</option>
+                                                                        <option value="30-59">30–59 minutes</option>
+                                                                        <option value="60-119">60–119 minutes</option>
+                                                                        <option value="120+">120+ minutes</option>
+                                                                </select>
+                                                        </fieldset>
 
-							<p>What you might be able to claim:</p>
-							<p className="prose-sm">
-								<em><b>Important!</b></em> Estimates only. Final payout is determined by your operator. Season tickets are converted to a per-journey value.
-							</p>
-							<label className="input mb-4">
-								<span className="label">£</span>
-								<input
-									type="text"
-									readOnly
-									placeholder="What you might be able to claim"
-									value={estimate === null ? "" : `${estimate.toFixed(2)}`}
-								/>
-							</label>
+                                                        <div className="space-y-2">
+                                                                <p className="text-sm font-semibold text-base-content">What you might be able to claim</p>
+                                                                <p className="text-sm text-base-content/80">
+                                                                        <strong>Important:</strong> Estimates only. Final payout is determined by your operator. Season tickets are converted to a per-journey value.
+                                                                </p>
+                                                                <label className="input input-bordered flex items-center gap-2">
+                                                                        <span className="font-semibold text-base-content">£</span>
+                                                                        <input
+                                                                                type="text"
+                                                                                readOnly
+                                                                                className="w-full bg-transparent"
+                                                                                placeholder="What you might be able to claim"
+                                                                                value={estimate === null ? "" : `${estimate.toFixed(2)}`}
+                                                                        />
+                                                                </label>
+                                                        </div>
 
-							<div>
-								<button
-									onClick={onClaim}
-									disabled={!estimate && !selectedOp?.claim_url}
-									className="btn btn-primary"
-								>
-									Claim with {selectedOp?.name || "this operator"}
-								</button>
-							</div>
-						</>
-					)}
-				</div>
-			)}
-		</div>
-	);
+                                                        <div>
+                                                                <button
+                                                                        onClick={onClaim}
+                                                                        disabled={!estimate && !selectedOp?.claim_url}
+                                                                        className="btn btn-accent"
+                                                                >
+                                                                        Claim with {selectedOp?.name || "this operator"}
+                                                                </button>
+                                                        </div>
+                                                </>
+                                        )}
+                                </div>
+                        )}
+                        </div>
+                </div>
+        );
 }

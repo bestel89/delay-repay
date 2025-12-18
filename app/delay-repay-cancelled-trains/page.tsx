@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function CancelledTrainsPage() {
         return (
-                <article className="prose max-w-none">
+                <article className="prose max-w-3xl prose-headings:font-semibold prose-a:link prose-a:link-hover">
                         <h1>Delay Repay for cancelled trains</h1>
                         <p>
                                 A cancelled train can trigger Delay Repay, a refund, or both, depending on when you were informed and whether you travelled. This guide explains the scenarios operators consider, the evidence they look for, and how to use the <Link href="/">Delay Repay calculator</Link> to set expectations before you submit a claim.
