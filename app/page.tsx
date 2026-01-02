@@ -29,7 +29,7 @@ export default function Page({ searchParams }: PageProps) {
                                         fill
                                         priority
                                         sizes="(min-width: 1280px) 1200px, 100vw"
-                                        src="/images/home/train-hero.jpg"
+                                        src="/pexels-robert-roberts-2158500590-35432879.jpg"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-r from-slate-950/85 via-slate-900/75 to-slate-900/40" />
                                 <div className="relative mx-auto flex min-h-[50vh] max-w-6xl flex-col justify-center gap-6 px-6 py-14 md:px-10">
