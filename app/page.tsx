@@ -9,7 +9,7 @@ export const revalidate = false;
 
 export const metadata: Metadata = {
         title: "Delay Repay Calculator (UK Train Delays) | DelayRepayCalc",
-        description: "Official UK train delay repay calculator with instant estimates for cancellations and delays, based on published operator policies.",
+        description: "UK train delay repay calculator with instant estimates for cancellations and delays, based on published operator policies.",
         alternates: { canonical: "/" },
 };
 
@@ -50,11 +50,11 @@ export default function Page({ searchParams }: PageProps) {
                         </section>
 
                         <section className="space-y-4 rounded-2xl bg-white p-6 shadow-sm">
-                                <h2 className="text-xl font-semibold leading-tight text-slate-900">Official Delay Repay Calculator for UK Train Delays</h2>
+                                <h2 className="text-xl font-semibold leading-tight text-slate-900">Delay Repay Calculator for UK Train Delays</h2>
                                 <p className="text-base leading-relaxed text-slate-700">
                                         Get an instant estimate for UK rail delays and cancellations using the{" "}
-                                        <Link className="text-blue-700 underline" href="/">delay repay calculator</Link>. This{" "}
-                                        <Link className="text-blue-700 underline" href="/">train delay calculator</Link> uses published operator policies so you can check what to expect before you claim.
+                                        <Link className="text-blue-700 underline" href="/#calculator">delay repay calculator</Link>. This{" "}
+                                       train delay calculator uses published operator policies so you can check what to expect before you claim.
                                 </p>
                                 <p className="text-base leading-relaxed text-slate-700">
                                         Enter your fare, pick your ticket type, and choose the delay band to see a guidance payout in pounds. Operator rules vary slightly, and the final decision sits with the train company.
