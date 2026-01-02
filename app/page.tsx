@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Calculator from "@/components/Calculator";
 import Faq from "@/components/Faq";
 import Link from "next/link";
+import Image from "next/image";
 
 export const dynamic = "force-static";
 export const revalidate = false;
@@ -20,35 +21,40 @@ export default function Page({ searchParams }: PageProps) {
         const operatorFromUrl = searchParams?.operator;
 
         return (
-                <main className="space-y-16">
-                        <section className="grid gap-8 rounded-2xl bg-white p-8 shadow-sm md:grid-cols-2">
-                                <div className="space-y-4">
-                                        <p className="text-sm font-semibold uppercase tracking-wide text-blue-700">Independent UK guide</p>
-                                        <h1 className="text-4xl font-bold leading-tight text-slate-900">Delay Repay Calculator</h1>
-                                        <p className="text-lg leading-relaxed text-slate-700">
-                                                Check how much Delay Repay you might receive for a delayed or cancelled UK rail journey. The calculator uses published operator policies and converts season tickets to a per-journey value so you can claim with confidence.
+                <main className="space-y-12">
+                        <section className="relative isolate overflow-hidden rounded-2xl bg-slate-900 text-white shadow-sm">
+                                <Image
+                                        alt="UK passenger train at a station platform"
+                                        className="object-cover"
+                                        fill
+                                        priority
+                                        sizes="(min-width: 1280px) 1200px, 100vw"
+                                        src="/pexels-robert-roberts-2158500590-35432879.jpg"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-r from-slate-950/85 via-slate-900/75 to-slate-900/40" />
+                                <div className="relative mx-auto flex min-h-[32vh] max-w-6xl flex-col justify-center gap-5 px-6 py-12 md:min-h-[38vh] md:px-10">
+                                        <h2 className="text-3xl font-bold leading-tight md:text-4xl">Delay Repay Calculator for UK Train Delays</h2>
+                                        <p className="max-w-2xl text-lg leading-relaxed text-slate-100">
+                                                Get an instant estimate for compensation on delayed or cancelled UK train journeys. Check eligibility, understand the bands, and jump straight to the calculator with confidence.
                                         </p>
-                                        <div className="flex flex-wrap gap-3">
-                                                <a className="btn btn-primary" href="#calculator">Estimate your Delay Repay</a>
-                                                <Link className="btn btn-outline" href="/delay-repay-explained">Learn how Delay Repay works</Link>
-                                        </div>
-                                        <div className="flex flex-wrap gap-4 pt-4 text-sm text-slate-700">
-                                                <span className="rounded-full bg-blue-50 px-3 py-1 text-blue-800">Used by UK rail passengers</span>
-                                                <span className="rounded-full bg-green-50 px-3 py-1 text-green-800">Based on published operator policies</span>
-                                                <span className="rounded-full bg-slate-100 px-3 py-1 text-slate-800">Independent and unaffiliated</span>
-                                        </div>
+                                        <a className="btn btn-primary w-fit" href="#calculator">Calculate compensation</a>
+                                        <p className="text-xs text-slate-200/80">
+                                                Photo by {" "}
+                                                <a className="underline" href="https://www.pexels.com/photo/red-train-at-birmingham-new-street-station-35432879/" rel="noopener noreferrer" target="_blank">
+                                                        Robert Roberts (Pexels)
+                                                </a>
+                                        </p>
                                 </div>
-                                <div className="rounded-xl bg-slate-50 p-6 text-sm leading-relaxed text-slate-800">
-                                        <h2 className="text-xl font-semibold text-slate-900">What this page is for</h2>
-                                        <p className="mt-2">
-                                                Delay Repay is a consumer compensation scheme. This site keeps the calculator front and centre, but also provides plain-English guidance on the process, evidence, and time limits so you can submit a complete claim to your train operator.
-                                        </p>
-                                        <ul className="mt-4 list-disc space-y-2 pl-5">
-                                                <li>Fast estimate in pounds, before you visit the operator claim form</li>
-                                                <li>Operator differences highlighted so you know when rules change</li>
-                                                <li>Links to deeper guides on season tickets, missed connections, and cancellations</li>
-                                        </ul>
-                                        <p className="mt-4 text-xs text-slate-600">Guidance only. Final decisions rest with the operator after they review your evidence.</p>
+                        </section>
+
+                        <section className="space-y-3 rounded-2xl bg-white p-6 shadow-sm">
+                                <h1 className="text-3xl font-bold leading-tight text-slate-900">Delay Repay Calculator</h1>
+                                <p className="text-base leading-relaxed text-slate-700">
+                                        Use our <Link className="text-blue-700 underline" href="#calculator">delay repay calculator</Link> to estimate compensation for delayed or cancelled UK rail journeys. This train delay calculator is guidance only, based on published operator policies.
+                                </p>
+                                <div className="flex flex-wrap gap-3 text-sm text-slate-700">
+                                        <span className="rounded-full bg-blue-50 px-3 py-1 text-blue-800">Used by UK rail passengers</span>
+                                        <span className="rounded-full bg-green-50 px-3 py-1 text-green-800">Based on published operator policies</span>
                                 </div>
                         </section>
 
@@ -61,6 +67,24 @@ export default function Page({ searchParams }: PageProps) {
                                 </div>
                                 <Calculator preselectedOperatorCode={operatorFromUrl} />
                                 <p className="text-sm text-slate-600">Results are indicative only. Your train operator confirms eligibility and the final payment.</p>
+                        </section>
+
+                        <section className="rounded-2xl bg-white p-4 shadow-sm">
+                                <div className="collapse collapse-arrow border border-slate-200 bg-white">
+                                        <input type="checkbox" />
+                                        <div className="collapse-title text-lg font-semibold text-slate-900">What this page is for</div>
+                                        <div className="collapse-content text-sm leading-relaxed text-slate-800">
+                                                <p className="mt-1">
+                                                        Delay Repay is a consumer compensation scheme. This site keeps the calculator front and centre, but also provides plain-English guidance on the process, evidence, and time limits so you can submit a complete claim to your train operator.
+                                                </p>
+                                                <ul className="mt-4 list-disc space-y-2 pl-5">
+                                                        <li>Fast estimate in pounds, before you visit the operator claim form</li>
+                                                        <li>Operator differences highlighted so you know when rules change</li>
+                                                        <li>Links to deeper guides on season tickets, missed connections, and cancellations</li>
+                                                </ul>
+                                                <p className="mt-4 text-xs text-slate-600">Guidance only. Final decisions rest with the operator after they review your evidence.</p>
+                                        </div>
+                                </div>
                         </section>
 
                         <section className="grid gap-8 rounded-2xl bg-white p-8 shadow-sm md:grid-cols-3">
