@@ -29,11 +29,11 @@ export default function Page({ searchParams }: PageProps) {
                                         fill
                                         priority
                                         sizes="(min-width: 1280px) 1200px, 100vw"
-                                        src="/images/home/train-hero.jpg"
+                                        src="/pexels-robert-roberts-2158500590-35432879.jpg"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-r from-slate-950/85 via-slate-900/75 to-slate-900/40" />
                                 <div className="relative mx-auto flex min-h-[32vh] max-w-6xl flex-col justify-center gap-5 px-6 py-12 md:min-h-[38vh] md:px-10">
-                                        <h2 className="text-3xl font-bold leading-tight md:text-4xl">Official Delay Repay Calculator for UK Train Delays</h2>
+                                        <h2 className="text-3xl font-bold leading-tight md:text-4xl">Delay Repay Calculator for UK Train Delays</h2>
                                         <p className="max-w-2xl text-lg leading-relaxed text-slate-100">
                                                 Get an instant estimate for compensation on delayed or cancelled UK train journeys. Check eligibility, understand the bands, and jump straight to the calculator with confidence.
                                         </p>
@@ -50,7 +50,7 @@ export default function Page({ searchParams }: PageProps) {
                         <section className="space-y-3 rounded-2xl bg-white p-6 shadow-sm">
                                 <h1 className="text-3xl font-bold leading-tight text-slate-900">Delay Repay Calculator</h1>
                                 <p className="text-base leading-relaxed text-slate-700">
-                                        Use our <Link className="text-blue-700 underline" href="/">delay repay calculator</Link> to estimate compensation for delayed or cancelled UK rail journeys. This <Link className="text-blue-700 underline" href="/">train delay calculator</Link> is guidance only, based on published operator policies.
+                                        Use our <Link className="text-blue-700 underline" href="#calculator">delay repay calculator</Link> to estimate compensation for delayed or cancelled UK rail journeys. This train delay calculator is guidance only, based on published operator policies.
                                 </p>
                                 <div className="flex flex-wrap gap-3 text-sm text-slate-700">
                                         <span className="rounded-full bg-blue-50 px-3 py-1 text-blue-800">Used by UK rail passengers</span>
