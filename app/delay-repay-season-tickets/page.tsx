@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import CalculatorCallout from "@/components/CalculatorCallout";
 
 export const metadata: Metadata = {
         title: "Delay Repay for season tickets | UK guidance",
@@ -14,6 +15,8 @@ export default function SeasonTicketsPage() {
                         <p>
                                 Season tickets are eligible for Delay Repay across most UK operators, but the compensation is calculated differently from single or return fares. This guide explains how per-journey values are derived, what evidence to provide, and how to use the <Link href="/">Delay Repay calculator</Link> to get an indicative payout before submitting a claim.
                         </p>
+
+                        <CalculatorCallout />
 
                         <h2>How operators calculate compensation</h2>
                         <p>

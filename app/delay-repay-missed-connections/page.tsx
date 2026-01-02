@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import CalculatorCallout from "@/components/CalculatorCallout";
 
 export const metadata: Metadata = {
         title: "Delay Repay for missed connections | UK guidance",
@@ -14,6 +15,8 @@ export default function MissedConnectionsPage() {
                         <p>
                                 If a late-running train causes you to miss a connection, you may be entitled to Delay Repay based on the delay at your final destination. This guide explains how operators assess these situations, what to record, and how to use the <Link href="/">Delay Repay calculator</Link> to see the likely compensation before you submit a claim.
                         </p>
+
+                        <CalculatorCallout />
 
                         <h2>Through tickets versus separate tickets</h2>
                         <p>

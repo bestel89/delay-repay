@@ -6,11 +6,13 @@ import Link from "next/link";
 export const dynamic = "force-static";
 export const revalidate = false;
 
-export const metadata: Metadata = {
-        title: "Delay Repay Calculator | Estimate UK train compensation",
-        description: "Estimate UK Delay Repay in pounds for your train delay. Independent guidance for season tickets, cancellations, and major operators.",
-        alternates: { canonical: "/" },
-};
+export async function generateMetadata(): Promise<Metadata> {
+        return {
+                title: "Delay Repay Calculator (UK Train Delays) | DelayRepayCalc",
+                description: "Official-style Delay Repay calculator for UK train delays with operator-specific guidance, examples, and evidence checklists.",
+                alternates: { canonical: "/" },
+        };
+}
 
 type PageProps = {
         searchParams?: { operator?: string };
@@ -49,6 +51,72 @@ export default function Page({ searchParams }: PageProps) {
                                                 <li>Links to deeper guides on season tickets, missed connections, and cancellations</li>
                                         </ul>
                                         <p className="mt-4 text-xs text-slate-600">Guidance only. Final decisions rest with the operator after they review your evidence.</p>
+                                </div>
+                        </section>
+
+                        <section className="rounded-2xl bg-blue-50 p-6 shadow-sm">
+                                <div className="space-y-3">
+                                        <h2 className="text-2xl font-semibold text-slate-900">Official Delay Repay Calculator for UK Train Delays</h2>
+                                        <p className="text-slate-800">
+                                                Delay RepayCalc is designed to mirror how UK train operators apply compensation, giving you an indicative figure before you open the official claim form. The{" "}
+                                                <Link className="font-semibold text-blue-800 underline" href="/">
+                                                        delay repay calculator
+                                                </Link>{" "}
+                                                and{" "}
+                                                <Link className="font-semibold text-blue-800 underline" href="/">
+                                                        train delay calculator
+                                                </Link>{" "}
+                                                use published rules, cover major national and regional operators, and highlight when an operator handles things differently.
+                                        </p>
+                                        <p className="text-slate-800">
+                                                Estimates are guidance, not a guarantee. Always check the operator’s claim form and upload clear evidence. If you need a Northern-specific route, the{" "}
+                                                <Link className="font-semibold text-blue-800 underline" href="/operators/northern">
+                                                        northern rail delay repay calculator
+                                                </Link>{" "}
+                                                is available, and you can jump straight to the calculator with{" "}
+                                                <Link className="font-semibold text-blue-800 underline" href="/?operator=northern">
+                                                        Northern pre-selected
+                                                </Link>
+                                                .
+                                        </p>
+                                </div>
+                        </section>
+
+                        <section className="rounded-2xl bg-white p-6 shadow-sm">
+                                <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+                                        <div>
+                                                <h2 className="text-xl font-semibold text-slate-900">Popular operator calculators</h2>
+                                                <p className="text-slate-700">Jump into the operator-specific view, then return to the calculator with the correct settings.</p>
+                                        </div>
+                                        <Link className="btn btn-primary" href="/">
+                                                Use the delay repay calculator
+                                        </Link>
+                                </div>
+                                <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                                        <Link className="rounded-lg border border-slate-200 bg-slate-50 p-4 hover:border-blue-400" href="/operators/avanti">
+                                                <p className="font-semibold text-slate-900">Avanti West Coast</p>
+                                                <p className="text-sm text-slate-700">Long-distance West Coast services.</p>
+                                        </Link>
+                                        <Link className="rounded-lg border border-slate-200 bg-slate-50 p-4 hover:border-blue-400" href="/operators/northern">
+                                                <p className="font-semibold text-slate-900">Northern</p>
+                                                <p className="text-sm text-slate-700">Regional routes across the North.</p>
+                                        </Link>
+                                        <Link className="rounded-lg border border-slate-200 bg-slate-50 p-4 hover:border-blue-400" href="/operators/lner">
+                                                <p className="font-semibold text-slate-900">LNER</p>
+                                                <p className="text-sm text-slate-700">East Coast Main Line.</p>
+                                        </Link>
+                                        <Link className="rounded-lg border border-slate-200 bg-slate-50 p-4 hover:border-blue-400" href="/operators/gwr">
+                                                <p className="font-semibold text-slate-900">Great Western Railway</p>
+                                                <p className="text-sm text-slate-700">West of England and South Wales.</p>
+                                        </Link>
+                                        <Link className="rounded-lg border border-slate-200 bg-slate-50 p-4 hover:border-blue-400" href="/operators/thameslink">
+                                                <p className="font-semibold text-slate-900">Thameslink</p>
+                                                <p className="text-sm text-slate-700">Core cross-London routes.</p>
+                                        </Link>
+                                        <Link className="rounded-lg border border-slate-200 bg-slate-50 p-4 hover:border-blue-400" href="/operators/southeastern">
+                                                <p className="font-semibold text-slate-900">Southeastern</p>
+                                                <p className="text-sm text-slate-700">Kent and South East London.</p>
+                                        </Link>
                                 </div>
                         </section>
 
@@ -141,25 +209,29 @@ export default function Page({ searchParams }: PageProps) {
                                         <Link className="text-blue-700 underline" href="/operators">See all operators</Link>
                                 </div>
                                 <div className="grid gap-4 md:grid-cols-3">
-                                        <Link className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm hover:border-blue-300" href="/delay-repay-avanti">
+                                        <Link className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm hover:border-blue-300" href="/operators/avanti">
                                                 <p className="font-semibold text-slate-900">Avanti West Coast</p>
                                                 <p className="text-sm text-slate-700">Long-distance West Coast services.</p>
                                         </Link>
-                                        <Link className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm hover:border-blue-300" href="/delay-repay-gwr">
+                                        <Link className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm hover:border-blue-300" href="/operators/gwr">
                                                 <p className="font-semibold text-slate-900">Great Western Railway</p>
                                                 <p className="text-sm text-slate-700">Intercity and regional routes in the West and Wales.</p>
                                         </Link>
-                                        <Link className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm hover:border-blue-300" href="/delay-repay-lner">
+                                        <Link className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm hover:border-blue-300" href="/operators/lner">
                                                 <p className="font-semibold text-slate-900">LNER</p>
                                                 <p className="text-sm text-slate-700">East Coast Main Line services.</p>
                                         </Link>
-                                        <Link className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm hover:border-blue-300" href="/delay-repay-northern">
+                                        <Link className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm hover:border-blue-300" href="/operators/northern">
                                                 <p className="font-semibold text-slate-900">Northern</p>
                                                 <p className="text-sm text-slate-700">Local and regional services across the North.</p>
                                         </Link>
-                                        <Link className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm hover:border-blue-300" href="/delay-repay-southern">
-                                                <p className="font-semibold text-slate-900">Southern</p>
-                                                <p className="text-sm text-slate-700">Commuter and airport services in the South East.</p>
+                                        <Link className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm hover:border-blue-300" href="/operators/southeastern">
+                                                <p className="font-semibold text-slate-900">Southeastern</p>
+                                                <p className="text-sm text-slate-700">Kent and South East London.</p>
+                                        </Link>
+                                        <Link className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm hover:border-blue-300" href="/operators/thameslink">
+                                                <p className="font-semibold text-slate-900">Thameslink</p>
+                                                <p className="text-sm text-slate-700">Cross-London services.</p>
                                         </Link>
                                         <Link className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm hover:border-blue-300" href="/delay-repay-explained">
                                                 <p className="font-semibold text-slate-900">All operator guidance</p>

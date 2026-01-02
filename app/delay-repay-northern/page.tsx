@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Calculator from "@/components/Calculator";
+import CalculatorCallout from "@/components/CalculatorCallout";
 
 export const metadata: Metadata = {
         title: "Northern Delay Repay calculator and guide",
@@ -15,6 +16,8 @@ export default function NorthernPage() {
                         <p>
                                 Northern operates a large commuter and regional network across the North of England. This guide explains how Northern handles Delay Repay and how to estimate compensation using the <Link href="/">Delay Repay calculator</Link> before submitting a claim.
                         </p>
+
+                        <CalculatorCallout variant="northern" />
 
                         <h2>Headline facts</h2>
                         <ul>

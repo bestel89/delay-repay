@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import CalculatorCallout from "@/components/CalculatorCallout";
 
 export const metadata: Metadata = {
         title: "Delay Repay explained | UK train compensation guidance",
@@ -14,6 +15,8 @@ export default function DelayRepayExplainedPage() {
                         <p>
                                 Delay Repay is the UK scheme that lets rail passengers claim compensation when a train is delayed or cancelled. This guide walks through eligibility, evidence, ticket types, operator differences, and how to submit a claim without jargon. It complements the <Link href="/">Delay Repay calculator</Link>, which estimates what you might receive in pounds before you open the official claim form.
                         </p>
+
+                        <CalculatorCallout />
 
                         <h2>What Delay Repay covers</h2>
                         <p>

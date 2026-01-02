@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { domainNameWithHTTPS } from "../Constants";
 import { supabaseServer } from "@/lib/supabase.server";
+import { operatorLandingData } from "@/lib/operators";
 
 type Operator = {
         updated_at: string | null;
@@ -38,13 +39,23 @@ export async function GET() {
                 { loc: `${domainNameWithHTTPS}/delay-repay-missed-connections`, lastmod: nowIso },
         ].map((entry) => ({ ...entry, changefreq: "monthly", priority: 0.8 }));
 
-        const operators: SitemapEntry[] = [
-                { loc: `${domainNameWithHTTPS}/operators`, lastmod: operatorsLastMod },
+        const landingOperators: SitemapEntry[] = operatorLandingData.map((op) => ({
+                loc: `${domainNameWithHTTPS}/operators/${op.slug}`,
+                lastmod: operatorsLastMod,
+        }));
+
+        const legacyOperatorGuides: SitemapEntry[] = [
                 { loc: `${domainNameWithHTTPS}/delay-repay-avanti`, lastmod: operatorsLastMod },
                 { loc: `${domainNameWithHTTPS}/delay-repay-gwr`, lastmod: operatorsLastMod },
                 { loc: `${domainNameWithHTTPS}/delay-repay-lner`, lastmod: operatorsLastMod },
                 { loc: `${domainNameWithHTTPS}/delay-repay-northern`, lastmod: operatorsLastMod },
                 { loc: `${domainNameWithHTTPS}/delay-repay-southern`, lastmod: operatorsLastMod },
+        ];
+
+        const operators: SitemapEntry[] = [
+                { loc: `${domainNameWithHTTPS}/operators`, lastmod: operatorsLastMod },
+                ...landingOperators,
+                ...legacyOperatorGuides,
         ].map((entry) => ({ ...entry, changefreq: "monthly", priority: 0.8 }));
 
         const utilityPages: SitemapEntry[] = [

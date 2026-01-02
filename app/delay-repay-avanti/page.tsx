@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Calculator from "@/components/Calculator";
+import CalculatorCallout from "@/components/CalculatorCallout";
 
 export const metadata: Metadata = {
         title: "Avanti Delay Repay calculator and guide",
@@ -15,6 +16,8 @@ export default function AvantiPage() {
                         <p>
                                 This page explains how Avanti West Coast applies Delay Repay and how to estimate compensation using the <Link href="/">Delay Repay calculator</Link>. It covers thresholds, ticket types, evidence, and practical steps to submit a complete claim.
                         </p>
+
+                        <CalculatorCallout />
 
                         <h2>At a glance</h2>
                         <ul>

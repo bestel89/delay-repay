@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import CalculatorCallout from "@/components/CalculatorCallout";
 
 export const metadata: Metadata = {
         title: "Delay Repay for cancelled trains | What to expect",
@@ -14,6 +15,8 @@ export default function CancelledTrainsPage() {
                         <p>
                                 A cancelled train can trigger Delay Repay, a refund, or both, depending on when you were informed and whether you travelled. This guide explains the scenarios operators consider, the evidence they look for, and how to use the <Link href="/">Delay Repay calculator</Link> to set expectations before you submit a claim.
                         </p>
+
+                        <CalculatorCallout />
 
                         <h2>When Delay Repay applies to cancellations</h2>
                         <p>

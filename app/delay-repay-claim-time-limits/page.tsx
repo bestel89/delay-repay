@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import CalculatorCallout from "@/components/CalculatorCallout";
 
 export const metadata: Metadata = {
         title: "Delay Repay claim time limits | UK deadlines",
@@ -14,6 +15,8 @@ export default function ClaimTimeLimitsPage() {
                         <p>
                                 Delay Repay claims usually need to be submitted within a set number of days from the date of travel. This guide summarises common windows, how to prepare evidence quickly, and what to do if you are close to the deadline. Use it alongside the <Link href="/">Delay Repay calculator</Link> so you can submit a complete claim on time.
                         </p>
+
+                        <CalculatorCallout />
 
                         <h2>Typical claim windows</h2>
                         <p>
