@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Calculator from "@/components/Calculator";
 import Faq from "@/components/Faq";
 import Link from "next/link";
+import Image from "next/image";
 
 export const dynamic = "force-static";
 export const revalidate = false;
@@ -21,6 +22,37 @@ export default function Page({ searchParams }: PageProps) {
 
         return (
                 <main className="space-y-16">
+                        <section className="relative isolate overflow-hidden rounded-2xl bg-slate-900 text-white shadow-sm">
+                                <Image
+                                        alt="UK passenger train at a station platform"
+                                        className="object-cover"
+                                        fill
+                                        priority
+                                        sizes="(min-width: 1280px) 1200px, 100vw"
+                                        src="/images/home/train-hero.jpg"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-r from-slate-950/85 via-slate-900/75 to-slate-900/40" />
+                                <div className="relative mx-auto flex min-h-[50vh] max-w-6xl flex-col justify-center gap-6 px-6 py-14 md:px-10">
+                                        <p className="text-sm font-semibold uppercase tracking-wide text-blue-100">Independent UK guide</p>
+                                        <h2 className="text-3xl font-bold leading-tight md:text-4xl">Official Delay Repay Calculator for UK Train Delays</h2>
+                                        <p className="max-w-2xl text-lg leading-relaxed text-slate-100">
+                                                Get an instant estimate for compensation on delayed or cancelled UK train journeys. Check eligibility, understand the bands, and jump straight to the calculator with confidence.
+                                        </p>
+                                        <div className="flex flex-wrap gap-3">
+                                                <a className="btn btn-primary" href="#calculator">Calculate compensation</a>
+                                                <Link className="btn btn-ghost border border-white/30 text-white hover:border-white" href="/delay-repay-explained">
+                                                        Learn how Delay Repay works
+                                                </Link>
+                                        </div>
+                                        <p className="text-xs text-slate-200/80">
+                                                Photo by {" "}
+                                                <a className="underline" href="https://www.pexels.com/photo/red-train-at-birmingham-new-street-station-35432879/" rel="noopener noreferrer" target="_blank">
+                                                        Robert Roberts (Pexels)
+                                                </a>
+                                        </p>
+                                </div>
+                        </section>
+
                         <section className="grid gap-8 rounded-2xl bg-white p-8 shadow-sm md:grid-cols-2">
                                 <div className="space-y-4">
                                         <p className="text-sm font-semibold uppercase tracking-wide text-blue-700">Independent UK guide</p>
