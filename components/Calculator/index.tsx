@@ -33,11 +33,8 @@ export default async function Calculator({ preselectedOperatorCode }: { preselec
 	}
 
         const ops = operators ?? [];
-        const normalise = (s: string) => s.toLowerCase().replace(/[^a-z0-9]/g, "");
-        const requested = preselectedOperatorCode ? normalise(preselectedOperatorCode.trim()) : "";
-        const matched = requested
-                ? ops.find((op) => normalise(op.code) === requested || normalise(op.name) === requested)?.code ?? ""
-                : "";
+        const requested = preselectedOperatorCode ? preselectedOperatorCode.trim().toLowerCase() : "";
+        const matched = requested ? ops.find((op) => op.code.toLowerCase() === requested)?.code ?? "" : "";
         const initialOpCode = matched || ops[0]?.code || "";
 
 	// 2) Default rules (all)

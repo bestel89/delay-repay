@@ -1,115 +1,132 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Calculator from "@/components/Calculator";
+import { supabaseServer } from "@/lib/supabase.server";
+import type { Tables } from "@/definitions/supabase";
 
 export const metadata: Metadata = {
-        title: "Northern Delay Repay calculator and guide",
-        description: "How Northern applies Delay Repay across its network: thresholds, tickets, cancellations, season products, and how to claim.",
+        title: "Northern Delay Repay Calculator | DelayRepayCalc",
+        description: "Estimate Northern rail Delay Repay compensation and learn the steps, evidence, and links you need to submit a claim.",
         alternates: { canonical: "/delay-repay-northern" },
 };
 
-export default function NorthernPage() {
+const faqItems = [
+        {
+                question: "When can I claim Delay Repay with Northern?",
+                answer: "You can usually claim when a Northern-operated leg arrives late at your final destination or if disruption meant you were advised not to travel. The delay is timed at the final stop on your ticket.",
+        },
+        {
+                question: "What are Northern’s Delay Repay thresholds?",
+                answer: "Many UK operators follow Delay Repay 15 (15/30/60+). Always check the official claim page for the latest Northern thresholds before submitting.",
+        },
+        {
+                question: "Which tickets are eligible on Northern?",
+                answer: "Most singles, returns, and season tickets are eligible when Northern operated the delayed service. Include the specific ticket reference and any railcard used.",
+        },
+        {
+                question: "How do I get an estimate for Northern?",
+                answer: "Use the delay repay calculator with Northern selected, enter your fare and delay length, and view the guidance payout before opening the claim form.",
+        },
+        {
+                question: "What evidence should I include?",
+                answer: "Attach proof of travel and proof of the actual arrival time. Photos of station boards, app screenshots, or email alerts work well.",
+        },
+        {
+                question: "What about missed connections on Northern journeys?",
+                answer: "Compensation is normally based on the delay at your final destination. List the planned connection, the service you missed, and the train you took instead.",
+        },
+        {
+                question: "Can I claim for cancelled Northern trains?",
+                answer: "If you did not travel, request a refund from the retailer. If you travelled on a later train, use Delay Repay based on the eventual arrival time.",
+        },
+];
+
+export default async function NorthernPage() {
+        const supabase = supabaseServer();
+        const { data, error } = await supabase
+                .from("operators")
+                .select("name,code,claim_url,website_url,delay_repay,active")
+                .eq("code", "northern")
+                .maybeSingle();
+
+        if (error || !data) {
+                return (
+                        <article className="prose max-w-none">
+                                <h1>Northern Delay Repay Calculator</h1>
+                                <p>We couldn’t load Northern details right now. Please use the <Link href="/">delay repay calculator</Link> and select Northern manually.</p>
+                        </article>
+                );
+        }
+
+        const operator = data as Tables<"operators">;
+        const faqJsonLd = {
+                "@context": "https://schema.org",
+                "@type": "FAQPage",
+                "mainEntity": faqItems.map((item) => ({
+                        "@type": "Question",
+                        name: item.question,
+                        acceptedAnswer: { "@type": "Answer", text: item.answer },
+                })),
+        };
+
         return (
                 <article className="prose max-w-none">
-                        <h1>Northern Delay Repay</h1>
+                        <h1>{operator.name} Delay Repay Calculator</h1>
                         <p>
-                                Northern operates a large commuter and regional network across the North of England. This guide explains how Northern handles Delay Repay and how to estimate compensation using the <Link href="/">Delay Repay calculator</Link> before submitting a claim.
+                                Use this <Link href="/delay-repay-northern">northern rail delay repay calculator</Link> to get a quick estimate before opening the official claim form. The{" "}
+                                <Link href="/">delay repay calculator</Link> preselects Northern so you can jump straight to the right guidance and payout bands.
+                        </p>
+                        <div className="not-prose mb-6 flex flex-wrap gap-3">
+                                <Link className="btn btn-primary" href={`/?operator=${operator.code}#calculator`}>
+                                        Calculate compensation
+                                </Link>
+                                {operator.claim_url && (
+                                        <a className="btn btn-outline" href={operator.claim_url} rel="noopener noreferrer" target="_blank">
+                                                Official Northern claim page
+                                        </a>
+                                )}
+                                {operator.website_url && (
+                                        <a className="btn btn-ghost" href={operator.website_url} rel="noopener noreferrer" target="_blank">
+                                                Northern website
+                                        </a>
+                                )}
+                        </div>
+
+                        <h2>How {operator.name} Delay Repay works</h2>
+                        <p>
+                                Northern participates in the Delay Repay scheme for most services it operates. Estimate the payout with the calculator, then submit the claim with ticket proof and evidence of the arrival time. If your journey includes another operator, note which leg Northern ran and where the delay started.
                         </p>
 
-                        <h2>Headline facts</h2>
+                        <h2>Compensation thresholds</h2>
+                        <p>Many UK operators follow Delay Repay 15 (15/30/60+). Always check the official claim page.</p>
+                        <p>
+                                The payout depends on the ticket type and delay band. Season tickets are converted to a per-journey value before the band is applied.
+                        </p>
+
+                        <h2>Examples</h2>
                         <ul>
-                                <li>Delay bands usually at 15–29, 30–59, 60–119, and 120+ minutes</li>
-                                <li>Most singles, returns, and season tickets on Northern services are eligible</li>
-                                <li>Claims are submitted via Northern’s online form with supporting evidence</li>
-                                <li>Payments may be offered by bank transfer, card refund, or vouchers</li>
+                                <li>Single ticket £22, 35-minute delay: typically 50% of the fare.</li>
+                                <li>Return ticket £48, 75-minute delay: often 100% of the single-leg value.</li>
+                                <li>Weekly season £120, 20-minute delay: calculator converts to a per-journey value then applies the band.</li>
                         </ul>
 
-                        <h2>Estimate a Northern journey</h2>
-                        <p>
-                                Start with the calculator below, pre-set to Northern. Enter your ticket price, ticket type, and delay length to see an indicative payout before opening the claim form.
-                        </p>
-                        <Calculator preselectedOperatorCode="northern" />
-
-                        <h2>Eligibility across the network</h2>
-                        <p>
-                                If your Northern service arrives late at your destination, you can generally claim under Delay Repay. If your journey includes another operator, identify which legs Northern operated and how the delay occurred. If the train was cancelled and you chose not to travel, a refund may be appropriate instead; note any advice received from staff.
-                        </p>
-
-                        <h2>Estimating with the calculator</h2>
-                        <p>
-                                Choose Northern in the <Link href="/">calculator</Link>, enter your ticket price, select the ticket type, and pick the delay band that matches your arrival. The calculator uses Northern’s published percentages and converts season tickets to a per-journey value. Use the result as guidance, then click through to Northern’s claim form.
-                        </p>
-
-                        <h2>Evidence Northern looks for</h2>
-                        <p>
-                                Provide proof of travel (ticket, smartcard, or booking reference) and proof of the actual arrival time. Photos of departure boards, screenshots from journey apps, or email alerts are useful. If staff re-routed you or accepted your ticket on another operator, note who authorised it and when.
-                        </p>
-                        <p>
-                                For split tickets or railcard discounts, include all ticket references and note the railcard used. Clear evidence helps avoid follow-up requests and speeds up payment.
-                        </p>
-
-                        <h2>Season tickets on Northern</h2>
-                        <p>
-                                Weekly, monthly, annual, and flexi season tickets are eligible when a qualifying delay occurs on a Northern-operated leg. The calculator divides the ticket price by the standard factor (10, 40, 464, or 16) and applies the band percentage. On the claim form, include the validity dates and whether the ticket is on a smartcard or mobile app.
-                        </p>
-                        <p>
-                                Regular commuters may submit multiple claims over time. Keeping a simple log of dates, services, and delays can help respond quickly if Northern requests clarification.
-                        </p>
-
-                        <h2>Advance fares and local routes</h2>
-                        <p>
-                                Advance fares are less common on shorter regional routes but do exist. If an Advance train is cancelled or delayed, you can claim based on the actual arrival time of the service you used. If you were advised to take a different operator, explain the circumstances and provide the arrival time of the alternative service.
-                        </p>
-
-                        <h2>Missed connections</h2>
-                        <p>
-                                If a Northern delay causes you to miss a connection, compensation is usually based on the delay at the final destination. Provide the planned connection time, the service missed, and the train you eventually boarded. If the connection involved another operator, state whether Northern staff authorised the change. More guidance is available in the <Link href="/delay-repay-missed-connections">missed connections guide</Link>.
-                        </p>
-
-                        <h2>Cancelled trains</h2>
-                        <p>
-                                If your Northern train is cancelled and you do not travel, you can normally request a refund. If you travel on a later service, Delay Repay may apply based on the arrival delay. Keep screenshots of cancellation notices and any advice from staff. Detailed steps are in the <Link href="/delay-repay-cancelled-trains">cancelled trains guide</Link>.
-                        </p>
-
-                        <h2>Time limits</h2>
-                        <p>
-                                Claims should be submitted within Northern’s stated window, often around 28 days. Submit promptly with clear evidence. If you are close to the deadline, focus on the essentials—ticket proof, journey details, and actual arrival time—and keep a copy of the submission confirmation. For more tips, see the <Link href="/delay-repay-claim-time-limits">time limits guide</Link>.
-                        </p>
-
-                        <h2>Submitting your claim</h2>
-                        <p>
-                                After estimating in the calculator, follow the Northern claim link. Provide contact details, journey specifics, ticket references, and your preferred payment method. Upload clear images of tickets and evidence, then keep the confirmation email for reference.
-                        </p>
-
-                        <h2>After submission</h2>
-                        <p>
-                                Northern aims to process claims quickly, though response times can vary. Payments are issued via the method you choose. If the amount differs from the calculator estimate, review the reason given and reply with any additional evidence if needed.
-                        </p>
-
-                        <h2>Checklist for Northern claims</h2>
+                        <h2>What you need to claim</h2>
                         <ul>
-                                <li>Ticket proof is clear and shows the route and date.</li>
-                                <li>Arrival time evidence is attached, even if it is a simple photo of the departure board.</li>
-                                <li>Any re-routing advice from staff is noted with time and location.</li>
-                                <li>Separate claims are prepared for separate days to keep evidence organised.</li>
+                                <li>Ticket proof (paper, smartcard, or e-ticket reference) and any railcard used.</li>
+                                <li>Evidence of actual arrival time, such as a station board photo or app screenshot.</li>
+                                <li>Details of any rerouting approval if you were asked to use a different service.</li>
                         </ul>
 
-                        <p>
-                                If you travel with children or in a group, list each ticket reference so the claim reflects the full party. Where accessibility considerations meant certain replacement routes were unsuitable, explain this briefly. Operators appreciate concise context and it can prevent the need for further clarification.
-                        </p>
-
-                        <p>
-                                If your itinerary involved another operator, state clearly which leg Northern operated and where the delay started. Clear attribution helps avoid the claim being redirected and keeps processing times down.
-                        </p>
-
-                        <h2>Related pages</h2>
+                        <h2>FAQs</h2>
                         <ul>
-                                <li><Link href="/">Delay Repay calculator</Link></li>
-                                <li><Link href="/delay-repay-explained">Delay Repay explained</Link></li>
-                                <li><Link href="/delay-repay-season-tickets">Season ticket guidance</Link></li>
-                                <li><Link href="/delay-repay-missed-connections">Missed connections</Link></li>
-                                <li><Link href="/delay-repay-cancelled-trains">Cancelled trains</Link></li>
+                                {faqItems.map((item) => (
+                                        <li key={item.question}>
+                                                <p className="font-semibold">{item.question}</p>
+                                                <p>{item.answer}</p>
+                                        </li>
+                                ))}
                         </ul>
+
+                        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
                 </article>
         );
 }

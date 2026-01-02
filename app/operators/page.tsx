@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { supabaseServer } from "@/lib/supabase.server";
 import type { Operator } from "@/definitions/operator";
-import {contactEmail} from "@/app/Constants";
+import { contactEmail } from "@/app/Constants";
 import Link from "next/link";
 
 export const dynamic = "force-static";
@@ -14,51 +14,24 @@ export const metadata: Metadata = {
 	alternates: { canonical: "/operators" },
 };
 
-type DefaultRow = { ticket: string; band: string; percent: number };
-type OverrideRow = { operator_code: string; ticket: string; band: string; percent: number };
-
 export default async function Page() {
 	const supabase = supabaseServer();
 
-	// 1) Operators
-	const { data: opsData } = await supabase
+	const { data: opsData, error } = await supabase
 		.from("operators")
 		.select("code,name,claim_url,delay_repay,active")
 		.eq("active", true)
+		.eq("delay_repay", true)
 		.order("name");
 
 	const operators: Operator[] = (opsData ?? []) as Operator[];
-
-	// 2) Defaults + Overrides (to detect real differences)
-	const [{ data: defaults }, { data: overrides }] = await Promise.all([
-		supabase.from("rules_default").select("ticket,band,percent"),
-		supabase.from("rules_override").select("operator_code,ticket,band,percent"),
-	]);
-
-	const defaultMap = new Map<string, number>();
-	(defaults ?? []).forEach((r: DefaultRow) =>
-		defaultMap.set(`${r.ticket}|${r.band}`, Number(r.percent))
-	);
-
-	// Operator codes where an override actually differs from default
-	const hasDiffOverride = new Set<string>();
-	(overrides ?? []).forEach((r: OverrideRow) => {
-		const key = `${r.ticket}|${r.band}`;
-		const def = defaultMap.get(key);
-		if (def === undefined || Number(r.percent) !== def) {
-			hasDiffOverride.add(r.operator_code);
-		}
-	});
-
-	type Status = "standard" | "override" | "no-dr";
-	const items = operators.map((op) => {
-		const status: Status = op.delay_repay
-			? hasDiffOverride.has(op.code)
-				? "override"
-				: "standard"
-			: "no-dr";
-		return { op, status };
-	});
+	const routeMap: Record<string, string> = {
+		northern: "/delay-repay-northern",
+		avanti: "/delay-repay-avanti",
+		gwr: "/delay-repay-gwr",
+		lner: "/delay-repay-lner",
+		southern: "/delay-repay-southern",
+	};
 
 	return (
 		<main>
@@ -70,44 +43,40 @@ export default async function Page() {
 					doesn’t go into the details.
 				</p>
 
-				{items.length === 0 ? (
+				{error ? (
+					<p>We couldn’t load operators right now. Please try again shortly.</p>
+				) : operators.length === 0 ? (
 					<p>No operators available right now.</p>
 				) : (
 					<ul className="not-prose divide-y">
-						{items.map(({ op, status }) => {
-							const badge =
-								status === "standard"
-									? { text: "Standard Delay Repay", cls: "badge-success" }
-									: status === "override"
-										? { text: "Different rules apply", cls: "badge-warning" }
-										: { text: "No Delay Repay", cls: "badge-neutral" };
-
-							const blurb =
-								status === "standard"
-									? "Uses the common banded percentages."
-									: status === "override"
-										? "This operator’s policy differs from the common bands."
-										: "This operator doesn’t use the standard Delay Repay scheme.";
-
+						{operators.map((op) => {
+							const route = routeMap[op.code as keyof typeof routeMap];
+							const externalLink = !route && op.claim_url ? op.claim_url : null;
 							return (
 								<li key={op.code} className="py-4">
 									<div className="flex items-start justify-between gap-4">
 										<div>
 											<h2 className="m-0">{op.name}</h2>
-											<p className="mt-1 text-sm text-neutral-700">{blurb}</p>
+											<p className="mt-1 text-sm text-neutral-700">
+												Active Delay Repay operator with published compensation bands.
+											</p>
 										</div>
 										<div className="flex items-center gap-2">
-											<span className={`badge ${badge.cls}`}>{badge.text}</span>
-											{op.claim_url && (
+											<span className="badge badge-success">Delay Repay</span>
+											{route ? (
+												<Link className="btn btn-primary no-underline" href={route}>
+													Calculator guide
+												</Link>
+											) : externalLink ? (
 												<a
-													href={op.claim_url}
+													href={externalLink}
 													target="_blank"
 													rel="noopener noreferrer"
 													className="btn btn-primary no-underline"
 												>
 													Claim page
 												</a>
-											)}
+											) : null}
 										</div>
 									</div>
 								</li>
