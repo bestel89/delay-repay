@@ -3,8 +3,8 @@ import Link from "next/link";
 import Calculator from "@/components/Calculator";
 
 export const metadata: Metadata = {
-        title: "Northern Delay Repay calculator and guide",
-        description: "How Northern applies Delay Repay across its network: thresholds, tickets, cancellations, season products, and how to claim.",
+        title: "Northern Delay Repay Calculator | DelayRepayCalc",
+        description: "Estimate Northern Delay Repay payouts, learn the thresholds, and jump to the claim form with clear evidence tips.",
         alternates: { canonical: "/delay-repay-northern" },
 };
 
@@ -13,7 +13,7 @@ export default function NorthernPage() {
                 <article className="prose max-w-none">
                         <h1>Northern Delay Repay</h1>
                         <p>
-                                Northern operates a large commuter and regional network across the North of England. This guide explains how Northern handles Delay Repay and how to estimate compensation using the <Link href="/">Delay Repay calculator</Link> before submitting a claim.
+                                Use this Northern rail delay repay calculator to estimate compensation before you submit a claim. Northern operates a large commuter and regional network, and this guide explains how Northern handles Delay Repay so you can start in the <Link href="/">delay repay calculator</Link> with confidence.
                         </p>
 
                         <h2>Headline facts</h2>

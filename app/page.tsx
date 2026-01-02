@@ -8,8 +8,8 @@ export const dynamic = "force-static";
 export const revalidate = false;
 
 export const metadata: Metadata = {
-        title: "Delay Repay Calculator | Estimate UK train compensation",
-        description: "Estimate UK Delay Repay in pounds for your train delay. Independent guidance for season tickets, cancellations, and major operators.",
+        title: "Delay Repay Calculator (UK Train Delays) | DelayRepayCalc",
+        description: "Official UK train delay repay calculator with instant estimates for cancellations and delays, based on published operator policies.",
         alternates: { canonical: "/" },
 };
 
@@ -18,7 +18,9 @@ type PageProps = {
 };
 
 export default function Page({ searchParams }: PageProps) {
-        const operatorFromUrl = searchParams?.operator;
+        const operatorFromUrl = searchParams?.operator && ["northern", "avanti"].includes(searchParams.operator)
+                ? searchParams.operator
+                : undefined;
 
         return (
                 <main className="space-y-12">
@@ -33,7 +35,7 @@ export default function Page({ searchParams }: PageProps) {
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-r from-slate-950/85 via-slate-900/75 to-slate-900/40" />
                                 <div className="relative mx-auto flex min-h-[32vh] max-w-6xl flex-col justify-center gap-5 px-6 py-12 md:min-h-[38vh] md:px-10">
-                                        <h2 className="text-3xl font-bold leading-tight md:text-4xl">Delay Repay Calculator for UK Train Delays</h2>
+                                        <h1 className="text-3xl font-bold leading-tight md:text-4xl">Delay Repay Calculator</h1>
                                         <p className="max-w-2xl text-lg leading-relaxed text-slate-100">
                                                 Get an instant estimate for compensation on delayed or cancelled UK train journeys. Check eligibility, understand the bands, and jump straight to the calculator with confidence.
                                         </p>
@@ -47,14 +49,29 @@ export default function Page({ searchParams }: PageProps) {
                                 </div>
                         </section>
 
-                        <section className="space-y-3 rounded-2xl bg-white p-6 shadow-sm">
-                                <h1 className="text-3xl font-bold leading-tight text-slate-900">Delay Repay Calculator</h1>
+                        <section className="space-y-4 rounded-2xl bg-white p-6 shadow-sm">
+                                <h2 className="text-xl font-semibold leading-tight text-slate-900">Official Delay Repay Calculator for UK Train Delays</h2>
                                 <p className="text-base leading-relaxed text-slate-700">
-                                        Use our <Link className="text-blue-700 underline" href="#calculator">delay repay calculator</Link> to estimate compensation for delayed or cancelled UK rail journeys. This train delay calculator is guidance only, based on published operator policies.
+                                        Get an instant estimate for UK rail delays and cancellations using the{" "}
+                                        <Link className="text-blue-700 underline" href="/">delay repay calculator</Link>. This{" "}
+                                        <Link className="text-blue-700 underline" href="/">train delay calculator</Link> uses published operator policies so you can check what to expect before you claim.
+                                </p>
+                                <p className="text-base leading-relaxed text-slate-700">
+                                        Enter your fare, pick your ticket type, and choose the delay band to see a guidance payout in pounds. Operator rules vary slightly, and the final decision sits with the train company.
                                 </p>
                                 <div className="flex flex-wrap gap-3 text-sm text-slate-700">
                                         <span className="rounded-full bg-blue-50 px-3 py-1 text-blue-800">Used by UK rail passengers</span>
                                         <span className="rounded-full bg-green-50 px-3 py-1 text-green-800">Based on published operator policies</span>
+                                </div>
+                                <div className="space-y-2">
+                                        <p className="text-sm font-semibold text-slate-900">Popular operator calculators</p>
+                                        <div className="flex flex-wrap gap-3 text-sm">
+                                                <Link className="text-blue-700 underline" href="/delay-repay-northern">Northern</Link>
+                                                <Link className="text-blue-700 underline" href="/delay-repay-avanti">Avanti West Coast</Link>
+                                                <Link className="text-blue-700 underline" href="/delay-repay-gwr">Great Western Railway</Link>
+                                                <Link className="text-blue-700 underline" href="/delay-repay-lner">LNER</Link>
+                                                <Link className="text-blue-700 underline" href="/delay-repay-southern">Southern</Link>
+                                        </div>
                                 </div>
                         </section>
 
