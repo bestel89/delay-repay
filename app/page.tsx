@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Calculator from "@/components/Calculator";
 import Faq from "@/components/Faq";
+import GuideCard from "@/components/GuideCard";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -136,40 +137,33 @@ export default function Page({ searchParams }: PageProps) {
                                 </div>
                         </section>
 
-                        <section className="grid gap-8 rounded-2xl bg-white p-8 shadow-sm md:grid-cols-2">
-                                <div className="space-y-3">
+                        <section className="grid gap-10 rounded-2xl bg-white p-8 shadow-sm md:grid-cols-2">
+                                <div className="space-y-4 md:pr-6">
+                                        <p className="text-sm font-semibold uppercase tracking-wide text-slate-500">Eligibility & scenarios</p>
                                         <h2 className="text-2xl font-semibold text-slate-900">Who can claim and common scenarios</h2>
-                                        <p className="text-slate-700">Delay Repay covers most ticket types when the train is delayed or cancelled. These guides explain the nuances.</p>
+                                        <p className="text-base leading-relaxed text-slate-700">Delay Repay covers most ticket types when the train is delayed or cancelled. These guides explain the nuances.</p>
                                 </div>
-                                <div className="grid gap-3">
-                                        <Link className="flex items-start justify-between rounded border border-slate-200 p-4 hover:bg-slate-50" href="/delay-repay-season-tickets">
-                                                <div>
-                                                        <p className="font-semibold text-slate-900">Season tickets</p>
-                                                        <p className="text-sm text-slate-700">Weekly, monthly, annual, and flexi products converted to per-journey estimates.</p>
-                                                </div>
-                                                <span className="text-blue-700">Read guide</span>
-                                        </Link>
-                                        <Link className="flex items-start justify-between rounded border border-slate-200 p-4 hover:bg-slate-50" href="/delay-repay-cancelled-trains">
-                                                <div>
-                                                        <p className="font-semibold text-slate-900">Cancelled trains</p>
-                                                        <p className="text-sm text-slate-700">What happens when the service never runs or you are advised not to travel.</p>
-                                                </div>
-                                                <span className="text-blue-700">Read guide</span>
-                                        </Link>
-                                        <Link className="flex items-start justify-between rounded border border-slate-200 p-4 hover:bg-slate-50" href="/delay-repay-missed-connections">
-                                                <div>
-                                                        <p className="font-semibold text-slate-900">Missed connections</p>
-                                                        <p className="text-sm text-slate-700">How delay is measured to the final destination and what evidence to include.</p>
-                                                </div>
-                                                <span className="text-blue-700">Read guide</span>
-                                        </Link>
-                                        <Link className="flex items-start justify-between rounded border border-slate-200 p-4 hover:bg-slate-50" href="/delay-repay-claim-time-limits">
-                                                <div>
-                                                        <p className="font-semibold text-slate-900">Claim time limits</p>
-                                                        <p className="text-sm text-slate-700">Typical submission windows and what to do if you are close to the deadline.</p>
-                                                </div>
-                                                <span className="text-blue-700">Read guide</span>
-                                        </Link>
+                                <div className="grid gap-4">
+                                        <GuideCard
+                                                description="Weekly, monthly, annual, and flexi products converted to per-journey estimates."
+                                                href="/delay-repay-season-tickets"
+                                                title="Season tickets"
+                                        />
+                                        <GuideCard
+                                                description="What happens when the service never runs or you are advised not to travel."
+                                                href="/delay-repay-cancelled-trains"
+                                                title="Cancelled trains"
+                                        />
+                                        <GuideCard
+                                                description="How delay is measured to the final destination and what evidence to include."
+                                                href="/delay-repay-missed-connections"
+                                                title="Missed connections"
+                                        />
+                                        <GuideCard
+                                                description="Typical submission windows and what to do if you are close to the deadline."
+                                                href="/delay-repay-claim-time-limits"
+                                                title="Claim time limits"
+                                        />
                                 </div>
                         </section>
 
