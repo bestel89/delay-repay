@@ -3,8 +3,8 @@ import Link from "next/link";
 import Calculator from "@/components/Calculator";
 
 export const metadata: Metadata = {
-        title: "Avanti Delay Repay calculator and guide",
-        description: "How Avanti West Coast handles Delay Repay: thresholds, evidence, season tickets, cancellations, and how to claim.",
+        title: "Avanti Delay Repay Calculator | DelayRepayCalc",
+        description: "Check Avanti West Coast Delay Repay thresholds, see examples, and estimate payouts before opening the official claim form.",
         alternates: { canonical: "/delay-repay-avanti" },
 };
 
@@ -68,7 +68,7 @@ export default function AvantiPage() {
 
                         <h2>Cancelled trains and not travelling</h2>
                         <p>
-                                If your Avanti service is cancelled and you choose not to travel, you can normally request a refund from the retailer. If you travel on a later service, Delay Repay may apply based on the arrival delay. Use the calculator to estimate the band and include any advice received from Avanti about alternative routes. More detail is in the <Link href="/delay-repay-cancelled-trains">cancelled trains guide</Link>.
+                                If your Avanti service is cancelled and you choose not to travel, you can normally request a refund from the retailer. If you travel on a later service, Delay Repay may apply based on the arrival delay. Use the calculator to estimate the band and include any advice received from Avanti about alternative routes. More detail is in the <Link href="/delay-repay-cancelled-trains">cancelled trains</Link>.
                         </p>
 
                         <h2>Time limits</h2>

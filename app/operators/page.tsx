@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 };
 
 type DefaultRow = { ticket: string; band: string; percent: number };
-type OverrideRow = { operator_code: string; ticket: string; band: string; percent: number };
+type OverrideRow = { operator_code: string | null; ticket: string; band: string; percent: number };
 
 export default async function Page() {
 	const supabase = supabaseServer();
