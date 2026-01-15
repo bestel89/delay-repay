@@ -30,13 +30,14 @@ export async function GET() {
                 .reduce((max, v) => (v > max ? v : max), 0);
         const operatorsLastMod = latestMs ? new Date(latestMs).toISOString() : nowIso;
 
-        const guides: SitemapEntry[] = [
-                { loc: `${domainNameWithHTTPS}/delay-repay-explained`, lastmod: nowIso },
-                { loc: `${domainNameWithHTTPS}/delay-repay-season-tickets`, lastmod: nowIso },
-                { loc: `${domainNameWithHTTPS}/delay-repay-claim-time-limits`, lastmod: nowIso },
-                { loc: `${domainNameWithHTTPS}/delay-repay-cancelled-trains`, lastmod: nowIso },
-                { loc: `${domainNameWithHTTPS}/delay-repay-missed-connections`, lastmod: nowIso },
-        ].map((entry) => ({ ...entry, changefreq: "monthly", priority: 0.8 }));
+	const guides: SitemapEntry[] = [
+		{ loc: `${domainNameWithHTTPS}/delay-repay-bands`, lastmod: nowIso },
+		{ loc: `${domainNameWithHTTPS}/delay-repay-explained`, lastmod: nowIso },
+		{ loc: `${domainNameWithHTTPS}/delay-repay-season-tickets`, lastmod: nowIso },
+		{ loc: `${domainNameWithHTTPS}/delay-repay-claim-time-limits`, lastmod: nowIso },
+		{ loc: `${domainNameWithHTTPS}/delay-repay-cancelled-trains`, lastmod: nowIso },
+		{ loc: `${domainNameWithHTTPS}/delay-repay-missed-connections`, lastmod: nowIso },
+	].map((entry) => ({ ...entry, changefreq: "monthly", priority: 0.8 }));
 
         const operators: SitemapEntry[] = [
                 { loc: `${domainNameWithHTTPS}/operators`, lastmod: operatorsLastMod },
