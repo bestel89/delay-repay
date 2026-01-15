@@ -9,8 +9,8 @@ export const dynamic = "force-static";
 export const revalidate = false;
 
 export const metadata: Metadata = {
-        title: "Delay Repay Calculator (UK Train Delays) | DelayRepayCalc",
-        description: "UK train delay repay calculator with instant estimates for cancellations and delays, based on published operator policies.",
+        title: "Delay Repay Calculator – Check UK Train Delay Compensation",
+        description: "Use our Delay Repay calculator to estimate UK train delay compensation in minutes. Learn arrival-time bands, ticket types, and the refund you could claim.",
         alternates: { canonical: "/" },
 };
 
@@ -36,7 +36,7 @@ export default function Page({ searchParams }: PageProps) {
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-r from-slate-950/85 via-slate-900/75 to-slate-900/40" />
                                 <div className="relative mx-auto flex min-h-[32vh] max-w-6xl flex-col justify-center gap-5 px-6 py-12 md:min-h-[38vh] md:px-10">
-                                        <h1 className="text-3xl font-bold leading-tight md:text-4xl">Delay Repay Calculator</h1>
+                                        <h1 className="text-3xl font-bold leading-tight md:text-4xl">UK Train Delay Repay Calculator</h1>
                                         <p className="max-w-2xl text-lg leading-relaxed text-slate-100">
                                                 Get an instant estimate for compensation on delayed or cancelled UK train journeys. Check eligibility, understand the bands, and jump straight to the calculator with confidence.
                                         </p>
@@ -82,6 +82,25 @@ export default function Page({ searchParams }: PageProps) {
                                         <p className="text-slate-700">
                                                 Enter the ticket price, ticket type, operator, and delay length. The estimator applies the operator’s published percentages. For season products we convert to a per-journey figure before applying the band.
                                         </p>
+                                </div>
+                                <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm md:p-6">
+                                        <div className="space-y-3 text-slate-700">
+                                                <h3 className="text-lg font-semibold text-slate-900">How is delay repay calculated?</h3>
+                                                <p>
+                                                        Delay Repay compensation is usually based on how late you arrive at your destination, not when you leave. Train operators set bands (often 15, 30, and 60 minutes) and pay a percentage of your fare once the delay hits a threshold. That percentage typically applies to the single fare for the affected journey, even if you hold a return ticket.
+                                                </p>
+                                                <ul className="list-disc space-y-2 pl-5">
+                                                        <li>Longer delays mean a higher percentage of your ticket price back.</li>
+                                                        <li>Season tickets and Advance tickets can be calculated differently, so check the policy for your operator.</li>
+                                                </ul>
+                                                <p>
+                                                        Use this calculator to get an indicative figure, then read{" "}
+                                                        <Link className="text-blue-700 underline" href="/delay-repay-explained">
+                                                                how Delay Repay works
+                                                        </Link>{" "}
+                                                        for the full breakdown, including evidence, time limits, and special cases.
+                                                </p>
+                                        </div>
                                 </div>
                                 <Calculator preselectedOperatorCode={operatorFromUrl} />
                                 <p className="text-sm text-slate-600">Results are indicative only. Your train operator confirms eligibility and the final payment.</p>
