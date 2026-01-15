@@ -2,25 +2,13 @@ import type {Metadata} from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-	title: "UK Train Delay Compensation Explained Simply (2025 Guide) | Delay Repay Calculator",
+	title: "How is Delay Repay calculated? | UK train delay compensation",
 	description:
-		"Clear Delay Repay guidance for UK rail passengers: thresholds, missed connections, season tickets, what to submit, and when claims can be rejected.",
+		"See how Delay Repay is calculated using arrival delays, ticket type, and fare basis for UK train delay compensation claims, thresholds, and estimates.",
 	alternates: {canonical: "https://delayrepaycalc.co.uk/delay-repay-explained"},
 };
 
 export default function DelayRepayExplainedPage() {
-	const toc = [
-		{id: "how-delay-repay-works", label: "How Delay Repay works"},
-		{id: "thresholds", label: "Typical thresholds"},
-		{id: "missed-connections", label: "Missed connections"},
-		{id: "season-tickets", label: "Season tickets"},
-		{id: "what-you-need", label: "What you need to claim"},
-		{id: "when-you-cant-claim", label: "When you can’t claim"},
-		{id: "faqs", label: "Most common questions"},
-		{id: "examples", label: "Worked examples"},
-		{id: "sources", label: "Sources / official references"},
-	];
-
 	const faqs = [
 		{
 			question: "Is compensation based on ticket price or the journey?",
@@ -74,29 +62,6 @@ export default function DelayRepayExplainedPage() {
 		},
 	];
 
-	const examples = [
-		{
-			title: "Example 1: Single ticket, 37-minute delay",
-			detail:
-				"You paid £28.40 for a single. A 37-minute arrival delay falls in the 30–59 band. Many operators pay 50%: £28.40 × 50% ≈ £14.20.",
-		},
-		{
-			title: "Example 2: Return ticket, delay on the outward leg",
-			detail:
-				"Return fare £64.00. Operators often treat each direction as half (so £32.00 per leg). If the outward train is 55 minutes late, 50% of £32.00 is ~£16.00. Check the operator page to see if they handle returns differently.",
-		},
-		{
-			title: "Example 3: Season ticket (conceptual per-journey value)",
-			detail:
-				"For a monthly season ticket, operators derive a per-journey value using industry formulas (e.g., cost divided by an assumed number of journeys). The calculator applies these conversions so your claim estimate is in line with how handlers review season tickets.",
-		},
-		{
-			title: "Example 4: Missed connection, final arrival 72 minutes late",
-			detail:
-				"Your first train is 20 minutes late, you miss the planned connection and arrive 72 minutes after schedule. The 60–119 band usually pays 100% of the affected fare even though the first delay was shorter.",
-		},
-	];
-
 	const faqSchema = {
 		'@context': 'https://schema.org',
 		'@type': 'FAQPage',
@@ -117,17 +82,27 @@ export default function DelayRepayExplainedPage() {
 					<header className="bg-base-100 shadow-lg rounded-box">
 						<div className="grid gap-6 p-6 lg:grid-cols-[1.2fr,0.8fr] lg:items-center">
 							<div className="space-y-3">
-								<p className="badge badge-primary">Updated for 2025</p>
-								<h1 className="mb-0">UK Train Delay Compensation Explained Simply (2025 Guide)</h1>
+								<p className="badge badge-primary">Updated for {new Date().getFullYear()}</p>
+								<h1 className="mb-0">How is Delay Repay calculated?</h1>
 								<p className="text-lg text-neutral-700">
 									Delay Repay is the UK rail scheme that pays compensation when trains arrive late or
-									are cancelled. This page distils the thresholds, evidence, and exceptions you need
-									to know—remember that each operator can set its own detail.
+									are cancelled. This page focuses on how Delay Repay is calculated and points you to
+									the right <Link href="/operators">train operators</Link> for scheme details.
 								</p>
-								<div className="flex flex-wrap gap-3">
-									<Link href="/" className="btn btn-primary">Estimate with the calculator</Link>
-									<Link href="/operators" className="btn btn-outline">Operator guides</Link>
-								</div>
+								<p className="text-base text-neutral-700">
+									Here’s the calculation logic most people need before submitting a claim.
+								</p>
+								<ul className="list-disc pl-5 text-neutral-700">
+									<li>Delay is measured at your destination arrival time.</li>
+									<li>Compare scheduled vs actual arrival time.</li>
+									<li>Compensation is usually based on the affected single fare.</li>
+									<li>Returns are often treated as two singles (half fare).</li>
+									<li>Ticket type and operator scheme can change thresholds.</li>
+									<li>Season tickets may use a per-journey value.</li>
+								</ul>
+								<p className="text-base text-neutral-700">
+									Use the calculator: <Link href="/">Delay Repay calculator</Link>
+								</p>
 							</div>
 							<div className="card bg-base-200 shadow">
 								<div className="card-body">
@@ -143,42 +118,14 @@ export default function DelayRepayExplainedPage() {
 						</div>
 					</header>
 
-					<section className="grid gap-6 lg:grid-cols-[320px,1fr] mt-10">
+					<section className="mt-10" id="worked-example-simple">
 						<div className="card bg-base-100 shadow">
-							<div className="card-body">
-								<h2 className="card-title">On this page</h2>
-								<ul className="not-prose space-y-2">
-									{toc.map((item) => (
-										<li key={item.id}>
-											<a className="link link-primary" href={`#${item.id}`}>
-												{item.label}
-											</a>
-										</li>
-									))}
-								</ul>
-							</div>
-						</div>
-						<div className="card bg-base-100 shadow">
-							<div className="card-body">
-								<h2 className="card-title" id="how-delay-repay-works">How Delay Repay works</h2>
+							<div className="card-body space-y-3">
+								<h2 className="card-title">Worked example (simple)</h2>
 								<p>
-									Delay Repay compensates passengers when arrival times exceed the published timetable. The
-									delay is measured at the destination you were ticketed to reach, including rail replacement
-									legs. Most operators adopt the standard 15/30/60/120+ minute bands, while some vary percentages
-									or require different evidence. Always claim from the operator responsible for the delay, not
-									the retailer.
-								</p>
-								<div className="alert alert-info">
-									<div>
-										<span className="font-semibold">Key takeaway:</span> If disruption changes your route or connection,
-										note who
-										advised the change—claims teams rely on that to validate your timings.
-									</div>
-								</div>
-								<p>
-									Explore operator specifics: <Link href="/delay-repay-avanti">Avanti</Link>, <Link
-									href="/delay-repay-gwr">GWR</Link>, <Link href="/delay-repay-lner">LNER</Link>, <Link
-									href="/delay-repay-northern">Northern</Link>, <Link href="/delay-repay-southern">Southern</Link>.
+									A £30 single delayed 35 minutes hits the 30–59 band, so compensation is based on the £30 fare.
+									For a £60 return, the delayed leg is often treated as a £30 single before the band applies.
+									Exact amounts depend on your operator’s scheme and ticket.
 								</p>
 							</div>
 						</div>
@@ -222,7 +169,8 @@ export default function DelayRepayExplainedPage() {
 									</table>
 								</div>
 								<p className="text-sm text-neutral-600">
-									Exact thresholds and payout methods vary by operator; check operator-specific pages.
+									Exact thresholds and payout methods vary by operator; see <Link href="/delay-repay-bands">Delay
+									Repay bands and amounts</Link>.
 								</p>
 							</div>
 						</div>
@@ -235,8 +183,7 @@ export default function DelayRepayExplainedPage() {
 								<p>
 									If a late first leg makes you miss a train, the delay is usually calculated at your final
 									destination. Include planned and actual times for every leg, any acceptance onto other
-									operators, and who advised the change. The <Link href="/delay-repay-missed-connections">missed
-									connections guide</Link> has deeper examples.
+									operators, and who advised the change.
 								</p>
 								<div className="alert alert-success">
 									<div>
@@ -255,9 +202,7 @@ export default function DelayRepayExplainedPage() {
 								<h2 className="card-title">Season tickets and Flexi products</h2>
 								<p>
 									Season, flexi, and carnet tickets are converted to a per-journey value before applying the delay band.
-									Operators use industry formulas (weekly, monthly, annual) and may round differently. The <Link
-									href="/delay-repay-season-tickets">season ticket guidance</Link> explains the common conversions and
-									how to enter them into the calculator.
+									Operators use industry formulas (weekly, monthly, annual) and may round differently.
 								</p>
 								<p>
 									For Flexi Season tickets, keep the specific tap-in or activation records; these prove which days were
@@ -278,10 +223,6 @@ export default function DelayRepayExplainedPage() {
 									<li>Bank details if you want cash; select voucher options if preferred.</li>
 									<li>Short explanation of what happened, including staff advice if you changed trains.</li>
 								</ul>
-								<p>
-									Use the <Link href="/">Delay Repay calculator</Link> first to check the estimated payout and jump
-									straight to the operator’s claim form.
-								</p>
 							</div>
 						</div>
 					</section>
@@ -313,8 +254,11 @@ export default function DelayRepayExplainedPage() {
 										</div>
 									</div>
 								</div>
-								<p className="text-sm text-neutral-600">Always check the operator’s terms—some still pay goodwill in
-									severe disruption.</p>
+								<p className="text-sm text-neutral-600">
+									Always check the operator’s terms and <Link href="/delay-repay-claim-time-limits">claim time
+									limits</Link>
+									before submitting.
+								</p>
 							</div>
 						</div>
 					</section>
@@ -334,70 +278,6 @@ export default function DelayRepayExplainedPage() {
 										</div>
 									))}
 								</div>
-							</div>
-						</div>
-					</section>
-
-					<section id="examples" className="mt-10">
-						<div className="card bg-base-100 shadow">
-							<div className="card-body space-y-4">
-								<div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-									<h2 className="card-title">Worked examples with numbers</h2>
-									<span className="badge badge-outline">Illustrative only</span>
-								</div>
-								<p className="text-neutral-700">Use these to sanity-check your claim before opening the official
-									form.</p>
-								<div className="grid gap-4 md:grid-cols-2">
-									{examples.map((example) => (
-										<div key={example.title} className="card bg-base-200 shadow-inner">
-											<div className="card-body space-y-2">
-												<h3 className="card-title text-base">{example.title}</h3>
-												<p className="text-sm text-neutral-700 leading-relaxed">{example.detail}</p>
-											</div>
-										</div>
-									))}
-								</div>
-								<p className="text-sm text-neutral-600">These examples are illustrative; operator rules and evidence
-									requirements can differ.</p>
-							</div>
-						</div>
-					</section>
-
-					<section id="sources" className="mt-10">
-						<div className="card bg-base-100 shadow">
-							<div className="card-body space-y-4">
-								<h2 className="card-title">Sources / official references</h2>
-								<p className="text-neutral-700">Use these to verify policy wording before submitting your claim.</p>
-								<ul className="list-disc pl-5">
-									<li><a className="link link-primary"
-												 href="https://www.nationalrail.co.uk/times_fares/delay_repay.aspx" target="_blank"
-												 rel="noopener noreferrer">National Rail – Delay Repay overview</a></li>
-									<li><a className="link link-primary"
-												 href="https://www.nationalrail.co.uk/times_fares/ticket_types/compensation_for_delays.aspx"
-												 target="_blank" rel="noopener noreferrer">National Rail – Compensation for delays</a></li>
-									<li><a className="link link-primary"
-												 href="https://www.avantiwestcoast.co.uk/help-and-support/delay-repay" target="_blank"
-												 rel="noopener noreferrer">Avanti West Coast – Delay Repay</a></li>
-									<li><a className="link link-primary"
-												 href="https://www.gwr.com/help-and-support/refunds-and-compensation/delay-repay"
-												 target="_blank" rel="noopener noreferrer">GWR – Delay Repay</a></li>
-									<li><a className="link link-primary" href="https://www.lner.co.uk/customer-service/delay-repay/"
-												 target="_blank" rel="noopener noreferrer">LNER – Delay Repay</a></li>
-								</ul>
-							</div>
-						</div>
-					</section>
-
-					<section className="card bg-base-100 shadow-lg mt-10">
-						<div className="card-body space-y-3">
-							<h2 className="card-title">Ready to claim?</h2>
-							<p>
-								Use the calculator to estimate your payout and jump straight to the operator’s form. If you travel
-								regularly, bookmark the operator guides to keep up with policy changes.
-							</p>
-							<div className="flex flex-wrap gap-3">
-								<Link href="/" className="btn btn-primary">Open calculator</Link>
-								<Link href="/operators" className="btn btn-outline">Browse operator pages</Link>
 							</div>
 						</div>
 					</section>
