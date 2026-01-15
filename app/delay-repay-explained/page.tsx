@@ -82,7 +82,7 @@ export default function DelayRepayExplainedPage() {
 					<header className="bg-base-100 shadow-lg rounded-box">
 						<div className="grid gap-6 p-6 lg:grid-cols-[1.2fr,0.8fr] lg:items-center">
 							<div className="space-y-3">
-								<p className="badge badge-primary">Updated for 2025</p>
+								<p className="badge badge-primary">Updated for {new Date().getFullYear()}</p>
 								<h1 className="mb-0">How is Delay Repay calculated?</h1>
 								<p className="text-lg text-neutral-700">
 									Delay Repay is the UK rail scheme that pays compensation when trains arrive late or
@@ -255,7 +255,8 @@ export default function DelayRepayExplainedPage() {
 									</div>
 								</div>
 								<p className="text-sm text-neutral-600">
-									Always check the operator’s terms and <Link href="/delay-repay-claim-time-limits">claim time limits</Link>
+									Always check the operator’s terms and <Link href="/delay-repay-claim-time-limits">claim time
+									limits</Link>
 									before submitting.
 								</p>
 							</div>
