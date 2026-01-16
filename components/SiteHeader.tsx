@@ -3,7 +3,7 @@
 import Link from "next/link";
 import {usePathname} from "next/navigation";
 import {useState} from "react";
-import {explainerLinks, mainLinks, operatorLinks, utilityLinks} from "@/lib/nav";
+import {explainerLinks, mainLinks, operatorLinks, routes, utilityLinks} from "@/lib/nav";
 
 const baseLinkClasses = "rounded-md px-2 py-1 transition hover:bg-blue-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white";
 
@@ -25,7 +25,7 @@ export default function SiteHeader() {
     <header className="bg-blue-900 text-white shadow-sm">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
         <div className="flex items-center text-xl font-semibold tracking-tight">
-          <Link href="/" className="flex items-center text-white no-underline">
+          <Link href={routes.home} className="flex items-center text-white no-underline">
             <img src="/white_logo.png" alt="Delay Repay logo" className="mr-3 h-10 w-auto" />
             <span>Delay Repay Calculator</span>
           </Link>

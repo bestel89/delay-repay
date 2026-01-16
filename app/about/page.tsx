@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { contactEmail, domainNameWithoutHTTPS } from "@/app/Constants";
+import {routes} from "@/lib/nav";
 
 export const metadata: Metadata = {
         title: "About DelayRepayCalc.co.uk | Independent UK Delay Repay help",
@@ -59,7 +60,7 @@ export default function AboutPage() {
                         </p>
 
                         <p>
-                                Ready to estimate a journey? Head back to the <Link href="/">Delay Repay calculator</Link> or explore the <Link href="/delay-repay-explained">full guide on how Delay Repay works</Link>.
+                                Ready to estimate a journey? Head back to the <Link href={routes.home}>Delay Repay calculator</Link> or explore the <Link href={routes.delayRepayExplained}>full guide on how Delay Repay works</Link>.
                         </p>
                 </article>
         );

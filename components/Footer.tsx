@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { domainNameWithoutHTTPS } from "@/app/Constants";
-import { utilityLinks } from "@/lib/nav";
+import { routes, utilityLinks } from "@/lib/nav";
 
 export default function Footer() {
         const infoLinks = utilityLinks.filter((link) => ["About", "Contact"].includes(link.label));
@@ -27,7 +27,7 @@ export default function Footer() {
                                                                         </Link>
                                                                 </li>
                                                         ))}
-                                                        <li><Link href="/operators" className="hover:underline">Operators</Link></li>
+                                                        <li><Link href={routes.operators} className="hover:underline">Operators</Link></li>
                                                 </ul>
                                         </div>
                                         <div className="space-y-2">
@@ -45,8 +45,8 @@ export default function Footer() {
                                         <div className="space-y-2">
                                                 <h3 className="font-semibold text-slate-900">Tools</h3>
                                                 <ul className="space-y-1">
-                                                        <li><Link href="/" className="hover:underline">Delay Repay calculator</Link></li>
-                                                        <li><Link href="/delay-repay-explained" className="hover:underline">How Delay Repay works</Link></li>
+                                                        <li><Link href={routes.home} className="hover:underline">Delay Repay calculator</Link></li>
+                                                        <li><Link href={routes.delayRepayExplained} className="hover:underline">How Delay Repay works</Link></li>
                                                 </ul>
                                         </div>
                                 </div>

@@ -3,6 +3,7 @@ import {supabaseServer} from "@/lib/supabase.server";
 import type {Operator} from "@/definitions/operator";
 import {contactEmail} from "@/app/Constants";
 import Link from "next/link";
+import {routes} from "@/lib/nav";
 
 export const dynamic = "force-static";
 export const revalidate = 86400;
@@ -119,7 +120,7 @@ export default async function Page() {
 
 				<p className="mt-8">
 					Want an estimate?{" "}
-					<Link href="/" className="no-underline">
+					<Link href={routes.home} className="no-underline">
 						Open the calculator
 					</Link>
 					.

@@ -2,6 +2,7 @@ import type {Metadata} from "next";
 import Calculator from "@/components/Calculator";
 import Link from "next/link";
 import Image from "next/image";
+import {routes} from "@/lib/nav";
 
 export const dynamic = "force-static";
 export const revalidate = false;
@@ -66,7 +67,7 @@ export default function Page({searchParams}: PageProps) {
 							Delay Repay is based on your arrival delay, with operators paying a fare percentage once you cross bands
 							like 15, 30, or 60 minutes. Season and Advance tickets can differ, so use the calculator for an estimate
 							then read{" "}
-							<Link className="text-blue-700 underline" href="/delay-repay-explained">
+							<Link className="text-blue-700 underline" href={routes.delayRepayExplained}>
 								how Delay Repay works
 							</Link>.
 						</p>
@@ -90,13 +91,13 @@ export default function Page({searchParams}: PageProps) {
 				<h2 className="text-2xl font-semibold text-slate-900">Common scenarios</h2>
 				<ul className="mt-4 list-disc space-y-2 pl-5 text-slate-700">
 					<li>
-						<Link className="text-blue-700 underline" href="/delay-repay-season-tickets">Season tickets</Link>
+						<Link className="text-blue-700 underline" href={routes.delayRepaySeasonTickets}>Season tickets</Link>
 					</li>
 					<li>
-						<Link className="text-blue-700 underline" href="/delay-repay-cancelled-trains">Cancelled trains</Link>
+						<Link className="text-blue-700 underline" href={routes.delayRepayCancelledTrains}>Cancelled trains</Link>
 					</li>
 					<li>
-						<Link className="text-blue-700 underline" href="/delay-repay-missed-connections">Missed connections</Link>
+						<Link className="text-blue-700 underline" href={routes.delayRepayMissedConnections}>Missed connections</Link>
 					</li>
 				</ul>
 			</section>
@@ -106,7 +107,7 @@ export default function Page({searchParams}: PageProps) {
 			<section >
 				<p className="text-slate-700">
 					Looking for operator-specific rules?{" "}
-					<Link className="text-blue-700 underline" href="/operators">Browse all operators</Link>.
+					<Link className="text-blue-700 underline" href={routes.operators}>Browse all operators</Link>.
 				</p>
 			</section>
 
@@ -130,7 +131,7 @@ export default function Page({searchParams}: PageProps) {
 				</div>
 				<p className="mt-4 text-slate-700">
 					For full details, see{" "}
-					<Link className="text-blue-700 underline" href="/delay-repay-explained">
+					<Link className="text-blue-700 underline" href={routes.delayRepayExplained}>
 						how Delay Repay works
 					</Link>.
 				</p>

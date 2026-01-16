@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Calculator from "@/components/Calculator";
+import {routes} from "@/lib/nav";
 
 export const metadata: Metadata = {
         title: "LNER Delay Repay calculator and guide",
@@ -13,7 +14,7 @@ export default function LnerPage() {
                 <article className="prose max-w-none">
                         <h1>LNER Delay Repay</h1>
                         <p>
-                                Learn how London North Eastern Railway (LNER) handles Delay Repay and use the <Link href="/">Delay Repay calculator</Link> to estimate compensation before you claim. This guide covers eligibility, ticket types, evidence, cancellations, and the steps to submit a strong application.
+                                Learn how London North Eastern Railway (LNER) handles Delay Repay and use the <Link href={routes.home}>Delay Repay calculator</Link> to estimate compensation before you claim. This guide covers eligibility, ticket types, evidence, cancellations, and the steps to submit a strong application.
                         </p>
 
                         <h2>Policy snapshot</h2>
@@ -37,7 +38,7 @@ export default function LnerPage() {
 
                         <h2>Estimating your claim</h2>
                         <p>
-                                In the <Link href="/">calculator</Link>, select LNER, enter your ticket price, pick the ticket type, and choose the delay band matching your arrival. The calculator applies LNER’s published percentages and converts season tickets to a per-journey value. Use the result to set expectations before opening the LNER claim form.
+                                In the <Link href={routes.home}>calculator</Link>, select LNER, enter your ticket price, pick the ticket type, and choose the delay band matching your arrival. The calculator applies LNER’s published percentages and converts season tickets to a per-journey value. Use the result to set expectations before opening the LNER claim form.
                         </p>
 
                         <h2>Evidence to include</h2>
@@ -63,17 +64,17 @@ export default function LnerPage() {
 
                         <h2>Missed connections</h2>
                         <p>
-                                If a late LNER service leads to a missed connection, compensation is usually based on the delay at the final destination. Provide the planned connection times, the service missed, and the train you ultimately boarded. If the connection involved a different operator, state whether LNER staff authorised the change. See the <Link href="/delay-repay-missed-connections">missed connections guide</Link> for more scenarios.
+                                If a late LNER service leads to a missed connection, compensation is usually based on the delay at the final destination. Provide the planned connection times, the service missed, and the train you ultimately boarded. If the connection involved a different operator, state whether LNER staff authorised the change. See the <Link href={routes.delayRepayMissedConnections}>missed connections guide</Link> for more scenarios.
                         </p>
 
                         <h2>Cancelled trains</h2>
                         <p>
-                                If your LNER service is cancelled and you do not travel, you can generally obtain a refund. If you take a later service, Delay Repay may apply based on the arrival delay. Retain notifications of the cancellation and any advice received from staff. More detail is in the <Link href="/delay-repay-cancelled-trains">cancelled trains guide</Link>.
+                                If your LNER service is cancelled and you do not travel, you can generally obtain a refund. If you take a later service, Delay Repay may apply based on the arrival delay. Retain notifications of the cancellation and any advice received from staff. More detail is in the <Link href={routes.delayRepayCancelledTrains}>cancelled trains guide</Link>.
                         </p>
 
                         <h2>Time limits</h2>
                         <p>
-                                LNER sets a submission window for claims, often around 28 days. Submit as soon as possible with clear evidence. If you are close to the deadline, prioritise ticket proof, journey details, and arrival time, then follow up with any extra information if requested. For general tips, read the <Link href="/delay-repay-claim-time-limits">time limits guide</Link>.
+                                LNER sets a submission window for claims, often around 28 days. Submit as soon as possible with clear evidence. If you are close to the deadline, prioritise ticket proof, journey details, and arrival time, then follow up with any extra information if requested. For general tips, read the <Link href={routes.delayRepayClaimTimeLimits}>time limits guide</Link>.
                         </p>
 
                         <h2>Submitting your claim</h2>
@@ -104,11 +105,11 @@ export default function LnerPage() {
 
                         <h2>Useful links</h2>
                         <ul>
-                                <li><Link href="/">Delay Repay calculator</Link></li>
-                                <li><Link href="/delay-repay-explained">Delay Repay explained</Link></li>
-                                <li><Link href="/delay-repay-season-tickets">Season ticket guidance</Link></li>
-                                <li><Link href="/delay-repay-missed-connections">Missed connections</Link></li>
-                                <li><Link href="/delay-repay-cancelled-trains">Cancelled trains</Link></li>
+                                <li><Link href={routes.home}>Delay Repay calculator</Link></li>
+                                <li><Link href={routes.delayRepayExplained}>Delay Repay explained</Link></li>
+                                <li><Link href={routes.delayRepaySeasonTickets}>Season ticket guidance</Link></li>
+                                <li><Link href={routes.delayRepayMissedConnections}>Missed connections</Link></li>
+                                <li><Link href={routes.delayRepayCancelledTrains}>Cancelled trains</Link></li>
                         </ul>
                 </article>
         );

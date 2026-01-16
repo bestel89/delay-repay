@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import {routes} from "@/lib/nav";
 
 export const metadata: Metadata = {
         title: "Delay Repay claim time limits | UK deadlines",
@@ -12,7 +13,7 @@ export default function ClaimTimeLimitsPage() {
                 <article className="prose max-w-none">
                         <h1>Delay Repay claim time limits</h1>
                         <p>
-                                Delay Repay claims usually need to be submitted within a set number of days from the date of travel. This guide summarises common windows, how to prepare evidence quickly, and what to do if you are close to the deadline. Use it alongside the <Link href="/">Delay Repay calculator</Link> so you can submit a complete claim on time.
+                                Delay Repay claims usually need to be submitted within a set number of days from the date of travel. This guide summarises common windows, how to prepare evidence quickly, and what to do if you are close to the deadline. Use it alongside the <Link href={routes.home}>Delay Repay calculator</Link> so you can submit a complete claim on time.
                         </p>
 
                         <h2>Typical claim windows</h2>
@@ -56,7 +57,7 @@ export default function ClaimTimeLimitsPage() {
 
                         <h2>Examples of operator expectations</h2>
                         <p>
-                                While policies change, many operators including Avanti, GWR, LNER, Northern, and Southern set windows of around 28 days. Some commuter networks may allow slightly longer during major disruption, while others ask for faster submissions when disruption is widespread. Always check the live wording on the claim form linked from the <Link href="/">calculator</Link> so you follow the most current requirement.
+                                While policies change, many operators including Avanti, GWR, LNER, Northern, and Southern set windows of around 28 days. Some commuter networks may allow slightly longer during major disruption, while others ask for faster submissions when disruption is widespread. Always check the live wording on the claim form linked from the <Link href={routes.home}>calculator</Link> so you follow the most current requirement.
                         </p>
                         <p>
                                 If you travel infrequently, setting a reminder on the day of travel can help avoid missing the window. Frequent travellers may prefer a weekly routine: log delays as they occur and submit any qualifying claims at the end of the week so nothing slips through.
@@ -78,7 +79,7 @@ export default function ClaimTimeLimitsPage() {
                                 <li>Actual arrival time recorded, ideally with a screenshot or photo</li>
                                 <li>Journey details match the operator selected in the calculator</li>
                                 <li>Claim submitted within the stated window and confirmation saved</li>
-                                <li>Related guidance read if your situation involves <Link href="/delay-repay-season-tickets">season tickets</Link> or <Link href="/delay-repay-cancelled-trains">cancellations</Link></li>
+                                <li>Related guidance read if your situation involves <Link href={routes.delayRepaySeasonTickets}>season tickets</Link> or <Link href={routes.delayRepayCancelledTrains}>cancellations</Link></li>
                         </ul>
 
                         <p>
@@ -91,7 +92,7 @@ export default function ClaimTimeLimitsPage() {
 
                         <h2>Next steps</h2>
                         <p>
-                                Estimate your compensation using the <Link href="/">Delay Repay calculator</Link>, then follow the operator link to submit before the deadline. For related guidance, read about <Link href="/delay-repay-season-tickets">season tickets</Link>, <Link href="/delay-repay-cancelled-trains">cancelled trains</Link>, and <Link href="/delay-repay-missed-connections">missed connections</Link>. Operator-specific pages for <Link href="/delay-repay-avanti">Avanti</Link>, <Link href="/delay-repay-gwr">GWR</Link>, <Link href="/delay-repay-lner">LNER</Link>, <Link href="/delay-repay-northern">Northern</Link>, and <Link href="/delay-repay-southern">Southern</Link> offer further detail.
+                                Estimate your compensation using the <Link href={routes.home}>Delay Repay calculator</Link>, then follow the operator link to submit before the deadline. For related guidance, read about <Link href={routes.delayRepaySeasonTickets}>season tickets</Link>, <Link href={routes.delayRepayCancelledTrains}>cancelled trains</Link>, and <Link href={routes.delayRepayMissedConnections}>missed connections</Link>. Operator-specific pages for <Link href={routes.avanti}>Avanti</Link>, <Link href={routes.gwr}>GWR</Link>, <Link href={routes.lner}>LNER</Link>, <Link href={routes.northern}>Northern</Link>, and <Link href={routes.southern}>Southern</Link> offer further detail.
                         </p>
                 </article>
         );

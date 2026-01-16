@@ -3,7 +3,7 @@ export type NavLink = {
   href: string;
 };
 
-const routes = {
+export const routes = {
   home: "/",
   delayRepayBands: "/delay-repay-bands",
   delayRepayCancelledTrains: "/delay-repay-cancelled-trains",

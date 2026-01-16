@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Calculator from "@/components/Calculator";
+import {routes} from "@/lib/nav";
 
 export const metadata: Metadata = {
         title: "GWR Delay Repay calculator and guide",
@@ -22,7 +23,7 @@ export default function GwrPage() {
                                 Calculate your GWR Delay Repay
                         </a>
                         <p>
-                                Use this guide to understand how Great Western Railway (GWR) handles Delay Repay and to estimate compensation using the <Link href="/">Delay Repay calculator</Link>. It covers eligibility, ticket types, evidence, cancellations, and what to expect after submitting a claim.
+                                Use this guide to understand how Great Western Railway (GWR) handles Delay Repay and to estimate compensation using the <Link href={routes.home}>Delay Repay calculator</Link>. It covers eligibility, ticket types, evidence, cancellations, and what to expect after submitting a claim.
                         </p>
 
                         <h2>Key points</h2>
@@ -48,7 +49,7 @@ export default function GwrPage() {
 
                         <h2>Estimating with the calculator</h2>
                         <p>
-                                Select GWR in the <Link href="/">calculator</Link>, add your ticket price, choose the ticket type, and pick the delay length. The calculator applies GWR’s published percentages and converts season tickets to a per-journey value. Use the estimate as guidance before opening the GWR claim form via the same page.
+                                Select GWR in the <Link href={routes.home}>calculator</Link>, add your ticket price, choose the ticket type, and pick the delay length. The calculator applies GWR’s published percentages and converts season tickets to a per-journey value. Use the estimate as guidance before opening the GWR claim form via the same page.
                         </p>
 
                         <h2>Evidence to provide</h2>
@@ -71,17 +72,17 @@ export default function GwrPage() {
 
                         <h2>Missed connections</h2>
                         <p>
-                                If a late GWR service causes you to miss a connection, compensation is usually based on the delay at the final destination. Provide the planned connection times, the service you missed, and the train you ultimately took. If the connection involved another operator, state whether GWR staff authorised the change. More scenarios are covered in the <Link href="/delay-repay-missed-connections">missed connections guide</Link>.
+                                If a late GWR service causes you to miss a connection, compensation is usually based on the delay at the final destination. Provide the planned connection times, the service you missed, and the train you ultimately took. If the connection involved another operator, state whether GWR staff authorised the change. More scenarios are covered in the <Link href={routes.delayRepayMissedConnections}>missed connections guide</Link>.
                         </p>
 
                         <h2>Cancelled trains</h2>
                         <p>
-                                If your GWR service is cancelled and you do not travel, you can normally seek a refund. If you take a later service, Delay Repay may apply based on the arrival delay. Record any advice given not to travel and keep screenshots of cancellation notices. For detailed steps, visit the <Link href="/delay-repay-cancelled-trains">cancelled trains guide</Link>.
+                                If your GWR service is cancelled and you do not travel, you can normally seek a refund. If you take a later service, Delay Repay may apply based on the arrival delay. Record any advice given not to travel and keep screenshots of cancellation notices. For detailed steps, visit the <Link href={routes.delayRepayCancelledTrains}>cancelled trains guide</Link>.
                         </p>
 
                         <h2>Claim time limits</h2>
                         <p>
-                                Claims should be made within the timeframe stated on the GWR form, often around 28 days. Submit promptly with clear evidence to avoid delays. If you are close to the deadline, focus on the essentials and keep a copy of the submission confirmation. For more tips, see the <Link href="/delay-repay-claim-time-limits">time limits guide</Link>.
+                                Claims should be made within the timeframe stated on the GWR form, often around 28 days. Submit promptly with clear evidence to avoid delays. If you are close to the deadline, focus on the essentials and keep a copy of the submission confirmation. For more tips, see the <Link href={routes.delayRepayClaimTimeLimits}>time limits guide</Link>.
                         </p>
 
                         <h2>How to submit a claim</h2>
@@ -112,11 +113,11 @@ export default function GwrPage() {
 
                         <h2>Related links</h2>
                         <ul>
-                                <li><Link href="/">Delay Repay calculator</Link></li>
-                                <li><Link href="/delay-repay-explained">Delay Repay explained</Link></li>
-                                <li><Link href="/delay-repay-season-tickets">Season ticket guidance</Link></li>
-                                <li><Link href="/delay-repay-missed-connections">Missed connections</Link></li>
-                                <li><Link href="/delay-repay-cancelled-trains">Cancelled trains</Link></li>
+                                <li><Link href={routes.home}>Delay Repay calculator</Link></li>
+                                <li><Link href={routes.delayRepayExplained}>Delay Repay explained</Link></li>
+                                <li><Link href={routes.delayRepaySeasonTickets}>Season ticket guidance</Link></li>
+                                <li><Link href={routes.delayRepayMissedConnections}>Missed connections</Link></li>
+                                <li><Link href={routes.delayRepayCancelledTrains}>Cancelled trains</Link></li>
                         </ul>
                 </article>
         );

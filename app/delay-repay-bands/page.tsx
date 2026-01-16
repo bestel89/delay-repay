@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import {routes} from "@/lib/nav";
 
 export const metadata: Metadata = {
 	title: "Delay Repay Bands & Amounts – 15, 30 & 60 Minute Compensation",
@@ -66,8 +67,8 @@ export default function DelayRepayBandsPage() {
 			<h2>Example: Avanti Delay Repay amounts</h2>
 			<p>
 				Avanti journeys generally follow standard bands, but the exact percentages can differ by scheme. For the latest
-				guidance on Avanti Delay Repay amounts, use the <Link href="/delay-repay-avanti">Avanti Delay Repay</Link> page and the{" "}
-				<Link href="/">Delay Repay calculator</Link>.
+				guidance on Avanti Delay Repay amounts, use the <Link href={routes.avanti}>Avanti Delay Repay</Link> page and the{" "}
+				<Link href={routes.home}>Delay Repay calculator</Link>.
 			</p>
 			<ul>
 				<li>Return tickets are often treated as two singles.</li>
@@ -78,19 +79,19 @@ export default function DelayRepayBandsPage() {
 			<h2>How long you have to claim</h2>
 			<p>
 				Claim deadlines vary by operator, so acting quickly helps. See the{" "}
-				<Link href="/delay-repay-claim-time-limits">claim time limits</Link> guide before you submit.
+				<Link href={routes.delayRepayClaimTimeLimits}>claim time limits</Link> guide before you submit.
 			</p>
 
 			<h2>Next steps</h2>
 			<ul>
 				<li>
-					<Link href="/">Delay Repay calculator</Link>
+					<Link href={routes.home}>Delay Repay calculator</Link>
 				</li>
 				<li>
-					<Link href="/operators">train operators</Link>
+					<Link href={routes.operators}>train operators</Link>
 				</li>
 				<li>
-					<Link href="/delay-repay-explained">how Delay Repay works</Link>
+					<Link href={routes.delayRepayExplained}>how Delay Repay works</Link>
 				</li>
 			</ul>
 		</article>
