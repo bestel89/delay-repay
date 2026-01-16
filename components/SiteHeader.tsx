@@ -3,7 +3,7 @@
 import Link from "next/link";
 import {usePathname} from "next/navigation";
 import {useState} from "react";
-import {explainerLinks, mainLinks, operatorLinks, routes, utilityLinks} from "@/lib/nav";
+import {explainerLinks, mainLinks, routes, utilityLinks} from "@/lib/nav";
 
 const baseLinkClasses = "rounded-md px-2 py-1 transition hover:bg-blue-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white";
 
@@ -11,7 +11,6 @@ export default function SiteHeader() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [explainerOpen, setExplainerOpen] = useState(false);
-  const [operatorOpen, setOperatorOpen] = useState(false);
   const [moreOpen, setMoreOpen] = useState(false);
 
   const isActive = (href: string) => pathname === href;
@@ -94,37 +93,12 @@ export default function SiteHeader() {
               </ul>
             </div>
           </div>
-          <div className="relative group">
-            <button
-              type="button"
-              className={`${baseLinkClasses} flex items-center gap-1 ${isGroupActive(operatorLinks) ? "font-semibold underline underline-offset-4" : ""}`}
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              Operators
-              <svg className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                <path
-                  fillRule="evenodd"
-                  d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 11.17l3.71-3.94a.75.75 0 0 1 1.08 1.04l-4.25 4.5a.75.75 0 0 1-1.08 0l-4.25-4.5a.75.75 0 0 1 .02-1.06Z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </button>
-            <div className="absolute left-0 z-20 mt-2 w-56 rounded-md bg-white py-2 text-slate-900 shadow-lg opacity-0 invisible transition group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
-              <ul className="flex flex-col">
-                {operatorLinks.map((link) => (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      className={`block px-4 py-2 text-sm hover:bg-slate-100 focus-visible:bg-slate-100 focus-visible:outline-none ${isActive(link.href) ? "bg-slate-100 font-semibold" : ""}`}
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
+          <Link
+            href={routes.operators}
+            className={`${baseLinkClasses} ${isActive(routes.operators) ? "font-semibold underline underline-offset-4" : ""}`}
+          >
+            Operators
+          </Link>
         </nav>
       </div>
       <nav
@@ -166,29 +140,13 @@ export default function SiteHeader() {
               ))}
             </div>
           )}
-          <button
-            type="button"
-            className={`flex items-center justify-between ${baseLinkClasses} ${isGroupActive(operatorLinks) ? "bg-blue-800 font-semibold" : ""}`}
-            aria-expanded={operatorOpen}
-            onClick={() => setOperatorOpen((open) => !open)}
+          <Link
+            href={routes.operators}
+            className={`${baseLinkClasses} ${isActive(routes.operators) ? "bg-blue-800 font-semibold" : ""}`}
+            onClick={() => setMobileOpen(false)}
           >
             Operators
-            <span aria-hidden="true">{operatorOpen ? "−" : "+"}</span>
-          </button>
-          {operatorOpen && (
-            <div className="ml-3 flex flex-col gap-1">
-              {operatorLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className={`rounded-md px-2 py-1 text-sm hover:bg-blue-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${isActive(link.href) ? "bg-blue-800 font-semibold" : ""}`}
-                  onClick={() => setMobileOpen(false)}
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </div>
-          )}
+          </Link>
           <button
             type="button"
             className={`flex items-center justify-between ${baseLinkClasses} ${isGroupActive(utilityLinks) ? "bg-blue-800 font-semibold" : ""}`}
