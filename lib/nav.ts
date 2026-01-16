@@ -29,10 +29,10 @@ export const mainLinks: NavLink[] = [
 ];
 
 export const explainerLinks: NavLink[] = [
+	{label: "Delay Repay explained", href: routes.delayRepayExplained},
   {label: "Delay Repay bands", href: routes.delayRepayBands},
   {label: "Cancelled trains", href: routes.delayRepayCancelledTrains},
   {label: "Claim time limits", href: routes.delayRepayClaimTimeLimits},
-  {label: "Delay Repay explained", href: routes.delayRepayExplained},
   {label: "Missed connections", href: routes.delayRepayMissedConnections},
   {label: "Season tickets", href: routes.delayRepaySeasonTickets}
 ];
