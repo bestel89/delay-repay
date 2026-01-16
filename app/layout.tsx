@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import Link from "next/link";
 import {domainNameWithHTTPS} from "@/app/Constants";
 import Script from "next/script";
-import { Analytics } from "@vercel/analytics/next"
+import {Analytics} from "@vercel/analytics/next"
 
 export const metadata: Metadata = {
 	title: "Delay Repay Calculator | UK Rail Compensation",
@@ -44,9 +44,10 @@ export default function RootLayout({children}: { children: React.ReactNode }) {
 		<body className="bg-slate-50 text-slate-900 min-h-screen flex flex-col">
 		<header className="bg-blue-900 text-white shadow-sm">
 			<div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
-				<div className="text-xl font-semibold tracking-tight">
-					<Link href="/" className="no-underline text-white">
-						Delay Repay Calculator
+				<div className="flex items-center text-xl font-semibold tracking-tight">
+					<Link href="/" className="no-underline text-white flex items-center">
+						<img src="/white_logo.png" alt="Delay Repay logo" className="h-10 w-auto mr-3"/>
+						<span>Delay Repay Calculator</span>
 					</Link>
 				</div>
 				<nav className="flex flex-wrap items-center gap-4 text-sm">
@@ -61,7 +62,7 @@ export default function RootLayout({children}: { children: React.ReactNode }) {
 		<main className="flex-1">
 			<div className="mx-auto max-w-6xl px-4 py-10">
 				{children}
-				<Analytics />
+				<Analytics/>
 			</div>
 		</main>
 		<Footer/>
