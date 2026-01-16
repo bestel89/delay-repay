@@ -16,6 +16,39 @@ export default function AvantiPage() {
                                 This page explains how Avanti West Coast applies Delay Repay and how to estimate compensation using the <Link href="/">Delay Repay calculator</Link>. It covers thresholds, ticket types, evidence, and practical steps to submit a complete claim.
                         </p>
 
+                        <h2>Avanti Delay Repay amounts (how much compensation you get)</h2>
+                        <p>
+                                Avanti typically pays between <strong>25% and 100%</strong> of your ticket price, depending on how long your train was delayed.
+                        </p>
+                        <div className="overflow-x-auto">
+                                <table className="min-w-full">
+                                        <thead>
+                                                <tr>
+                                                        <th>Delay length</th>
+                                                        <th>Compensation</th>
+                                                </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>15–29 minutes</td>
+                                                        <td>25% of the single fare</td>
+                                                </tr>
+                                                <tr>
+                                                        <td>30–59 minutes</td>
+                                                        <td>50% of the single fare</td>
+                                                </tr>
+                                                <tr>
+                                                        <td>60–119 minutes</td>
+                                                        <td>100% of the single fare</td>
+                                                </tr>
+                                                <tr>
+                                                        <td>120+ minutes</td>
+                                                        <td>100% (sometimes more in exceptional cases)</td>
+                                                </tr>
+                                        </tbody>
+                                </table>
+                        </div>
+
                         <h2>At a glance</h2>
                         <ul>
                                 <li>Typical bands: 15–29, 30–59, 60–119, 120+ minutes</li>

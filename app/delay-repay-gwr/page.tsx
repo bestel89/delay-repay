@@ -12,6 +12,15 @@ export default function GwrPage() {
         return (
                 <article className="prose max-w-none">
                         <h1>Great Western Railway Delay Repay</h1>
+                        <p className="mt-2 text-sm">
+                                Use our <strong>GWR Delay Repay calculator</strong> below to see how much compensation you’re entitled to.
+                        </p>
+                        <a
+                                href="#calculator"
+                                className="mt-3 inline-block rounded-xl bg-blue-600 px-4 py-2 text-white text-sm font-medium md:hidden"
+                        >
+                                Calculate your GWR Delay Repay
+                        </a>
                         <p>
                                 Use this guide to understand how Great Western Railway (GWR) handles Delay Repay and to estimate compensation using the <Link href="/">Delay Repay calculator</Link>. It covers eligibility, ticket types, evidence, cancellations, and what to expect after submitting a claim.
                         </p>
@@ -28,7 +37,9 @@ export default function GwrPage() {
                         <p>
                                 Start with the calculator to see an indicative payout for a GWR delay. The operator is pre-selected below—enter your ticket price, ticket type, and delay length to get a figure before opening the claim form.
                         </p>
-                        <Calculator preselectedOperatorCode="gwr" />
+                        <div id="calculator">
+                                <Calculator preselectedOperatorCode="gwr" />
+                        </div>
 
                         <h2>Eligibility on GWR services</h2>
                         <p>
