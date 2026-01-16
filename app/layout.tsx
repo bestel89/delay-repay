@@ -6,12 +6,19 @@ import Link from "next/link";
 import {domainNameWithHTTPS} from "@/app/Constants";
 import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next"
+import Image from "next/image";
 
 export const metadata: Metadata = {
 	title: "Delay Repay Calculator | UK Rail Compensation",
 	description: "Independent UK Delay Repay calculator with guidance on operators, season tickets, cancellations, and claim steps.",
 	metadataBase: new URL(domainNameWithHTTPS),
 	alternates: {canonical: "/"},
+	icons: {
+		icon: [
+			{url: "/favicon.ico", sizes: "48x48"},
+			{url: "/favicon-192.png", type: "image/png", sizes: "192x192"}
+		]
+	}
 };
 
 export default function RootLayout({children}: { children: React.ReactNode }) {
@@ -39,8 +46,15 @@ export default function RootLayout({children}: { children: React.ReactNode }) {
 		<header className="bg-blue-900 text-white shadow-sm">
 			<div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
 				<div className="text-xl font-semibold tracking-tight">
-					<Link href="/" className="no-underline text-white">
-						Delay Repay Calculator
+					<Link href="/" className="no-underline text-white flex items-center gap-2">
+						<Image
+							src="/white_logo.png"
+							alt="Delay Repay logo"
+							width={28}
+							height={28}
+							priority
+						/>
+						<span>Delay Repay Calculator</span>
 					</Link>
 				</div>
 				<nav className="flex flex-wrap items-center gap-4 text-sm">
