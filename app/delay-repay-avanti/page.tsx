@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Calculator from "@/components/Calculator";
+import {routes} from "@/lib/nav";
 
 export const metadata: Metadata = {
         title: "Avanti Delay Repay Calculator | DelayRepayCalc",
@@ -13,7 +14,7 @@ export default function AvantiPage() {
                 <article className="prose max-w-none">
                         <h1>Avanti West Coast Delay Repay</h1>
                         <p>
-                                This page explains how Avanti West Coast applies Delay Repay and how to estimate compensation using the <Link href="/">Delay Repay calculator</Link>. It covers thresholds, ticket types, evidence, and practical steps to submit a complete claim.
+                                This page explains how Avanti West Coast applies Delay Repay and how to estimate compensation using the <Link href={routes.home}>Delay Repay calculator</Link>. It covers thresholds, ticket types, evidence, and practical steps to submit a complete claim.
                         </p>
 
                         <h2>Avanti Delay Repay amounts (how much compensation you get)</h2>
@@ -70,7 +71,7 @@ export default function AvantiPage() {
 
                         <h2>Using the calculator</h2>
                         <p>
-                                Select Avanti in the <Link href="/">calculator</Link>, enter your ticket price, choose the ticket type, and pick the delay band that matches your arrival. The calculator applies Avanti’s published percentages and converts season tickets to a per-journey value. Use the result as guidance before opening the Avanti claim form from the same screen.
+                                Select Avanti in the <Link href={routes.home}>calculator</Link>, enter your ticket price, choose the ticket type, and pick the delay band that matches your arrival. The calculator applies Avanti’s published percentages and converts season tickets to a per-journey value. Use the result as guidance before opening the Avanti claim form from the same screen.
                         </p>
 
                         <h2>Evidence to submit</h2>
@@ -96,17 +97,17 @@ export default function AvantiPage() {
 
                         <h2>Missed connections</h2>
                         <p>
-                                If an Avanti delay causes you to miss a connection, the delay is usually measured at the final destination on your itinerary. Provide details of the planned connection, the train you missed, and the service you eventually took. If the connection involved a different operator, indicate whether Avanti staff authorised the change. For guidance on complex journeys, see the <Link href="/delay-repay-missed-connections">missed connections</Link> page.
+                                If an Avanti delay causes you to miss a connection, the delay is usually measured at the final destination on your itinerary. Provide details of the planned connection, the train you missed, and the service you eventually took. If the connection involved a different operator, indicate whether Avanti staff authorised the change. For guidance on complex journeys, see the <Link href={routes.delayRepayMissedConnections}>missed connections</Link> page.
                         </p>
 
                         <h2>Cancelled trains and not travelling</h2>
                         <p>
-                                If your Avanti service is cancelled and you choose not to travel, you can normally request a refund from the retailer. If you travel on a later service, Delay Repay may apply based on the arrival delay. Use the calculator to estimate the band and include any advice received from Avanti about alternative routes. More detail is in the <Link href="/delay-repay-cancelled-trains">cancelled trains</Link>.
+                                If your Avanti service is cancelled and you choose not to travel, you can normally request a refund from the retailer. If you travel on a later service, Delay Repay may apply based on the arrival delay. Use the calculator to estimate the band and include any advice received from Avanti about alternative routes. More detail is in the <Link href={routes.delayRepayCancelledTrains}>cancelled trains</Link>.
                         </p>
 
                         <h2>Time limits</h2>
                         <p>
-                                Claims generally need to be submitted within the operator’s stated window, often around 28 days. Submit as soon as possible with clear evidence. If you are close to the deadline, prioritise the essentials: ticket proof, journey details, and actual arrival time. For tips, read the <Link href="/delay-repay-claim-time-limits">claim time limits guide</Link>.
+                                Claims generally need to be submitted within the operator’s stated window, often around 28 days. Submit as soon as possible with clear evidence. If you are close to the deadline, prioritise the essentials: ticket proof, journey details, and actual arrival time. For tips, read the <Link href={routes.delayRepayClaimTimeLimits}>claim time limits guide</Link>.
                         </p>
 
                         <h2>How to submit</h2>
@@ -129,11 +130,11 @@ export default function AvantiPage() {
 
                         <h2>Related resources</h2>
                         <ul>
-                                <li><Link href="/">Delay Repay calculator</Link></li>
-                                <li><Link href="/delay-repay-explained">How Delay Repay works</Link></li>
-                                <li><Link href="/delay-repay-season-tickets">Season ticket guidance</Link></li>
-                                <li><Link href="/delay-repay-missed-connections">Missed connections</Link></li>
-                                <li><Link href="/delay-repay-cancelled-trains">Cancelled trains</Link></li>
+                                <li><Link href={routes.home}>Delay Repay calculator</Link></li>
+                                <li><Link href={routes.delayRepayExplained}>How Delay Repay works</Link></li>
+                                <li><Link href={routes.delayRepaySeasonTickets}>Season ticket guidance</Link></li>
+                                <li><Link href={routes.delayRepayMissedConnections}>Missed connections</Link></li>
+                                <li><Link href={routes.delayRepayCancelledTrains}>Cancelled trains</Link></li>
                         </ul>
                 </article>
         );

@@ -2,8 +2,12 @@
 
 import Link from "next/link";
 import { domainNameWithoutHTTPS } from "@/app/Constants";
+import { routes, utilityLinks } from "@/lib/nav";
 
 export default function Footer() {
+        const infoLinks = utilityLinks.filter((link) => ["About", "Contact"].includes(link.label));
+        const policyLinks = utilityLinks.filter((link) => ["Privacy", "Cookies", "Legal"].includes(link.label));
+
         return (
                 <footer className="mt-12 border-t border-slate-200 bg-white">
                         <div className="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-8 md:flex-row md:items-start md:justify-between">
@@ -16,24 +20,33 @@ export default function Footer() {
                                         <div className="space-y-2">
                                                 <h3 className="font-semibold text-slate-900">Information</h3>
                                                 <ul className="space-y-1">
-                                                        <li><Link href="/about" className="hover:underline">About</Link></li>
-                                                        <li><Link href="/contact" className="hover:underline">Contact</Link></li>
-                                                        <li><Link href="/operators" className="hover:underline">Operators</Link></li>
+                                                        {infoLinks.map((link) => (
+                                                                <li key={link.href}>
+                                                                        <Link href={link.href} className="hover:underline">
+                                                                                {link.label}
+                                                                        </Link>
+                                                                </li>
+                                                        ))}
+                                                        <li><Link href={routes.operators} className="hover:underline">Operators</Link></li>
                                                 </ul>
                                         </div>
                                         <div className="space-y-2">
                                                 <h3 className="font-semibold text-slate-900">Policies</h3>
                                                 <ul className="space-y-1">
-                                                        <li><Link href="/privacy" className="hover:underline">Privacy Policy</Link></li>
-                                                        <li><Link href="/cookies" className="hover:underline">Cookie Policy</Link></li>
-                                                        <li><Link href="/legal" className="hover:underline">Disclaimer</Link></li>
+                                                        {policyLinks.map((link) => (
+                                                                <li key={link.href}>
+                                                                        <Link href={link.href} className="hover:underline">
+                                                                                {link.label === "Privacy" ? "Privacy Policy" : link.label === "Cookies" ? "Cookie Policy" : link.label === "Legal" ? "Disclaimer" : link.label}
+                                                                        </Link>
+                                                                </li>
+                                                        ))}
                                                 </ul>
                                         </div>
                                         <div className="space-y-2">
                                                 <h3 className="font-semibold text-slate-900">Tools</h3>
                                                 <ul className="space-y-1">
-                                                        <li><Link href="/" className="hover:underline">Delay Repay calculator</Link></li>
-                                                        <li><Link href="/delay-repay-explained" className="hover:underline">How Delay Repay works</Link></li>
+                                                        <li><Link href={routes.home} className="hover:underline">Delay Repay calculator</Link></li>
+                                                        <li><Link href={routes.delayRepayExplained} className="hover:underline">How Delay Repay works</Link></li>
                                                 </ul>
                                         </div>
                                 </div>

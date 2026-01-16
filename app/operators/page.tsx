@@ -3,6 +3,7 @@ import {supabaseServer} from "@/lib/supabase.server";
 import type {Operator} from "@/definitions/operator";
 import {contactEmail} from "@/app/Constants";
 import Link from "next/link";
+import {routes} from "@/lib/nav";
 
 export const dynamic = "force-static";
 export const revalidate = 86400;
@@ -19,6 +20,13 @@ type OverrideRow = { operator_code: string; ticket: string; band: string; percen
 
 export default async function Page() {
 	const supabase = supabaseServer();
+	const operatorRoutes: Record<string, string> = {
+		avanti: routes.avanti,
+		gwr: routes.gwr,
+		lner: routes.lner,
+		northern: routes.northern,
+		southern: routes.southern,
+	};
 
 	// 1) Operators
 	const {data: opsData} = await supabase
@@ -74,52 +82,74 @@ export default async function Page() {
 				{items.length === 0 ? (
 					<p>No operators available right now.</p>
 				) : (
-					<ul className="not-prose divide-y">
-						{items.map(({op, status}) => {
-							const badge =
-								status === "standard"
-									? {text: "Standard Delay Repay", cls: "badge-success"}
-									: status === "override"
-										? {text: "Different rules apply", cls: "badge-warning"}
-										: {text: "No Delay Repay", cls: "badge-neutral"};
+					<div className="not-prose overflow-x-auto">
+						<table className="table w-full">
+							<thead>
+							<tr>
+								<th>Operator</th>
+								<th>Status</th>
+								<th>Guides &amp; real operator claim pages</th>
+							</tr>
+							</thead>
+							<tbody>
+							{items.map(({op, status}) => {
+								const badge =
+									status === "standard"
+										? {text: "Standard Delay Repay", cls: "badge-success"}
+										: status === "override"
+											? {text: "Different rules apply", cls: "badge-warning"}
+											: {text: "No Delay Repay", cls: "badge-neutral"};
 
-							const blurb =
-								status === "standard"
-									? "Uses the common banded percentages."
-									: status === "override"
-										? "This operator’s policy differs from the common bands."
-										: "This operator doesn’t use the standard Delay Repay scheme.";
+								const blurb =
+									status === "standard"
+										? "Uses the common banded percentages."
+										: status === "override"
+											? "This operator’s policy differs from the common bands."
+											: "This operator doesn’t use the standard Delay Repay scheme.";
 
-							return (
-								<li key={op.code} className="py-4">
-									<div className="flex items-start justify-between gap-4">
-										<div>
-											<h2 className="m-0">{op.name}</h2>
-											<p className="mt-1 text-sm text-neutral-700">{blurb}</p>
-										</div>
-										<div className="flex items-center gap-2">
+								const operatorRoute = operatorRoutes[op.code];
+
+								return (
+									<tr key={op.code}>
+										<td>
+											<div className="font-semibold">{op.name}</div>
+											<div className="text-sm text-neutral-700">{blurb}</div>
+										</td>
+										<td>
 											<span className={`badge ${badge.cls}`}>{badge.text}</span>
-											{op.claim_url && (
-												<a
-													href={op.claim_url}
-													target="_blank"
-													rel="noopener noreferrer"
-													className="btn btn-primary no-underline"
-												>
-													Claim page
-												</a>
-											)}
-										</div>
-									</div>
-								</li>
-							);
-						})}
-					</ul>
+										</td>
+										<td>
+											<div className="flex flex-wrap items-center justify-between gap-2">
+												{operatorRoute && (
+													<Link href={operatorRoute} className="btn btn-primary btn-sm no-underline">
+														Operator guide
+													</Link>
+												)}
+												{op.claim_url && (
+													<>
+														<div></div>
+														<a
+															href={op.claim_url}
+															target="_blank"
+															rel="noopener noreferrer"
+															className="btn btn-secondary btn-sm no-underline"
+														>
+															Claim page
+														</a></>
+												)}
+											</div>
+										</td>
+									</tr>
+								);
+							})}
+							</tbody>
+						</table>
+					</div>
 				)}
 
 				<p className="mt-8">
 					Want an estimate?{" "}
-					<Link href="/" className="no-underline">
+					<Link href={routes.home} className="no-underline">
 						Open the calculator
 					</Link>
 					.

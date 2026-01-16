@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Calculator from "@/components/Calculator";
+import {routes} from "@/lib/nav";
 
 export const metadata: Metadata = {
         title: "Southern Delay Repay calculator and guide",
@@ -13,7 +14,7 @@ export default function SouthernPage() {
                 <article className="prose max-w-none">
                         <h1>Southern Delay Repay</h1>
                         <p>
-                                Southern runs commuter and airport services across the South East. This guide shows how Southern applies Delay Repay and how to estimate compensation using the <Link href="/">Delay Repay calculator</Link> before submitting a claim.
+                                Southern runs commuter and airport services across the South East. This guide shows how Southern applies Delay Repay and how to estimate compensation using the <Link href={routes.home}>Delay Repay calculator</Link> before submitting a claim.
                         </p>
 
                         <h2>Overview</h2>
@@ -37,7 +38,7 @@ export default function SouthernPage() {
 
                         <h2>Estimating with the calculator</h2>
                         <p>
-                                Select Southern in the <Link href="/">calculator</Link>, enter your ticket price, choose the ticket type, and select the delay length. The calculator applies Southern’s published percentages and converts season tickets to a per-journey value. Use the estimate as guidance before opening the Southern claim form from the same page.
+                                Select Southern in the <Link href={routes.home}>calculator</Link>, enter your ticket price, choose the ticket type, and select the delay length. The calculator applies Southern’s published percentages and converts season tickets to a per-journey value. Use the estimate as guidance before opening the Southern claim form from the same page.
                         </p>
 
                         <h2>Evidence to include</h2>
@@ -57,17 +58,17 @@ export default function SouthernPage() {
 
                         <h2>Missed connections</h2>
                         <p>
-                                When a Southern delay causes a missed connection, the delay is measured at the final destination. Provide the planned connection time, the service missed, and the train you eventually boarded. If the connection involved a different operator, state whether Southern staff authorised the change. For more examples, see the <Link href="/delay-repay-missed-connections">missed connections guide</Link>.
+                                When a Southern delay causes a missed connection, the delay is measured at the final destination. Provide the planned connection time, the service missed, and the train you eventually boarded. If the connection involved a different operator, state whether Southern staff authorised the change. For more examples, see the <Link href={routes.delayRepayMissedConnections}>missed connections guide</Link>.
                         </p>
 
                         <h2>Cancelled trains</h2>
                         <p>
-                                If a Southern service is cancelled and you do not travel, you can usually request a refund. If you travel on a later service, Delay Repay may apply based on the arrival delay. Keep cancellation notices and any advice from staff. More detail is available in the <Link href="/delay-repay-cancelled-trains">cancelled trains guide</Link>.
+                                If a Southern service is cancelled and you do not travel, you can usually request a refund. If you travel on a later service, Delay Repay may apply based on the arrival delay. Keep cancellation notices and any advice from staff. More detail is available in the <Link href={routes.delayRepayCancelledTrains}>cancelled trains guide</Link>.
                         </p>
 
                         <h2>Time limits</h2>
                         <p>
-                                Claims should be submitted within Southern’s stated timeframe, often around 28 days. Submit promptly with clear evidence. If you are close to the deadline, prioritise ticket proof, journey details, and arrival time, and keep a copy of the submission confirmation. For wider tips, read the <Link href="/delay-repay-claim-time-limits">time limits guide</Link>.
+                                Claims should be submitted within Southern’s stated timeframe, often around 28 days. Submit promptly with clear evidence. If you are close to the deadline, prioritise ticket proof, journey details, and arrival time, and keep a copy of the submission confirmation. For wider tips, read the <Link href={routes.delayRepayClaimTimeLimits}>time limits guide</Link>.
                         </p>
 
                         <h2>Submitting your claim</h2>
@@ -98,11 +99,11 @@ export default function SouthernPage() {
 
                         <h2>Helpful links</h2>
                         <ul>
-                                <li><Link href="/">Delay Repay calculator</Link></li>
-                                <li><Link href="/delay-repay-explained">How Delay Repay works</Link></li>
-                                <li><Link href="/delay-repay-season-tickets">Season ticket guidance</Link></li>
-                                <li><Link href="/delay-repay-missed-connections">Missed connections</Link></li>
-                                <li><Link href="/delay-repay-cancelled-trains">Cancelled trains</Link></li>
+                                <li><Link href={routes.home}>Delay Repay calculator</Link></li>
+                                <li><Link href={routes.delayRepayExplained}>How Delay Repay works</Link></li>
+                                <li><Link href={routes.delayRepaySeasonTickets}>Season ticket guidance</Link></li>
+                                <li><Link href={routes.delayRepayMissedConnections}>Missed connections</Link></li>
+                                <li><Link href={routes.delayRepayCancelledTrains}>Cancelled trains</Link></li>
                         </ul>
                 </article>
         );

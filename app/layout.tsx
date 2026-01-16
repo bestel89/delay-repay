@@ -2,11 +2,11 @@ import React from "react";
 import type {Metadata} from "next";
 import "./globals.css";
 import Footer from "@/components/Footer";
-import Link from "next/link";
 import {domainNameWithHTTPS} from "@/app/Constants";
 import Script from "next/script";
 import {Analytics} from "@vercel/analytics/next"
 import PageFrame from "@/components/PageFrame";
+import SiteHeader from "@/components/SiteHeader";
 
 export const metadata: Metadata = {
 	title: "Delay Repay Calculator | UK Rail Compensation",
@@ -43,23 +43,7 @@ export default function RootLayout({children}: { children: React.ReactNode }) {
 			/>
 		</head>
 		<body className="bg-base-200 text-slate-900 min-h-screen flex flex-col">
-		<header className="bg-blue-900 text-white shadow-sm">
-			<div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
-				<div className="flex items-center text-xl font-semibold tracking-tight">
-					<Link href="/" className="no-underline text-white flex items-center">
-						<img src="/white_logo.png" alt="Delay Repay logo" className="h-10 w-auto mr-3"/>
-						<span>Delay Repay Calculator</span>
-					</Link>
-				</div>
-				<nav className="flex flex-wrap items-center gap-4 text-sm">
-					<Link className="hover:underline" href="/">Home</Link>
-					<Link className="hover:underline" href="/delay-repay-explained">Delay Repay guide</Link>
-					<Link className="hover:underline" href="/operators">Operators</Link>
-					<Link className="hover:underline" href="/delay-repay-season-tickets">Season tickets</Link>
-					<Link className="hover:underline" href="/about">About</Link>
-				</nav>
-			</div>
-		</header>
+		<SiteHeader />
 		<div className="flex-1 py-6 sm:py-10">
 			{/* PageFrame lives in the root layout so every route shares the same document-style container. */}
 			<PageFrame>

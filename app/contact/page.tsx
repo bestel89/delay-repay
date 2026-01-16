@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { contactEmail } from "@/app/Constants";
+import {routes} from "@/lib/nav";
 
 export const metadata: Metadata = {
         title: "Contact DelayRepayCalc.co.uk | Get in touch",
@@ -33,10 +34,10 @@ export default function ContactPage() {
 
                         <h2>Useful links</h2>
                         <ul>
-                                <li><Link href="/">Delay Repay calculator</Link></li>
-                                <li><Link href="/delay-repay-explained">How Delay Repay works</Link></li>
-                                <li><Link href="/delay-repay-season-tickets">Season ticket guidance</Link></li>
-                                <li><Link href="/delay-repay-claim-time-limits">Claim time limits</Link></li>
+                                <li><Link href={routes.home}>Delay Repay calculator</Link></li>
+                                <li><Link href={routes.delayRepayExplained}>How Delay Repay works</Link></li>
+                                <li><Link href={routes.delayRepaySeasonTickets}>Season ticket guidance</Link></li>
+                                <li><Link href={routes.delayRepayClaimTimeLimits}>Claim time limits</Link></li>
                         </ul>
                 </article>
         );

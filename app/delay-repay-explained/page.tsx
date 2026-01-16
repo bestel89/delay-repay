@@ -1,5 +1,6 @@
 import type {Metadata} from "next";
 import Link from "next/link";
+import {routes} from "@/lib/nav";
 
 export const metadata: Metadata = {
 	title: "How is Delay Repay calculated? | UK train delay compensation",
@@ -84,7 +85,7 @@ export default function DelayRepayExplainedPage() {
 					<p className="text-lg text-neutral-700">
 						Delay Repay is the UK rail scheme that pays compensation when trains arrive late or
 						are cancelled. This page focuses on how Delay Repay is calculated and points you to
-						the right <Link href="/operators">train operators</Link> for scheme details.
+						the right <Link href={routes.operators}>train operators</Link> for scheme details.
 					</p>
 					<p className="text-base text-neutral-700">
 						Here’s the calculation logic most people need before submitting a claim.
@@ -98,7 +99,7 @@ export default function DelayRepayExplainedPage() {
 						<li>Season tickets may use a per-journey value.</li>
 					</ul>
 					<p className="text-base text-neutral-700">
-						Use the calculator: <Link href="/">Delay Repay calculator</Link>
+						Use the calculator: <Link href={routes.home}>Delay Repay calculator</Link>
 					</p>
 					<h2 className="card-title">Quick summary</h2>
 					<ul className="not-prose space-y-2">
@@ -157,7 +158,7 @@ export default function DelayRepayExplainedPage() {
 							</table>
 						</div>
 						<p className="text-sm text-neutral-600">
-							Exact thresholds and payout methods vary by operator; see <Link href="/delay-repay-bands">Delay
+							Exact thresholds and payout methods vary by operator; see <Link href={routes.delayRepayBands}>Delay
 							Repay bands and amounts</Link>.
 						</p>
 					</div>
@@ -235,7 +236,7 @@ export default function DelayRepayExplainedPage() {
 							</div>
 						</div>
 						<p className="text-sm text-neutral-600">
-							Always check the operator’s terms and <Link href="/delay-repay-claim-time-limits">claim time
+							Always check the operator’s terms and <Link href={routes.delayRepayClaimTimeLimits}>claim time
 							limits</Link>
 							before submitting.
 						</p>

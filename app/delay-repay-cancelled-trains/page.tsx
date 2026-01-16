@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import {routes} from "@/lib/nav";
 
 export const metadata: Metadata = {
         title: "Delay Repay for cancelled trains | What to expect",
@@ -12,7 +13,7 @@ export default function CancelledTrainsPage() {
                 <article className="prose max-w-none">
                         <h1>Delay Repay for cancelled trains</h1>
                         <p>
-                                A cancelled train can trigger Delay Repay, a refund, or both, depending on when you were informed and whether you travelled. This guide explains the scenarios operators consider, the evidence they look for, and how to use the <Link href="/">Delay Repay calculator</Link> to set expectations before you submit a claim.
+                                A cancelled train can trigger Delay Repay, a refund, or both, depending on when you were informed and whether you travelled. This guide explains the scenarios operators consider, the evidence they look for, and how to use the <Link href={routes.home}>Delay Repay calculator</Link> to set expectations before you submit a claim.
                         </p>
 
                         <h2>When Delay Repay applies to cancellations</h2>
@@ -53,7 +54,7 @@ export default function CancelledTrainsPage() {
                                 <li>Check live information and ask staff whether to wait, re-route, or not travel</li>
                                 <li>Keep notes of advice received and times of any replacement services</li>
                                 <li>Retain tickets and take photos of screens or announcements where possible</li>
-                                <li>Use the <Link href="/">calculator</Link> to estimate compensation before submitting the claim</li>
+                                <li>Use the <Link href={routes.home}>calculator</Link> to estimate compensation before submitting the claim</li>
                         </ul>
 
                         <h2>Submitting the claim</h2>
@@ -81,7 +82,7 @@ export default function CancelledTrainsPage() {
 
                         <h2>Where to learn more</h2>
                         <p>
-                                For missed connections caused by cancellations, see the <Link href="/delay-repay-missed-connections">missed connections guide</Link>. For deadlines, read the <Link href="/delay-repay-claim-time-limits">claim time limits</Link> page. When you are ready to proceed, return to the <Link href="/">Delay Repay calculator</Link> to estimate the likely payment and reach the correct operator form.
+                                For missed connections caused by cancellations, see the <Link href={routes.delayRepayMissedConnections}>missed connections guide</Link>. For deadlines, read the <Link href={routes.delayRepayClaimTimeLimits}>claim time limits</Link> page. When you are ready to proceed, return to the <Link href={routes.home}>Delay Repay calculator</Link> to estimate the likely payment and reach the correct operator form.
                         </p>
                 </article>
         );

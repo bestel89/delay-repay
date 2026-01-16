@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import {contactEmail, domainNameWithoutHTTPS} from "@/app/Constants";
+import {routes} from "@/lib/nav";
 
 export const metadata: Metadata = {
 	title: 'Privacy Policy | Delay Repay Estimator',
@@ -53,7 +54,7 @@ export default function PrivacyPage() {
 			<h2>4. Cookies & Analytics</h2>
 			<p>
 				We may use essential cookies and privacy-respecting analytics to understand usage and improve performance.
-				See our <a href="/cookies">Cookie Policy</a> for details.
+				See our <a href={routes.cookies}>Cookie Policy</a> for details.
 			</p>
 
 			<h2>5. Data Security</h2>

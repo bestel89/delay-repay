@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import {routes} from "@/lib/nav";
 
 export const metadata: Metadata = {
         title: "Delay Repay for missed connections | UK guidance",
@@ -12,7 +13,7 @@ export default function MissedConnectionsPage() {
                 <article className="prose max-w-none">
                         <h1>Delay Repay for missed connections</h1>
                         <p>
-                                If a late-running train causes you to miss a connection, you may be entitled to Delay Repay based on the delay at your final destination. This guide explains how operators assess these situations, what to record, and how to use the <Link href="/">Delay Repay calculator</Link> to see the likely compensation before you submit a claim.
+                                If a late-running train causes you to miss a connection, you may be entitled to Delay Repay based on the delay at your final destination. This guide explains how operators assess these situations, what to record, and how to use the <Link href={routes.home}>Delay Repay calculator</Link> to see the likely compensation before you submit a claim.
                         </p>
 
                         <h2>Through tickets versus separate tickets</h2>
@@ -80,7 +81,7 @@ export default function MissedConnectionsPage() {
 
                         <h2>Next steps</h2>
                         <p>
-                                Ready to estimate your claim? Open the <Link href="/">Delay Repay calculator</Link>. For related situations, see the <Link href="/delay-repay-cancelled-trains">cancelled trains guide</Link> and the <Link href="/delay-repay-claim-time-limits">claim time limits</Link> page. Operator-specific pages for <Link href="/delay-repay-avanti">Avanti</Link>, <Link href="/delay-repay-gwr">GWR</Link>, <Link href="/delay-repay-lner">LNER</Link>, <Link href="/delay-repay-northern">Northern</Link>, and <Link href="/delay-repay-southern">Southern</Link> provide extra detail on how each company applies Delay Repay to complex journeys.
+                                Ready to estimate your claim? Open the <Link href={routes.home}>Delay Repay calculator</Link>. For related situations, see the <Link href={routes.delayRepayCancelledTrains}>cancelled trains guide</Link> and the <Link href={routes.delayRepayClaimTimeLimits}>claim time limits</Link> page. Operator-specific pages for <Link href={routes.avanti}>Avanti</Link>, <Link href={routes.gwr}>GWR</Link>, <Link href={routes.lner}>LNER</Link>, <Link href={routes.northern}>Northern</Link>, and <Link href={routes.southern}>Southern</Link> provide extra detail on how each company applies Delay Repay to complex journeys.
                         </p>
                 </article>
         );

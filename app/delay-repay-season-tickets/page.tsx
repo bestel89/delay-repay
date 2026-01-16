@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import {routes} from "@/lib/nav";
 
 export const metadata: Metadata = {
         title: "Delay Repay for season tickets | UK guidance",
@@ -12,7 +13,7 @@ export default function SeasonTicketsPage() {
                 <article className="prose max-w-none">
                         <h1>Delay Repay for season tickets</h1>
                         <p>
-                                Season tickets are eligible for Delay Repay across most UK operators, but the compensation is calculated differently from single or return fares. This guide explains how per-journey values are derived, what evidence to provide, and how to use the <Link href="/">Delay Repay calculator</Link> to get an indicative payout before submitting a claim.
+                                Season tickets are eligible for Delay Repay across most UK operators, but the compensation is calculated differently from single or return fares. This guide explains how per-journey values are derived, what evidence to provide, and how to use the <Link href={routes.home}>Delay Repay calculator</Link> to get an indicative payout before submitting a claim.
                         </p>
 
                         <h2>How operators calculate compensation</h2>
@@ -72,12 +73,12 @@ export default function SeasonTicketsPage() {
 
                         <h2>Time limits and submission tips</h2>
                         <p>
-                                Many operators require claims within around 28 days, though some allow longer. Submitting quickly reduces the risk of misplacing evidence. Use the <Link href="/delay-repay-claim-time-limits">time limits guide</Link> for a summary of typical windows. When completing the claim form, clearly state that you hold a season ticket, include the validity dates, and confirm whether the ticket is on a smartcard or mobile app.
+                                Many operators require claims within around 28 days, though some allow longer. Submitting quickly reduces the risk of misplacing evidence. Use the <Link href={routes.delayRepayClaimTimeLimits}>time limits guide</Link> for a summary of typical windows. When completing the claim form, clearly state that you hold a season ticket, include the validity dates, and confirm whether the ticket is on a smartcard or mobile app.
                         </p>
 
                         <h2>Next steps</h2>
                         <p>
-                                Start with an estimate on the <Link href="/">Delay Repay calculator</Link>, selecting the relevant season ticket type. Review operator-specific guidance via the links for <Link href="/delay-repay-avanti">Avanti</Link>, <Link href="/delay-repay-gwr">GWR</Link>, <Link href="/delay-repay-lner">LNER</Link>, <Link href="/delay-repay-northern">Northern</Link>, and <Link href="/delay-repay-southern">Southern</Link>. If you encounter a policy not reflected in the calculator, get in touch through the <Link href="/contact">contact page</Link> so it can be updated.
+                                Start with an estimate on the <Link href={routes.home}>Delay Repay calculator</Link>, selecting the relevant season ticket type. Review operator-specific guidance via the links for <Link href={routes.avanti}>Avanti</Link>, <Link href={routes.gwr}>GWR</Link>, <Link href={routes.lner}>LNER</Link>, <Link href={routes.northern}>Northern</Link>, and <Link href={routes.southern}>Southern</Link>. If you encounter a policy not reflected in the calculator, get in touch through the <Link href={routes.contact}>contact page</Link> so it can be updated.
                         </p>
                 </article>
         );
