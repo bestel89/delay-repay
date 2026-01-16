@@ -67,9 +67,9 @@ export default function RootLayout({children}: { children: React.ReactNode }) {
 					{children}
 					<Analytics/>
 				</main>
-				<Footer/>
 			</PageFrame>
 		</div>
+		<Footer/>
 		</body>
 		</html>
 	);
