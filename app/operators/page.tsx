@@ -1,6 +1,6 @@
-import type { Metadata } from "next";
-import { supabaseServer } from "@/lib/supabase.server";
-import type { Operator } from "@/definitions/operator";
+import type {Metadata} from "next";
+import {supabaseServer} from "@/lib/supabase.server";
+import type {Operator} from "@/definitions/operator";
 import {contactEmail} from "@/app/Constants";
 import Link from "next/link";
 
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 	title: "Operators — Which rules apply • Delay Repay Calculator",
 	description:
 		"See which UK train operators use the standard Delay Repay bands and which have different rules.",
-	alternates: { canonical: "/operators" },
+	alternates: {canonical: "/operators"},
 };
 
 type DefaultRow = { ticket: string; band: string; percent: number };
@@ -21,7 +21,7 @@ export default async function Page() {
 	const supabase = supabaseServer();
 
 	// 1) Operators
-	const { data: opsData } = await supabase
+	const {data: opsData} = await supabase
 		.from("operators")
 		.select("code,name,claim_url,delay_repay,active")
 		.eq("active", true)
@@ -30,7 +30,7 @@ export default async function Page() {
 	const operators: Operator[] = (opsData ?? []) as Operator[];
 
 	// 2) Defaults + Overrides (to detect real differences)
-	const [{ data: defaults }, { data: overrides }] = await Promise.all([
+	const [{data: defaults}, {data: overrides}] = await Promise.all([
 		supabase.from("rules_default").select("ticket,band,percent"),
 		supabase.from("rules_override").select("operator_code,ticket,band,percent"),
 	]);
@@ -57,12 +57,13 @@ export default async function Page() {
 				? "override"
 				: "standard"
 			: "no-dr";
-		return { op, status };
+		return {op, status};
 	});
 
 	return (
 		<main>
-			<article className="prose">
+			<article className="prose max-w-none">
+
 				<h1>Operators — which rules apply</h1>
 				<p>
 					We flag whether each operator follows the <em>standard Delay Repay bands</em> or whether{" "}
@@ -74,13 +75,13 @@ export default async function Page() {
 					<p>No operators available right now.</p>
 				) : (
 					<ul className="not-prose divide-y">
-						{items.map(({ op, status }) => {
+						{items.map(({op, status}) => {
 							const badge =
 								status === "standard"
-									? { text: "Standard Delay Repay", cls: "badge-success" }
+									? {text: "Standard Delay Repay", cls: "badge-success"}
 									: status === "override"
-										? { text: "Different rules apply", cls: "badge-warning" }
-										: { text: "No Delay Repay", cls: "badge-neutral" };
+										? {text: "Different rules apply", cls: "badge-warning"}
+										: {text: "No Delay Repay", cls: "badge-neutral"};
 
 							const blurb =
 								status === "standard"
