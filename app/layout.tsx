@@ -6,6 +6,7 @@ import Link from "next/link";
 import {domainNameWithHTTPS} from "@/app/Constants";
 import Script from "next/script";
 import {Analytics} from "@vercel/analytics/next"
+import PageFrame from "@/components/PageFrame";
 
 export const metadata: Metadata = {
 	title: "Delay Repay Calculator | UK Rail Compensation",
@@ -41,7 +42,7 @@ export default function RootLayout({children}: { children: React.ReactNode }) {
 				crossOrigin="anonymous"
 			/>
 		</head>
-		<body className="bg-slate-50 text-slate-900 min-h-screen flex flex-col">
+		<body className="bg-base-200 text-slate-900 min-h-screen flex flex-col">
 		<header className="bg-blue-900 text-white shadow-sm">
 			<div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
 				<div className="flex items-center text-xl font-semibold tracking-tight">
@@ -59,12 +60,15 @@ export default function RootLayout({children}: { children: React.ReactNode }) {
 				</nav>
 			</div>
 		</header>
-		<main className="flex-1">
-			<div className="mx-auto max-w-6xl px-4 py-10">
-				{children}
-				<Analytics/>
-			</div>
-		</main>
+		<div className="flex-1 py-6 sm:py-10">
+			{/* PageFrame lives in the root layout so every route shares the same document-style container. */}
+			<PageFrame>
+				<main className="flex-1">
+					{children}
+					<Analytics/>
+				</main>
+			</PageFrame>
+		</div>
 		<Footer/>
 		</body>
 		</html>
