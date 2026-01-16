@@ -12,6 +12,12 @@ export const metadata: Metadata = {
 	description: "Independent UK Delay Repay calculator with guidance on operators, season tickets, cancellations, and claim steps.",
 	metadataBase: new URL(domainNameWithHTTPS),
 	alternates: {canonical: "/"},
+	icons: {
+		icon: [
+			{url: "/favicon.ico", sizes: "48x48"},
+			{url: "/favicon-192.png", type: "image/png", sizes: "192x192"}
+		]
+	}
 };
 
 export default function RootLayout({children}: { children: React.ReactNode }) {
