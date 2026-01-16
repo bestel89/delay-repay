@@ -88,7 +88,7 @@ export default async function Page() {
 							<tr>
 								<th>Operator</th>
 								<th>Status</th>
-								<th>Links</th>
+								<th>Guides &amp; real operator claim pages</th>
 							</tr>
 							</thead>
 							<tbody>
@@ -119,21 +119,23 @@ export default async function Page() {
 											<span className={`badge ${badge.cls}`}>{badge.text}</span>
 										</td>
 										<td>
-											<div className="flex flex-wrap items-center gap-2">
+											<div className="flex flex-wrap items-center justify-between gap-2">
 												{operatorRoute && (
-													<Link href={operatorRoute} className="btn btn-ghost btn-sm no-underline">
+													<Link href={operatorRoute} className="btn btn-primary btn-sm no-underline">
 														Operator guide
 													</Link>
 												)}
 												{op.claim_url && (
-													<a
-														href={op.claim_url}
-														target="_blank"
-														rel="noopener noreferrer"
-														className="btn btn-primary btn-sm no-underline"
-													>
-														Claim page
-													</a>
+													<>
+														<div></div>
+														<a
+															href={op.claim_url}
+															target="_blank"
+															rel="noopener noreferrer"
+															className="btn btn-secondary btn-sm no-underline"
+														>
+															Claim page
+														</a></>
 												)}
 											</div>
 										</td>
