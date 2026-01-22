@@ -9,6 +9,7 @@ export const routes = {
   delayRepayCancelledTrains: "/delay-repay-cancelled-trains",
   delayRepayClaimTimeLimits: "/delay-repay-claim-time-limits",
   delayRepayExplained: "/delay-repay-explained",
+  delayRepayLondon: "/delay-repay-london",
   delayRepayMissedConnections: "/delay-repay-missed-connections",
   delayRepaySeasonTickets: "/delay-repay-season-tickets",
   operators: "/operators",
@@ -30,6 +31,7 @@ export const mainLinks: NavLink[] = [
 
 export const explainerLinks: NavLink[] = [
 	{label: "Delay Repay explained", href: routes.delayRepayExplained},
+  {label: "Delay Repay in London", href: routes.delayRepayLondon},
   {label: "Delay Repay bands", href: routes.delayRepayBands},
   {label: "Cancelled trains", href: routes.delayRepayCancelledTrains},
   {label: "Claim time limits", href: routes.delayRepayClaimTimeLimits},

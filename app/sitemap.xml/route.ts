@@ -33,6 +33,7 @@ export async function GET() {
 	const guides: SitemapEntry[] = [
 		{ loc: `${domainNameWithHTTPS}/delay-repay-bands`, lastmod: nowIso },
 		{ loc: `${domainNameWithHTTPS}/delay-repay-explained`, lastmod: nowIso },
+		{ loc: `${domainNameWithHTTPS}/delay-repay-london`, lastmod: nowIso },
 		{ loc: `${domainNameWithHTTPS}/delay-repay-season-tickets`, lastmod: nowIso },
 		{ loc: `${domainNameWithHTTPS}/delay-repay-claim-time-limits`, lastmod: nowIso },
 		{ loc: `${domainNameWithHTTPS}/delay-repay-cancelled-trains`, lastmod: nowIso },
